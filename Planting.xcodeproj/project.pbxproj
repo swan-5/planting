@@ -54,6 +54,7 @@
 		C7D1274D63AA73622282B280 /* QuickAddSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */; };
 		C7ECA5CED2505AD007A46806 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC9A568195DA5956A98F020 /* CategoryRepository.swift */; };
 		CD56E1FDE248CC1716176022 /* CalendarHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */; };
+		D0C9C6E42E3215181A9706DE /* MultiDayBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */; };
 		D20831A775D606C6EAF8EC33 /* TodoVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */; };
 		D411F05CA0250A5C2CE76390 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
 		D79368DC745CA98DBBF6163A /* CalendarDragPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9454C6362BEE57406BBFC6A /* CalendarDragPayload.swift */; };
@@ -96,6 +97,7 @@
 		7614556DE72EAC68BB919688 /* PlantingMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingMetrics.swift; sourceTree = "<group>"; };
 		7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
 		88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeViewModel.swift; sourceTree = "<group>"; };
+		89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiDayBarView.swift; sourceTree = "<group>"; };
 		8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddSheet.swift; sourceTree = "<group>"; };
 		916E3F626EC288D39627EBFC /* MemoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeView.swift; sourceTree = "<group>"; };
 		936CE7F86FB8B6D78558C574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */,
 				EB0064883BB62E41F37E91E5 /* DateDetailView.swift */,
 				4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */,
+				89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */,
 				3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */,
 			);
 			path = Calendar;
@@ -439,6 +442,7 @@
 				2B12265E8E76E62BC39E3162 /* MemoHomeView.swift in Sources */,
 				5BAE5F40144F30676D10AC1C /* MemoHomeViewModel.swift in Sources */,
 				88AFA0806292240812A090E9 /* MemoRepository.swift in Sources */,
+				D0C9C6E42E3215181A9706DE /* MultiDayBarView.swift in Sources */,
 				99A70A4A59B3EB6E7540BE42 /* PersistenceController.swift in Sources */,
 				46FF5E19DD94B1AFD018B5FF /* PlantingApp.swift in Sources */,
 				AA1D928C646F573904BA1E86 /* PlantingColor.swift in Sources */,

@@ -20,6 +20,10 @@ struct DateCellView: View {
     let isToday: Bool
     let content: CalendarHomeViewModel.CellContent
     let hasClipboard: Bool
+    /// Blank space reserved below the date number so this cell's own rows
+    /// don't sit under the multi-day bars drawn as an overlay above the
+    /// whole week row (see CalendarHomeView.weekRow).
+    let topInset: CGFloat
     let onOpen: () -> Void
     let onMove: (CalendarDragPayload) -> Void
     let onCopy: (CalendarDragPayload) -> Void
@@ -45,6 +49,10 @@ struct DateCellView: View {
             Text(dayNumber)
                 .font(isToday ? PlantingFont.emphasis(13) : PlantingFont.dateNumber)
                 .foregroundStyle(numberColor)
+
+            if topInset > 0 {
+                Color.clear.frame(height: topInset)
+            }
 
             ForEach(rows.prefix(maxVisibleRows)) { row in
                 rowView(row)

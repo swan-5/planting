@@ -14,8 +14,10 @@ struct CalendarHomeView: View {
     @State private var isPresentingCreate = false
     @State private var pendingCreateKind: QuickAddKind?
     @State private var detailDate: Date?
+    @State private var editingSchedule: Schedule?
 
-    private let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 7)
+    private let baseCellHeight: CGFloat = 68
+    private let barLaneHeight: CGFloat = 17
 
     var body: some View {
         NavigationStack {
@@ -85,6 +87,9 @@ struct CalendarHomeView: View {
             .navigationDestination(item: $detailDate) { date in
                 DateDetailView(date: date)
             }
+            .sheet(item: $editingSchedule, onDismiss: { viewModel?.loadMonthData() }) { schedule in
+                ScheduleEditView(existingSchedule: schedule)
+            }
         }
     }
 
@@ -134,22 +139,78 @@ struct CalendarHomeView: View {
     }
 
     private func dateGrid(_ viewModel: CalendarHomeViewModel) -> some View {
-        LazyVGrid(columns: columns, spacing: 0) {
-            ForEach(viewModel.days) { day in
-                DateCellView(
-                    day: day,
-                    isToday: viewModel.isToday(day.date),
-                    content: viewModel.content(for: day.date),
-                    hasClipboard: viewModel.copiedPayload != nil,
-                    onOpen: { detailDate = day.date },
-                    onMove: { payload in viewModel.moveItem(payload, to: day.date) },
-                    onCopy: { payload in viewModel.copyItem(payload) },
-                    onPaste: { viewModel.pasteItem(to: day.date) },
-                    onToggleTodo: { item in viewModel.toggleTodoCompletion(item) },
-                    onMoveTodoToTop: { item in viewModel.moveTodoToTop(item, on: day.date) }
-                )
+        VStack(spacing: 0) {
+            ForEach(weekChunks(viewModel.days), id: \.[0].id) { week in
+                weekRow(viewModel, week: week)
             }
         }
+    }
+
+    private func weekChunks(_ days: [MonthGridDay]) -> [[MonthGridDay]] {
+        stride(from: 0, to: days.count, by: 7).map { Array(days[$0..<min($0 + 7, days.count)]) }
+    }
+
+    /// One grid row: date cells in a plain HStack, with multi-day schedule
+    /// bars drawn as an absolutely-positioned overlay on top (see
+    /// MultiDayBarView / CalendarHomeViewModel.MultiDayBar) — a LazyVGrid
+    /// can't make a single item span multiple columns, so this row needs
+    /// its own GeometryReader to compute each bar's pixel offset/width.
+    private func weekRow(_ viewModel: CalendarHomeViewModel, week: [MonthGridDay]) -> some View {
+        let bars = viewModel.multiDayBars(forWeekStarting: week[0].date)
+        let laneCount = bars.map(\.lane).max().map { $0 + 1 } ?? 0
+        let barsHeight = CGFloat(laneCount) * barLaneHeight
+        let rowHeight = baseCellHeight + barsHeight
+
+        // Per-column inset: only the days a bar actually crosses reserve
+        // space for it, so a day with no bar over it doesn't get pushed
+        // down just because a sibling in the same week has one.
+        func topInset(forColumn column: Int) -> CGFloat {
+            let maxLane = bars
+                .filter { column >= $0.startColumn && column < $0.startColumn + $0.columnSpan }
+                .map(\.lane)
+                .max()
+            guard let maxLane else { return 0 }
+            return CGFloat(maxLane + 1) * barLaneHeight
+        }
+
+        return GeometryReader { geo in
+            let columnWidth = geo.size.width / 7
+            ZStack(alignment: .topLeading) {
+                HStack(spacing: 0) {
+                    ForEach(Array(week.enumerated()), id: \.element.id) { column, day in
+                        DateCellView(
+                            day: day,
+                            isToday: viewModel.isToday(day.date),
+                            content: viewModel.content(for: day.date),
+                            hasClipboard: viewModel.copiedPayload != nil,
+                            topInset: topInset(forColumn: column),
+                            onOpen: { detailDate = day.date },
+                            onMove: { payload in viewModel.moveItem(payload, to: day.date) },
+                            onCopy: { payload in viewModel.copyItem(payload) },
+                            onPaste: { viewModel.pasteItem(to: day.date) },
+                            onToggleTodo: { item in viewModel.toggleTodoCompletion(item) },
+                            onMoveTodoToTop: { item in viewModel.moveTodoToTop(item, on: day.date) }
+                        )
+                        .frame(maxHeight: .infinity, alignment: .top)
+                    }
+                }
+                .frame(height: geo.size.height)
+
+                ForEach(bars) { bar in
+                    MultiDayBarView(
+                        title: bar.occurrence.schedule.title,
+                        color: bar.occurrence.schedule.category?.color ?? PlantingColor.primaryBlue,
+                        onTap: { editingSchedule = bar.occurrence.schedule }
+                    )
+                    .frame(width: columnWidth * CGFloat(bar.columnSpan) - 3, height: 15)
+                    .offset(
+                        x: columnWidth * CGFloat(bar.startColumn) + 2,
+                        y: 21 + CGFloat(bar.lane) * barLaneHeight
+                    )
+                }
+            }
+        }
+        .frame(height: rowHeight)
     }
 }
 

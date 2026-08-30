@@ -1,12 +1,15 @@
 import Foundation
 import SwiftData
 
-/// A single expanded instance of a (possibly repeating) Schedule on a date.
-/// Schedules have no completion state, so — unlike Todo — these are computed
-/// on demand from RecurrenceEngine rather than persisted.
+/// A single expanded instance of a (possibly repeating) Schedule, spanning
+/// `date...endDate` (both the same day for a single-day schedule). Schedules
+/// have no completion state, so — unlike Todo — these are computed on
+/// demand from RecurrenceEngine rather than persisted.
 struct ScheduleOccurrence: Identifiable {
     let schedule: Schedule
     let date: Date
+    let endDate: Date
+    var isMultiDay: Bool { endDate > date }
     var id: String { "\(schedule.id)-\(date.timeIntervalSince1970)" }
 }
 
@@ -53,13 +56,26 @@ final class SwiftDataScheduleRepository: ScheduleRepository {
     }
 
     func occurrences(in range: ClosedRange<Date>) throws -> [ScheduleOccurrence] {
-        try fetchAll().flatMap { schedule in
-            RecurrenceEngine.occurrences(
+        try fetchAll().flatMap { schedule -> [ScheduleOccurrence] in
+            let start = calendar.startOfDay(for: schedule.startDate)
+            let spanDays = schedule.endDate.map {
+                max(0, calendar.dateComponents([.day], from: start, to: calendar.startOfDay(for: $0)).day ?? 0)
+            } ?? 0
+
+            // Widen the query so an occurrence that *started* before `range`
+            // but still spans into it (a multi-day event) isn't missed.
+            let widenedStart = calendar.date(byAdding: .day, value: -spanDays, to: range.lowerBound) ?? range.lowerBound
+
+            return RecurrenceEngine.occurrences(
                 of: schedule.recurrenceRule,
                 anchorDate: schedule.startDate,
-                in: range,
+                in: widenedStart...range.upperBound,
                 calendar: calendar
-            ).map { ScheduleOccurrence(schedule: schedule, date: $0) }
+            ).compactMap { occurrenceStart -> ScheduleOccurrence? in
+                let occurrenceEnd = calendar.date(byAdding: .day, value: spanDays, to: occurrenceStart) ?? occurrenceStart
+                guard occurrenceEnd >= range.lowerBound, occurrenceStart <= range.upperBound else { return nil }
+                return ScheduleOccurrence(schedule: schedule, date: occurrenceStart, endDate: occurrenceEnd)
+            }
         }
     }
 
