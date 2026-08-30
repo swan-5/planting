@@ -1,0 +1,651 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08A616857E3A5B9EEF96624C /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110C8968A7C69A54A9769851 /* MemoEditView.swift */; };
+		11B9E035EA2F95C9B608F11F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEE5FA8B5EA076F5CD133C81 /* Pretendard-Thin.otf */; };
+		191755C610CB9A63E700B7BB /* CalendarHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78111F61EFDB04BF880DD8 /* CalendarHomeView.swift */; };
+		2415C200C1C901A7D3B7318B /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE20EDC369E7718BA4A8289 /* Todo.swift */; };
+		270E833E7010F848EBAEC615 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC743F2C8586CD5BF3503C9 /* Color+Hex.swift */; };
+		2B12265E8E76E62BC39E3162 /* MemoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E3F626EC288D39627EBFC /* MemoHomeView.swift */; };
+		2E8FBBCE4CB1E45060B47CF0 /* CategoryEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF2BA5F9ACB9FA0CBC0049 /* CategoryEditSheet.swift */; };
+		35B7681115D98920FE3AE000 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED6DB7BA390A316E060BE9 /* TodoRow.swift */; };
+		368AC0D2603FB8693826E9A9 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 063527F85AF06697CDB75713 /* Pretendard-Medium.otf */; };
+		46FF5E19DD94B1AFD018B5FF /* PlantingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */; };
+		4C2D4E720624248C089C8043 /* DailyCompletionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */; };
+		4CBD7353C55DBA12470028E8 /* ScheduleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */; };
+		4F8AB5514AB57AD6FBC69AAE /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */; };
+		523D3896AE17847ED423D73A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F1B22374250AF2E9D222441D /* README.md */; };
+		55BFCA03B1194C0CEE07ACDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D102CDE569CA536AADA33A44 /* Assets.xcassets */; };
+		5BAE5F40144F30676D10AC1C /* MemoHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */; };
+		5FB72740B0172AC2E767DB9E /* TodoOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */; };
+		627C233394FD202E1B1942EC /* PlantingFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225B6D069A1700DCF7A4387D /* PlantingFont.swift */; };
+		63DCE1583FAB27A9562E1D5E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */; };
+		6450B41562B46E81D2D7241A /* DateCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */; };
+		6924A616CD3716F55D387626 /* CategoryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */; };
+		7403290F1ACBD8963F73230B /* RecurrenceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */; };
+		75B1F8610A242F21E48F0FD8 /* Category+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FCCD1235D1036A58340D4 /* Category+Color.swift */; };
+		76ECA46120FD896CA0890530 /* CloverGrowthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */; };
+		779058A9796903B6E4DD71C9 /* CategorySeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596851DF4DAED41BE484EF94 /* CategorySeeder.swift */; };
+		7F562A208791E285FC4FCBE7 /* BiometricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */; };
+		866FE409393F982F3510B430 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */; };
+		86EC899DAE07A5C838345370 /* TodoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95C4D94C04E357A79501704 /* TodoEditView.swift */; };
+		88AFA0806292240812A090E9 /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390F809C0440AFCE9D80151 /* MemoRepository.swift */; };
+		8907AB5848DFAC6B5F1E6311 /* FortuneOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */; };
+		8FB59EA7C5220B1A4A77B97D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD271C3838E3921BF3CA3 /* Category.swift */; };
+		99A70A4A59B3EB6E7540BE42 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0624A4FDCBA48AD084776FA /* PersistenceController.swift */; };
+		99E1A288B7C5270B6ED9BF5C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95CF52DC7815BBCB464FEF /* SettingsView.swift */; };
+		9C230C282B664BEBB9BD8672 /* PlantingMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7614556DE72EAC68BB919688 /* PlantingMetrics.swift */; };
+		9D4498AE2B6D12BDF952D89E /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C3DFA3E5E167677D31D022B1 /* Pretendard-Light.otf */; };
+		9D5D336C1E548229BB26A607 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0073B3CC490EC0A29107B8E0 /* Pretendard-ExtraBold.otf */; };
+		A36EFB347AEB904597EF3D96 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9A67382D82172DDABDAF6650 /* Pretendard-Bold.otf */; };
+		A4B52BE6281127AAB3F86477 /* DateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0064883BB62E41F37E91E5 /* DateDetailView.swift */; };
+		A5898AA41B317D0C7F90C42A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E1FA277A9DFD31AEBC831293 /* Pretendard-Regular.otf */; };
+		AA1D928C646F573904BA1E86 /* PlantingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */; };
+		AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */; };
+		B0C726EC02FCB82C18D2B948 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 12E06AAF1CBDA2B1C4A9F826 /* Pretendard-ExtraLight.otf */; };
+		B6CFA9FFB88974DA83B5F851 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B473AC4D6613756EBF7AD556 /* Pretendard-SemiBold.otf */; };
+		BBB0E67A72D7434048C02C96 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8074B2B77EA1C736C9B6F2 /* CategoryListViewModel.swift */; };
+		C7D1274D63AA73622282B280 /* QuickAddSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */; };
+		C7ECA5CED2505AD007A46806 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC9A568195DA5956A98F020 /* CategoryRepository.swift */; };
+		CD56E1FDE248CC1716176022 /* CalendarHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */; };
+		D20831A775D606C6EAF8EC33 /* TodoVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */; };
+		D411F05CA0250A5C2CE76390 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
+		D79368DC745CA98DBBF6163A /* CalendarDragPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9454C6362BEE57406BBFC6A /* CalendarDragPayload.swift */; };
+		DCACEAA36E3E2E83A9305CD6 /* TodoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022911A9727F3D514D4236A8 /* TodoHomeView.swift */; };
+		E46A13863ABDDF3AAB214143 /* TodoHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDB5052D1C15D09C941EE0 /* TodoHomeViewModel.swift */; };
+		E63E4E836AA254EB866EC61F /* RecurrenceRuleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88EBB6B4D38F30EBC790106 /* RecurrenceRuleEditor.swift */; };
+		E8BA455E98FB14E98D2DD874 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA0312B115546A892B418F /* Schedule.swift */; };
+		E958671D7516829CEA68D1E8 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DAAFEC7ACCF33E1DE9B03 /* RootTabView.swift */; };
+		F9F4B12E0A7623D3F0B61759 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F824E418FD1C0F82539D5F86 /* Pretendard-Black.otf */; };
+		FC7BF2BFA28CAC5F3B9376E2 /* CalendarMonthLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0073B3CC490EC0A29107B8E0 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		022911A9727F3D514D4236A8 /* TodoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHomeView.swift; sourceTree = "<group>"; };
+		027DAAFEC7ACCF33E1DE9B03 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		063527F85AF06697CDB75713 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoVisibility.swift; sourceTree = "<group>"; };
+		0E78111F61EFDB04BF880DD8 /* CalendarHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHomeView.swift; sourceTree = "<group>"; };
+		110C8968A7C69A54A9769851 /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
+		12E06AAF1CBDA2B1C4A9F826 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		1390F809C0440AFCE9D80151 /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
+		1A8074B2B77EA1C736C9B6F2 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
+		1DAF2BA5F9ACB9FA0CBC0049 /* CategoryEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditSheet.swift; sourceTree = "<group>"; };
+		1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
+		1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		225B6D069A1700DCF7A4387D /* PlantingFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingFont.swift; sourceTree = "<group>"; };
+		29DDB5052D1C15D09C941EE0 /* TodoHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHomeViewModel.swift; sourceTree = "<group>"; };
+		34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRepository.swift; sourceTree = "<group>"; };
+		3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOccurrence.swift; sourceTree = "<group>"; };
+		3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
+		3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthLayout.swift; sourceTree = "<group>"; };
+		4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneOfTheDay.swift; sourceTree = "<group>"; };
+		57ED6DB7BA390A316E060BE9 /* TodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRow.swift; sourceTree = "<group>"; };
+		580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloverGrowthView.swift; sourceTree = "<group>"; };
+		596851DF4DAED41BE484EF94 /* CategorySeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySeeder.swift; sourceTree = "<group>"; };
+		5EE20EDC369E7718BA4A8289 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCellRow.swift; sourceTree = "<group>"; };
+		7614556DE72EAC68BB919688 /* PlantingMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingMetrics.swift; sourceTree = "<group>"; };
+		7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
+		88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeViewModel.swift; sourceTree = "<group>"; };
+		8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddSheet.swift; sourceTree = "<group>"; };
+		916E3F626EC288D39627EBFC /* MemoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeView.swift; sourceTree = "<group>"; };
+		936CE7F86FB8B6D78558C574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9A67382D82172DDABDAF6650 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHomeViewModel.swift; sourceTree = "<group>"; };
+		A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingApp.swift; sourceTree = "<group>"; };
+		A95C4D94C04E357A79501704 /* TodoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditView.swift; sourceTree = "<group>"; };
+		AF95CF52DC7815BBCB464FEF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AFC9A568195DA5956A98F020 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		B473AC4D6613756EBF7AD556 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		B66FCCD1235D1036A58340D4 /* Category+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Color.swift"; sourceTree = "<group>"; };
+		B7CEB8F00CA08AD05A0CC2D8 /* Planting.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Planting.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B88EBB6B4D38F30EBC790106 /* RecurrenceRuleEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRuleEditor.swift; sourceTree = "<group>"; };
+		B9454C6362BEE57406BBFC6A /* CalendarDragPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDragPayload.swift; sourceTree = "<group>"; };
+		BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCellView.swift; sourceTree = "<group>"; };
+		BDC743F2C8586CD5BF3503C9 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingColor.swift; sourceTree = "<group>"; };
+		BEFA0312B115546A892B418F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		C33AD271C3838E3921BF3CA3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		C3DFA3E5E167677D31D022B1 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthenticator.swift; sourceTree = "<group>"; };
+		D0624A4FDCBA48AD084776FA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceEngine.swift; sourceTree = "<group>"; };
+		D102CDE569CA536AADA33A44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DEE5FA8B5EA076F5CD133C81 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		E1FA277A9DFD31AEBC831293 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		EB0064883BB62E41F37E91E5 /* DateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDetailView.swift; sourceTree = "<group>"; };
+		F1B22374250AF2E9D222441D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCompletionSummary.swift; sourceTree = "<group>"; };
+		F824E418FD1C0F82539D5F86 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		218588CC843712143E2C9424 /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				110C8968A7C69A54A9769851 /* MemoEditView.swift */,
+				916E3F626EC288D39627EBFC /* MemoHomeView.swift */,
+				88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
+		30F69412D30490AF8267C5BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B7CEB8F00CA08AD05A0CC2D8 /* Planting.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3365A7F2A50C0BABD579199B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F824E418FD1C0F82539D5F86 /* Pretendard-Black.otf */,
+				9A67382D82172DDABDAF6650 /* Pretendard-Bold.otf */,
+				0073B3CC490EC0A29107B8E0 /* Pretendard-ExtraBold.otf */,
+				12E06AAF1CBDA2B1C4A9F826 /* Pretendard-ExtraLight.otf */,
+				C3DFA3E5E167677D31D022B1 /* Pretendard-Light.otf */,
+				063527F85AF06697CDB75713 /* Pretendard-Medium.otf */,
+				E1FA277A9DFD31AEBC831293 /* Pretendard-Regular.otf */,
+				B473AC4D6613756EBF7AD556 /* Pretendard-SemiBold.otf */,
+				DEE5FA8B5EA076F5CD133C81 /* Pretendard-Thin.otf */,
+				F1B22374250AF2E9D222441D /* README.md */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		4758279D73233EFBE53B9800 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C33AD271C3838E3921BF3CA3 /* Category.swift */,
+				F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */,
+				34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */,
+				BEFA0312B115546A892B418F /* Schedule.swift */,
+				5EE20EDC369E7718BA4A8289 /* Todo.swift */,
+				3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */,
+				0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4D62D58AD765862EC98D9678 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				A95C4D94C04E357A79501704 /* TodoEditView.swift */,
+				022911A9727F3D514D4236A8 /* TodoHomeView.swift */,
+				29DDB5052D1C15D09C941EE0 /* TodoHomeViewModel.swift */,
+				57ED6DB7BA390A316E060BE9 /* TodoRow.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		4F23501E66432A83FE435320 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				B66FCCD1235D1036A58340D4 /* Category+Color.swift */,
+				BDC743F2C8586CD5BF3503C9 /* Color+Hex.swift */,
+				BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */,
+				225B6D069A1700DCF7A4387D /* PlantingFont.swift */,
+				7614556DE72EAC68BB919688 /* PlantingMetrics.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		51A417B8BFC95DCEEC5F03B1 /* Recurrence */ = {
+			isa = PBXGroup;
+			children = (
+				D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */,
+				1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */,
+			);
+			path = Recurrence;
+			sourceTree = "<group>";
+		};
+		64E71449DA86183B6F78BE68 /* Planting */ = {
+			isa = PBXGroup;
+			children = (
+				D383DD69F68A7E6D5EFCB9C9 /* App */,
+				7E4327F43C0C7682F4B0FAB6 /* Core */,
+				6E87EC952B2624EECA1F3C2C /* Features */,
+				9793EBD87DD1DA28930755EA /* Resources */,
+				AF850F8ECC846994F4C2AF4B /* Shared */,
+			);
+			path = Planting;
+			sourceTree = "<group>";
+		};
+		6E87EC952B2624EECA1F3C2C /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A554E1C60BA0BC9D15663CFC /* Calendar */,
+				C27BA2613D23E4D0E8ADB015 /* Category */,
+				218588CC843712143E2C9424 /* Memo */,
+				CD7BBB58CAC71EBBA79D872F /* QuickAdd */,
+				9EE7AE64E0BB3754371B79BF /* Settings */,
+				4D62D58AD765862EC98D9678 /* Todo */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		7E4327F43C0C7682F4B0FAB6 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4F23501E66432A83FE435320 /* DesignSystem */,
+				4758279D73233EFBE53B9800 /* Models */,
+				8E76C6236EF1B44FBB1F7DA2 /* Persistence */,
+				51A417B8BFC95DCEEC5F03B1 /* Recurrence */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8E76C6236EF1B44FBB1F7DA2 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				AFC9A568195DA5956A98F020 /* CategoryRepository.swift */,
+				596851DF4DAED41BE484EF94 /* CategorySeeder.swift */,
+				1390F809C0440AFCE9D80151 /* MemoRepository.swift */,
+				D0624A4FDCBA48AD084776FA /* PersistenceController.swift */,
+				34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */,
+				1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		9793EBD87DD1DA28930755EA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D102CDE569CA536AADA33A44 /* Assets.xcassets */,
+				3365A7F2A50C0BABD579199B /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9EE7AE64E0BB3754371B79BF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AF95CF52DC7815BBCB464FEF /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A554E1C60BA0BC9D15663CFC /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				B9454C6362BEE57406BBFC6A /* CalendarDragPayload.swift */,
+				0E78111F61EFDB04BF880DD8 /* CalendarHomeView.swift */,
+				A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */,
+				3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */,
+				580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */,
+				754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */,
+				BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */,
+				EB0064883BB62E41F37E91E5 /* DateDetailView.swift */,
+				4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */,
+				3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		AF850F8ECC846994F4C2AF4B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */,
+				B88EBB6B4D38F30EBC790106 /* RecurrenceRuleEditor.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		C27BA2613D23E4D0E8ADB015 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				1DAF2BA5F9ACB9FA0CBC0049 /* CategoryEditSheet.swift */,
+				1A8074B2B77EA1C736C9B6F2 /* CategoryListViewModel.swift */,
+				7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		CD7BBB58CAC71EBBA79D872F /* QuickAdd */ = {
+			isa = PBXGroup;
+			children = (
+				8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */,
+			);
+			path = QuickAdd;
+			sourceTree = "<group>";
+		};
+		D383DD69F68A7E6D5EFCB9C9 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				936CE7F86FB8B6D78558C574 /* Info.plist */,
+				A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */,
+				027DAAFEC7ACCF33E1DE9B03 /* RootTabView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F216791AD38F29A557E67EE7 = {
+			isa = PBXGroup;
+			children = (
+				64E71449DA86183B6F78BE68 /* Planting */,
+				30F69412D30490AF8267C5BC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		63773DF236E14C253C32ED63 /* Planting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEADDAC599FB45B35361AD28 /* Build configuration list for PBXNativeTarget "Planting" */;
+			buildPhases = (
+				F55C786F05D6EF25EE57A82E /* Sources */,
+				8E5EC79F6B0BCC4FD8685ACE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Planting;
+			packageProductDependencies = (
+			);
+			productName = Planting;
+			productReference = B7CEB8F00CA08AD05A0CC2D8 /* Planting.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E9142D9E53A989FF7B0A4145 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 54984903B1301F48EE1D81FA /* Build configuration list for PBXProject "Planting" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F216791AD38F29A557E67EE7;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 30F69412D30490AF8267C5BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				63773DF236E14C253C32ED63 /* Planting */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E5EC79F6B0BCC4FD8685ACE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55BFCA03B1194C0CEE07ACDD /* Assets.xcassets in Resources */,
+				F9F4B12E0A7623D3F0B61759 /* Pretendard-Black.otf in Resources */,
+				A36EFB347AEB904597EF3D96 /* Pretendard-Bold.otf in Resources */,
+				9D5D336C1E548229BB26A607 /* Pretendard-ExtraBold.otf in Resources */,
+				B0C726EC02FCB82C18D2B948 /* Pretendard-ExtraLight.otf in Resources */,
+				9D4498AE2B6D12BDF952D89E /* Pretendard-Light.otf in Resources */,
+				368AC0D2603FB8693826E9A9 /* Pretendard-Medium.otf in Resources */,
+				A5898AA41B317D0C7F90C42A /* Pretendard-Regular.otf in Resources */,
+				B6CFA9FFB88974DA83B5F851 /* Pretendard-SemiBold.otf in Resources */,
+				11B9E035EA2F95C9B608F11F /* Pretendard-Thin.otf in Resources */,
+				523D3896AE17847ED423D73A /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F55C786F05D6EF25EE57A82E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F562A208791E285FC4FCBE7 /* BiometricAuthenticator.swift in Sources */,
+				D79368DC745CA98DBBF6163A /* CalendarDragPayload.swift in Sources */,
+				191755C610CB9A63E700B7BB /* CalendarHomeView.swift in Sources */,
+				CD56E1FDE248CC1716176022 /* CalendarHomeViewModel.swift in Sources */,
+				FC7BF2BFA28CAC5F3B9376E2 /* CalendarMonthLayout.swift in Sources */,
+				75B1F8610A242F21E48F0FD8 /* Category+Color.swift in Sources */,
+				8FB59EA7C5220B1A4A77B97D /* Category.swift in Sources */,
+				2E8FBBCE4CB1E45060B47CF0 /* CategoryEditSheet.swift in Sources */,
+				BBB0E67A72D7434048C02C96 /* CategoryListViewModel.swift in Sources */,
+				6924A616CD3716F55D387626 /* CategoryManagementView.swift in Sources */,
+				C7ECA5CED2505AD007A46806 /* CategoryRepository.swift in Sources */,
+				779058A9796903B6E4DD71C9 /* CategorySeeder.swift in Sources */,
+				76ECA46120FD896CA0890530 /* CloverGrowthView.swift in Sources */,
+				270E833E7010F848EBAEC615 /* Color+Hex.swift in Sources */,
+				4C2D4E720624248C089C8043 /* DailyCompletionSummary.swift in Sources */,
+				6450B41562B46E81D2D7241A /* DateCellRow.swift in Sources */,
+				AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */,
+				A4B52BE6281127AAB3F86477 /* DateDetailView.swift in Sources */,
+				8907AB5848DFAC6B5F1E6311 /* FortuneOfTheDay.swift in Sources */,
+				866FE409393F982F3510B430 /* Memo.swift in Sources */,
+				08A616857E3A5B9EEF96624C /* MemoEditView.swift in Sources */,
+				2B12265E8E76E62BC39E3162 /* MemoHomeView.swift in Sources */,
+				5BAE5F40144F30676D10AC1C /* MemoHomeViewModel.swift in Sources */,
+				88AFA0806292240812A090E9 /* MemoRepository.swift in Sources */,
+				99A70A4A59B3EB6E7540BE42 /* PersistenceController.swift in Sources */,
+				46FF5E19DD94B1AFD018B5FF /* PlantingApp.swift in Sources */,
+				AA1D928C646F573904BA1E86 /* PlantingColor.swift in Sources */,
+				627C233394FD202E1B1942EC /* PlantingFont.swift in Sources */,
+				9C230C282B664BEBB9BD8672 /* PlantingMetrics.swift in Sources */,
+				C7D1274D63AA73622282B280 /* QuickAddSheet.swift in Sources */,
+				7403290F1ACBD8963F73230B /* RecurrenceEngine.swift in Sources */,
+				63DCE1583FAB27A9562E1D5E /* RecurrenceRule.swift in Sources */,
+				E63E4E836AA254EB866EC61F /* RecurrenceRuleEditor.swift in Sources */,
+				E958671D7516829CEA68D1E8 /* RootTabView.swift in Sources */,
+				E8BA455E98FB14E98D2DD874 /* Schedule.swift in Sources */,
+				4CBD7353C55DBA12470028E8 /* ScheduleEditView.swift in Sources */,
+				D411F05CA0250A5C2CE76390 /* ScheduleRepository.swift in Sources */,
+				99E1A288B7C5270B6ED9BF5C /* SettingsView.swift in Sources */,
+				2415C200C1C901A7D3B7318B /* Todo.swift in Sources */,
+				86EC899DAE07A5C838345370 /* TodoEditView.swift in Sources */,
+				DCACEAA36E3E2E83A9305CD6 /* TodoHomeView.swift in Sources */,
+				E46A13863ABDDF3AAB214143 /* TodoHomeViewModel.swift in Sources */,
+				5FB72740B0172AC2E767DB9E /* TodoOccurrence.swift in Sources */,
+				4F8AB5514AB57AD6FBC69AAE /* TodoRepository.swift in Sources */,
+				35B7681115D98920FE3AE000 /* TodoRow.swift in Sources */,
+				D20831A775D606C6EAF8EC33 /* TodoVisibility.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2D78AC38F28681B2E845E19D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Planting/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.planting.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		324E386D69EC7901FC3BDE3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6D08DA125287FBE8A69A35AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F2B191F1FCDC62CFEC6769F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Planting/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.planting.app;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		54984903B1301F48EE1D81FA /* Build configuration list for PBXProject "Planting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				324E386D69EC7901FC3BDE3A /* Debug */,
+				6D08DA125287FBE8A69A35AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FEADDAC599FB45B35361AD28 /* Build configuration list for PBXNativeTarget "Planting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2B191F1FCDC62CFEC6769F8 /* Debug */,
+				2D78AC38F28681B2E845E19D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E9142D9E53A989FF7B0A4145 /* Project object */;
+}
