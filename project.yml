@@ -36,12 +36,51 @@ targets:
         TARGETED_DEVICE_FAMILY: "1"
         MARKETING_VERSION: "1.0"
         CURRENT_PROJECT_VERSION: "1"
+    entitlements:
+      path: Planting/App/Planting.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.planting.app
+    dependencies:
+      - target: PlantingWidgets
+        embed: true
+
+  PlantingWidgets:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Widgets
+      - path: Planting/Core/Models
+      - path: Planting/Core/Persistence
+      - path: Planting/Core/Recurrence
+      - path: Planting/Core/DesignSystem
+      - path: Planting/Features/Calendar/CalendarMonthLayout.swift
+    info:
+      path: Widgets/Info.plist
+      properties:
+        CFBundleDisplayName: Planting Widgets
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.planting.app.widgets
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: YES
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+    entitlements:
+      path: Widgets/PlantingWidgets.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.planting.app
 
 schemes:
   Planting:
     build:
       targets:
         Planting: all
+        PlantingWidgets: all
     run:
       config: Debug
     test:

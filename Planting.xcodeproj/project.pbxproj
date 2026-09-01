@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08A616857E3A5B9EEF96624C /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110C8968A7C69A54A9769851 /* MemoEditView.swift */; };
+		0AD0182F2A2D69BB9B89ED4C /* DailyCompletionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */; };
 		11B9E035EA2F95C9B608F11F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEE5FA8B5EA076F5CD133C81 /* Pretendard-Thin.otf */; };
 		191755C610CB9A63E700B7BB /* CalendarHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78111F61EFDB04BF880DD8 /* CalendarHomeView.swift */; };
 		2415C200C1C901A7D3B7318B /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE20EDC369E7718BA4A8289 /* Todo.swift */; };
@@ -16,6 +17,7 @@
 		2E8FBBCE4CB1E45060B47CF0 /* CategoryEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF2BA5F9ACB9FA0CBC0049 /* CategoryEditSheet.swift */; };
 		35B7681115D98920FE3AE000 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED6DB7BA390A316E060BE9 /* TodoRow.swift */; };
 		368AC0D2603FB8693826E9A9 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 063527F85AF06697CDB75713 /* Pretendard-Medium.otf */; };
+		43EE0E2D22AB1697D0BF6C61 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE20EDC369E7718BA4A8289 /* Todo.swift */; };
 		46FF5E19DD94B1AFD018B5FF /* PlantingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */; };
 		4C2D4E720624248C089C8043 /* DailyCompletionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */; };
 		4CBD7353C55DBA12470028E8 /* ScheduleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */; };
@@ -24,20 +26,33 @@
 		55BFCA03B1194C0CEE07ACDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D102CDE569CA536AADA33A44 /* Assets.xcassets */; };
 		5BAE5F40144F30676D10AC1C /* MemoHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */; };
 		5FB72740B0172AC2E767DB9E /* TodoOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */; };
+		619E2876B52EC4DF84504588 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0624A4FDCBA48AD084776FA /* PersistenceController.swift */; };
+		61AAAAF636462B161B85CD07 /* PlantingWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1BA2DE82F374F972704DAD7D /* PlantingWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		627C233394FD202E1B1942EC /* PlantingFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225B6D069A1700DCF7A4387D /* PlantingFont.swift */; };
 		63DCE1583FAB27A9562E1D5E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */; };
 		6450B41562B46E81D2D7241A /* DateCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */; };
 		6924A616CD3716F55D387626 /* CategoryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */; };
+		6AB9A0B774625D16C829C04B /* Category+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FCCD1235D1036A58340D4 /* Category+Color.swift */; };
+		6B3AA03016C3DE0966D388D8 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC743F2C8586CD5BF3503C9 /* Color+Hex.swift */; };
+		6E60A3D3FFAD72E44DABCD93 /* CategorySeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596851DF4DAED41BE484EF94 /* CategorySeeder.swift */; };
+		702DDEE89FADA7D901991BA8 /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A21786DE4BFF3FA27C99B5B /* CalendarWidget.swift */; };
 		7403290F1ACBD8963F73230B /* RecurrenceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */; };
 		75B1F8610A242F21E48F0FD8 /* Category+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FCCD1235D1036A58340D4 /* Category+Color.swift */; };
 		76ECA46120FD896CA0890530 /* CloverGrowthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */; };
+		77049FB2A8FBFF2C2548C2CC /* TodoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497F769C29A3BFF6B7AE335 /* TodoWidget.swift */; };
 		779058A9796903B6E4DD71C9 /* CategorySeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596851DF4DAED41BE484EF94 /* CategorySeeder.swift */; };
 		7F562A208791E285FC4FCBE7 /* BiometricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */; };
+		81E7B494169AE296FD22FED0 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
+		856D95F61B442D621E0879DD /* TodoOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */; };
 		866FE409393F982F3510B430 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */; };
 		86EC899DAE07A5C838345370 /* TodoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95C4D94C04E357A79501704 /* TodoEditView.swift */; };
 		88AFA0806292240812A090E9 /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390F809C0440AFCE9D80151 /* MemoRepository.swift */; };
 		8907AB5848DFAC6B5F1E6311 /* FortuneOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */; };
+		8A4D16FA1F9FFADE863A62A4 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */; };
 		8FB59EA7C5220B1A4A77B97D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD271C3838E3921BF3CA3 /* Category.swift */; };
+		8FCF73BB4E3BBB613F0FD413 /* PlantingMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7614556DE72EAC68BB919688 /* PlantingMetrics.swift */; };
+		96A9F29D71350658F2977C66 /* PlantingFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225B6D069A1700DCF7A4387D /* PlantingFont.swift */; };
+		9915A653AE5A21B8A550BDDE /* PlantingWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868E49980751D7DBE34EC5BD /* PlantingWidgetsBundle.swift */; };
 		99A70A4A59B3EB6E7540BE42 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0624A4FDCBA48AD084776FA /* PersistenceController.swift */; };
 		99E1A288B7C5270B6ED9BF5C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF95CF52DC7815BBCB464FEF /* SettingsView.swift */; };
 		9C230C282B664BEBB9BD8672 /* PlantingMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7614556DE72EAC68BB919688 /* PlantingMetrics.swift */; };
@@ -47,25 +62,61 @@
 		A4B52BE6281127AAB3F86477 /* DateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0064883BB62E41F37E91E5 /* DateDetailView.swift */; };
 		A5898AA41B317D0C7F90C42A /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E1FA277A9DFD31AEBC831293 /* Pretendard-Regular.otf */; };
 		AA1D928C646F573904BA1E86 /* PlantingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */; };
+		AA5D78FF218B3085AF54249D /* WidgetDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57266913BCC6DCDC3BB2E043 /* WidgetDataProvider.swift */; };
 		AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */; };
+		AE454D1C6D8E79A86FB3E31E /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */; };
 		B0C726EC02FCB82C18D2B948 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 12E06AAF1CBDA2B1C4A9F826 /* Pretendard-ExtraLight.otf */; };
+		B4C728A22D14B26AE819AB9B /* PlantingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */; };
 		B6CFA9FFB88974DA83B5F851 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B473AC4D6613756EBF7AD556 /* Pretendard-SemiBold.otf */; };
+		BB3E9EDCFBA724C65649D489 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33AD271C3838E3921BF3CA3 /* Category.swift */; };
 		BBB0E67A72D7434048C02C96 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8074B2B77EA1C736C9B6F2 /* CategoryListViewModel.swift */; };
 		C7D1274D63AA73622282B280 /* QuickAddSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */; };
 		C7ECA5CED2505AD007A46806 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC9A568195DA5956A98F020 /* CategoryRepository.swift */; };
 		CD56E1FDE248CC1716176022 /* CalendarHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */; };
+		CE67E4DB1D67270E22D3DC89 /* TodayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2835B50441E9EFC86DAFF8D /* TodayWidget.swift */; };
+		CF43BE8401C5FFEE90C2F3B7 /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390F809C0440AFCE9D80151 /* MemoRepository.swift */; };
 		D0C9C6E42E3215181A9706DE /* MultiDayBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */; };
 		D20831A775D606C6EAF8EC33 /* TodoVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */; };
+		D2F3EF79704BF99B71A1CAA3 /* CalendarMonthLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */; };
 		D411F05CA0250A5C2CE76390 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
 		D79368DC745CA98DBBF6163A /* CalendarDragPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9454C6362BEE57406BBFC6A /* CalendarDragPayload.swift */; };
 		DCACEAA36E3E2E83A9305CD6 /* TodoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022911A9727F3D514D4236A8 /* TodoHomeView.swift */; };
+		E1E9E63CA7219EB785B25176 /* TodoVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */; };
 		E46A13863ABDDF3AAB214143 /* TodoHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDB5052D1C15D09C941EE0 /* TodoHomeViewModel.swift */; };
 		E63E4E836AA254EB866EC61F /* RecurrenceRuleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88EBB6B4D38F30EBC790106 /* RecurrenceRuleEditor.swift */; };
 		E8BA455E98FB14E98D2DD874 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA0312B115546A892B418F /* Schedule.swift */; };
 		E958671D7516829CEA68D1E8 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DAAFEC7ACCF33E1DE9B03 /* RootTabView.swift */; };
+		EB24E9DA6733A3315F49644B /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC9A568195DA5956A98F020 /* CategoryRepository.swift */; };
+		F3C6CCE881804C17F390DCBB /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA0312B115546A892B418F /* Schedule.swift */; };
 		F9F4B12E0A7623D3F0B61759 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F824E418FD1C0F82539D5F86 /* Pretendard-Black.otf */; };
 		FC7BF2BFA28CAC5F3B9376E2 /* CalendarMonthLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */; };
+		FE4CD5214B7B3A47864F29F4 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */; };
+		FF7816D2A6513502BD52F091 /* RecurrenceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		598D180703A569F0D1E15425 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9142D9E53A989FF7B0A4145 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6164D18116137917247D1B91;
+			remoteInfo = PlantingWidgets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B575601F42D89DC4D21A5C45 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				61AAAAF636462B161B85CD07 /* PlantingWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0073B3CC490EC0A29107B8E0 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -78,6 +129,7 @@
 		12E06AAF1CBDA2B1C4A9F826 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		1390F809C0440AFCE9D80151 /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
 		1A8074B2B77EA1C736C9B6F2 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
+		1BA2DE82F374F972704DAD7D /* PlantingWidgets.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PlantingWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DAF2BA5F9ACB9FA0CBC0049 /* CategoryEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEditSheet.swift; sourceTree = "<group>"; };
 		1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
@@ -89,13 +141,17 @@
 		3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
 		3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthLayout.swift; sourceTree = "<group>"; };
 		4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneOfTheDay.swift; sourceTree = "<group>"; };
+		57266913BCC6DCDC3BB2E043 /* WidgetDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataProvider.swift; sourceTree = "<group>"; };
 		57ED6DB7BA390A316E060BE9 /* TodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRow.swift; sourceTree = "<group>"; };
 		580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloverGrowthView.swift; sourceTree = "<group>"; };
+		583AF1E1E9264495B8596A12 /* Planting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planting.entitlements; sourceTree = "<group>"; };
 		596851DF4DAED41BE484EF94 /* CategorySeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySeeder.swift; sourceTree = "<group>"; };
 		5EE20EDC369E7718BA4A8289 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		6A21786DE4BFF3FA27C99B5B /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCellRow.swift; sourceTree = "<group>"; };
 		7614556DE72EAC68BB919688 /* PlantingMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingMetrics.swift; sourceTree = "<group>"; };
 		7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
+		868E49980751D7DBE34EC5BD /* PlantingWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingWidgetsBundle.swift; sourceTree = "<group>"; };
 		88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeViewModel.swift; sourceTree = "<group>"; };
 		89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiDayBarView.swift; sourceTree = "<group>"; };
 		8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddSheet.swift; sourceTree = "<group>"; };
@@ -124,10 +180,14 @@
 		D102CDE569CA536AADA33A44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEE5FA8B5EA076F5CD133C81 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		E1FA277A9DFD31AEBC831293 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		E2835B50441E9EFC86DAFF8D /* TodayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWidget.swift; sourceTree = "<group>"; };
 		EB0064883BB62E41F37E91E5 /* DateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDetailView.swift; sourceTree = "<group>"; };
+		F00C476F5F3FF882E43E1FCC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F1B22374250AF2E9D222441D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCompletionSummary.swift; sourceTree = "<group>"; };
+		F497F769C29A3BFF6B7AE335 /* TodoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoWidget.swift; sourceTree = "<group>"; };
 		F824E418FD1C0F82539D5F86 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		FA22735F2D6EB7DCBC06551F /* PlantingWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlantingWidgets.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -145,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				B7CEB8F00CA08AD05A0CC2D8 /* Planting.app */,
+				1BA2DE82F374F972704DAD7D /* PlantingWidgets.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,6 +225,20 @@
 				F1B22374250AF2E9D222441D /* README.md */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		418878AF9F638D2E27B6E0A7 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				6A21786DE4BFF3FA27C99B5B /* CalendarWidget.swift */,
+				F00C476F5F3FF882E43E1FCC /* Info.plist */,
+				FA22735F2D6EB7DCBC06551F /* PlantingWidgets.entitlements */,
+				868E49980751D7DBE34EC5BD /* PlantingWidgetsBundle.swift */,
+				E2835B50441E9EFC86DAFF8D /* TodayWidget.swift */,
+				F497F769C29A3BFF6B7AE335 /* TodoWidget.swift */,
+				57266913BCC6DCDC3BB2E043 /* WidgetDataProvider.swift */,
+			);
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 		4758279D73233EFBE53B9800 /* Models */ = {
@@ -327,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				936CE7F86FB8B6D78558C574 /* Info.plist */,
+				583AF1E1E9264495B8596A12 /* Planting.entitlements */,
 				A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */,
 				027DAAFEC7ACCF33E1DE9B03 /* RootTabView.swift */,
 			);
@@ -337,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				64E71449DA86183B6F78BE68 /* Planting */,
+				418878AF9F638D2E27B6E0A7 /* Widgets */,
 				30F69412D30490AF8267C5BC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -344,16 +421,35 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6164D18116137917247D1B91 /* PlantingWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B9A7EB3A29586E4E4A5DAAC /* Build configuration list for PBXNativeTarget "PlantingWidgets" */;
+			buildPhases = (
+				DA0F443085C44E353CE5B25D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlantingWidgets;
+			packageProductDependencies = (
+			);
+			productName = PlantingWidgets;
+			productReference = 1BA2DE82F374F972704DAD7D /* PlantingWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		63773DF236E14C253C32ED63 /* Planting */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEADDAC599FB45B35361AD28 /* Build configuration list for PBXNativeTarget "Planting" */;
 			buildPhases = (
 				F55C786F05D6EF25EE57A82E /* Sources */,
 				8E5EC79F6B0BCC4FD8685ACE /* Resources */,
+				B575601F42D89DC4D21A5C45 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F9D0019E242453D962770E0A /* PBXTargetDependency */,
 			);
 			name = Planting;
 			packageProductDependencies = (
@@ -388,6 +484,7 @@
 			projectRoot = "";
 			targets = (
 				63773DF236E14C253C32ED63 /* Planting */,
+				6164D18116137917247D1B91 /* PlantingWidgets */,
 			);
 		};
 /* End PBXProject section */
@@ -414,6 +511,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA0F443085C44E353CE5B25D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2F3EF79704BF99B71A1CAA3 /* CalendarMonthLayout.swift in Sources */,
+				702DDEE89FADA7D901991BA8 /* CalendarWidget.swift in Sources */,
+				6AB9A0B774625D16C829C04B /* Category+Color.swift in Sources */,
+				BB3E9EDCFBA724C65649D489 /* Category.swift in Sources */,
+				EB24E9DA6733A3315F49644B /* CategoryRepository.swift in Sources */,
+				6E60A3D3FFAD72E44DABCD93 /* CategorySeeder.swift in Sources */,
+				6B3AA03016C3DE0966D388D8 /* Color+Hex.swift in Sources */,
+				0AD0182F2A2D69BB9B89ED4C /* DailyCompletionSummary.swift in Sources */,
+				8A4D16FA1F9FFADE863A62A4 /* Memo.swift in Sources */,
+				CF43BE8401C5FFEE90C2F3B7 /* MemoRepository.swift in Sources */,
+				619E2876B52EC4DF84504588 /* PersistenceController.swift in Sources */,
+				B4C728A22D14B26AE819AB9B /* PlantingColor.swift in Sources */,
+				96A9F29D71350658F2977C66 /* PlantingFont.swift in Sources */,
+				8FCF73BB4E3BBB613F0FD413 /* PlantingMetrics.swift in Sources */,
+				9915A653AE5A21B8A550BDDE /* PlantingWidgetsBundle.swift in Sources */,
+				FF7816D2A6513502BD52F091 /* RecurrenceEngine.swift in Sources */,
+				FE4CD5214B7B3A47864F29F4 /* RecurrenceRule.swift in Sources */,
+				F3C6CCE881804C17F390DCBB /* Schedule.swift in Sources */,
+				81E7B494169AE296FD22FED0 /* ScheduleRepository.swift in Sources */,
+				CE67E4DB1D67270E22D3DC89 /* TodayWidget.swift in Sources */,
+				43EE0E2D22AB1697D0BF6C61 /* Todo.swift in Sources */,
+				856D95F61B442D621E0879DD /* TodoOccurrence.swift in Sources */,
+				AE454D1C6D8E79A86FB3E31E /* TodoRepository.swift in Sources */,
+				E1E9E63CA7219EB785B25176 /* TodoVisibility.swift in Sources */,
+				77049FB2A8FBFF2C2548C2CC /* TodoWidget.swift in Sources */,
+				AA5D78FF218B3085AF54249D /* WidgetDataProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F55C786F05D6EF25EE57A82E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -470,11 +600,20 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F9D0019E242453D962770E0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6164D18116137917247D1B91 /* PlantingWidgets */;
+			targetProxy = 598D180703A569F0D1E15425 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		2D78AC38F28681B2E845E19D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Planting/App/Planting.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Planting/App/Info.plist;
@@ -553,6 +692,26 @@
 			};
 			name = Debug;
 		};
+		682EDFAE4D34A4C6D5DC8F1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widgets/PlantingWidgets.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.planting.app.widgets;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
 		6D08DA125287FBE8A69A35AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -609,10 +768,31 @@
 			};
 			name = Release;
 		};
+		7CC3964070B60EC3F03C3B36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widgets/PlantingWidgets.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.planting.app.widgets;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		F2B191F1FCDC62CFEC6769F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Planting/App/Planting.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = Planting/App/Info.plist;
@@ -636,6 +816,15 @@
 			buildConfigurations = (
 				324E386D69EC7901FC3BDE3A /* Debug */,
 				6D08DA125287FBE8A69A35AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5B9A7EB3A29586E4E4A5DAAC /* Build configuration list for PBXNativeTarget "PlantingWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				682EDFAE4D34A4C6D5DC8F1B /* Debug */,
+				7CC3964070B60EC3F03C3B36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

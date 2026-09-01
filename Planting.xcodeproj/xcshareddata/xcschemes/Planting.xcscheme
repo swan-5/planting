@@ -21,6 +21,20 @@
                ReferencedContainer = "container:Planting.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6164D18116137917247D1B91"
+               BuildableName = "PlantingWidgets.appex"
+               BlueprintName = "PlantingWidgets"
+               ReferencedContainer = "container:Planting.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

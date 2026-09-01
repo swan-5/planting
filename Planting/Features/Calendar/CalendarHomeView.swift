@@ -15,6 +15,10 @@ struct CalendarHomeView: View {
     @State private var pendingCreateKind: QuickAddKind?
     @State private var detailDate: Date?
     @State private var editingSchedule: Schedule?
+    /// Drives which edge the month slides in/out from (PRODUCT_SPEC.md §22
+    /// "natural month slide"). >0 = next month (slides in from the right),
+    /// <0 = previous month (from the left), 0 = jump-to-today (no direction).
+    @State private var monthNavigationDirection = 0
 
     private let baseCellHeight: CGFloat = 68
     private let barLaneHeight: CGFloat = 17
@@ -25,8 +29,13 @@ struct CalendarHomeView: View {
                 if let viewModel {
                     header(viewModel)
                     weekdayHeader(viewModel)
-                    dateGrid(viewModel)
-                    CloverGrowthView(fullyCompletedWeeks: viewModel.fullyCompletedWeeksThisMonth)
+                    VStack(spacing: 0) {
+                        dateGrid(viewModel)
+                        CloverGrowthView(fullyCompletedWeeks: viewModel.fullyCompletedWeeksThisMonth)
+                    }
+                    .id(viewModel.visibleMonth)
+                    .transition(monthTransition)
+                    .clipped()
                 }
                 Spacer(minLength: 0)
             }
@@ -93,6 +102,28 @@ struct CalendarHomeView: View {
         }
     }
 
+    private var monthTransition: AnyTransition {
+        .asymmetric(
+            insertion: .move(edge: monthNavigationDirection < 0 ? .leading : .trailing),
+            removal: .move(edge: monthNavigationDirection < 0 ? .trailing : .leading)
+        )
+    }
+
+    private func goToPreviousMonth(_ viewModel: CalendarHomeViewModel) {
+        monthNavigationDirection = -1
+        withAnimation(.easeInOut(duration: 0.28)) { viewModel.goToPreviousMonth() }
+    }
+
+    private func goToNextMonth(_ viewModel: CalendarHomeViewModel) {
+        monthNavigationDirection = 1
+        withAnimation(.easeInOut(duration: 0.28)) { viewModel.goToNextMonth() }
+    }
+
+    private func goToToday(_ viewModel: CalendarHomeViewModel) {
+        monthNavigationDirection = 0
+        withAnimation(.easeInOut(duration: 0.28)) { viewModel.goToToday() }
+    }
+
     private func header(_ viewModel: CalendarHomeViewModel) -> some View {
         HStack(spacing: PlantingSpacing.md) {
             HStack(spacing: 4) {
@@ -110,14 +141,14 @@ struct CalendarHomeView: View {
 
             Spacer()
 
-            Button("Today") { viewModel.goToToday() }
+            Button("Today") { goToToday(viewModel) }
                 .font(PlantingFont.body(13))
                 .foregroundStyle(PlantingColor.secondaryText)
 
-            Button { viewModel.goToPreviousMonth() } label: {
+            Button { goToPreviousMonth(viewModel) } label: {
                 Image(systemName: "chevron.left")
             }
-            Button { viewModel.goToNextMonth() } label: {
+            Button { goToNextMonth(viewModel) } label: {
                 Image(systemName: "chevron.right")
             }
         }
