@@ -21,11 +21,11 @@ struct TodoHomeView: View {
                     .padding(.horizontal, PlantingSpacing.lg)
                     .padding(.vertical, PlantingSpacing.sm)
 
-                    if viewModel.items.isEmpty {
+                    if viewModel.displayedItems.isEmpty {
                         emptyState
                     } else {
                         List {
-                            ForEach(viewModel.items) { item in
+                            ForEach(viewModel.displayedItems) { item in
                                 TodoRow(
                                     item: item,
                                     dDayLabel: viewModel.dDayLabel(for: item),
@@ -40,6 +40,7 @@ struct TodoHomeView: View {
             }
             .background(PlantingColor.background)
             .onAppear { viewModel?.load() }
+            .searchable(text: searchBinding, prompt: "Search todos")
             .navigationTitle("Todo")
             .toolbar {
                 if let viewModel {
@@ -100,6 +101,13 @@ struct TodoHomeView: View {
         Binding(
             get: { viewModel.sortOption },
             set: { viewModel.sortOption = $0; viewModel.sort() }
+        )
+    }
+
+    private var searchBinding: Binding<String> {
+        Binding(
+            get: { viewModel?.searchText ?? "" },
+            set: { viewModel?.searchText = $0 }
         )
     }
 }

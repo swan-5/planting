@@ -14,6 +14,7 @@ enum PersistenceController {
             Todo.self,
             TodoOccurrence.self,
             Memo.self,
+            MonthlyReflection.self,
         ])
 
         let configuration: ModelConfiguration

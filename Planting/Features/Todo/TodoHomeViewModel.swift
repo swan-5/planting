@@ -15,7 +15,16 @@ final class TodoHomeViewModel {
 
     var segment: Segment = .today
     var sortOption: SortOption = .dueDate
+    var searchText: String = ""
     private(set) var items: [TodoItem] = []
+
+    /// `items` filtered to titles containing `searchText` (substring match,
+    /// case/diacritic-insensitive) — not the spec, added on request.
+    var displayedItems: [TodoItem] {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else { return items }
+        return items.filter { $0.todo.title.localizedStandardContains(query) }
+    }
 
     private let repository: TodoRepository
     private let calendar: Calendar

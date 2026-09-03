@@ -15,6 +15,11 @@ struct CalendarHomeView: View {
     @State private var pendingCreateKind: QuickAddKind?
     @State private var detailDate: Date?
     @State private var editingSchedule: Schedule?
+    /// The month tapped via the header's "‹ September ⌄ ›" control — not
+    /// necessarily `viewModel.visibleMonth` by the time the pushed screen
+    /// reads it if the user then also flips months, so this is captured
+    /// once at tap time and handed to MonthlyReflectionView directly.
+    @State private var reflectionMonth: Date?
     /// Drives which edge the month slides in/out from (PRODUCT_SPEC.md §22
     /// "natural month slide"). >0 = next month (slides in from the right),
     /// <0 = previous month (from the left), 0 = jump-to-today (no direction).
@@ -29,15 +34,20 @@ struct CalendarHomeView: View {
                 if let viewModel {
                     header(viewModel)
                     weekdayHeader(viewModel)
-                    VStack(spacing: 0) {
-                        dateGrid(viewModel)
-                        CloverGrowthView(fullyCompletedWeeks: viewModel.fullyCompletedWeeksThisMonth)
-                    }
-                    .id(viewModel.visibleMonth)
-                    .transition(monthTransition)
-                    .clipped()
+                    dateGrid(viewModel)
+                        .id(viewModel.visibleMonth)
+                        .transition(monthTransition)
+                        .clipped()
+
+                    // Centered in whatever blank space is left below the
+                    // grid (down to the tab bar), not pinned to the grid's
+                    // bottom edge — on request.
+                    Spacer(minLength: 0)
+                    CloverGrowthView(fullyCompletedWeeks: viewModel.fullyCompletedWeeksThisMonth)
+                    Spacer(minLength: 0)
+                } else {
+                    Spacer(minLength: 0)
                 }
-                Spacer(minLength: 0)
             }
             .background(PlantingColor.background)
             .onAppear { viewModel?.loadMonthData() }
@@ -96,6 +106,9 @@ struct CalendarHomeView: View {
             .navigationDestination(item: $detailDate) { date in
                 DateDetailView(date: date)
             }
+            .navigationDestination(item: $reflectionMonth) { month in
+                MonthlyReflectionView(month: month)
+            }
             .sheet(item: $editingSchedule, onDismiss: { viewModel?.loadMonthData() }) { schedule in
                 ScheduleEditView(existingSchedule: schedule)
             }
@@ -124,37 +137,68 @@ struct CalendarHomeView: View {
         withAnimation(.easeInOut(duration: 0.28)) { viewModel.goToToday() }
     }
 
+    /// "‹ September ⌄ ›" (not in the spec, added on request): the chevrons
+    /// keep doing month-slide navigation exactly as before, and the month
+    /// name itself is now a button that opens that month's Monthly
+    /// Reflection — always the month currently on screen, so flipping to
+    /// August first and then tapping "August ⌄" opens August's reflection.
     private func header(_ viewModel: CalendarHomeViewModel) -> some View {
         HStack(spacing: PlantingSpacing.md) {
-            HStack(spacing: 4) {
-                Text(viewModel.monthTitle)
-                    .font(PlantingFont.monthTitle)
-                    .foregroundStyle(PlantingColor.primaryText)
+            VStack(alignment: .leading, spacing: 0) {
+                Text(yearOnly(viewModel.visibleMonth))
+                    .font(PlantingFont.caption)
+                    .foregroundStyle(PlantingColor.secondaryText)
 
-                if viewModel.fullyCompletedWeeksThisMonth >= 4 {
-                    Image("clover_stage4")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 18, height: 18)
+                Button {
+                    reflectionMonth = viewModel.visibleMonth
+                } label: {
+                    HStack(spacing: 3) {
+                        Text(monthNameOnly(viewModel.visibleMonth))
+                            .font(PlantingFont.monthTitle)
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 13, weight: .semibold))
+                    }
+                    .foregroundStyle(PlantingColor.primaryText)
                 }
+                .buttonStyle(.plain)
             }
 
             Spacer()
 
-            Button("Today") { goToToday(viewModel) }
-                .font(PlantingFont.body(13))
-                .foregroundStyle(PlantingColor.secondaryText)
+            HStack(spacing: PlantingSpacing.md) {
+                Button("Today") { goToToday(viewModel) }
+                    .font(PlantingFont.body(13))
+                    .foregroundStyle(PlantingColor.secondaryText)
 
-            Button { goToPreviousMonth(viewModel) } label: {
-                Image(systemName: "chevron.left")
-            }
-            Button { goToNextMonth(viewModel) } label: {
-                Image(systemName: "chevron.right")
+                HStack(spacing: 6) {
+                    Button { goToPreviousMonth(viewModel) } label: {
+                        Image(systemName: "chevron.left")
+                    }
+                    Button { goToNextMonth(viewModel) } label: {
+                        Image(systemName: "chevron.right")
+                    }
+                }
             }
         }
         .foregroundStyle(PlantingColor.primaryText)
         .padding(.horizontal, PlantingSpacing.lg)
         .padding(.vertical, PlantingSpacing.sm)
+    }
+
+    private func monthNameOnly(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = MonthGridBuilder.calendar
+        formatter.locale = Locale.autoupdatingCurrent
+        formatter.setLocalizedDateFormatFromTemplate("MMMM")
+        return formatter.string(from: date)
+    }
+
+    private func yearOnly(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = MonthGridBuilder.calendar
+        formatter.locale = Locale.autoupdatingCurrent
+        formatter.setLocalizedDateFormatFromTemplate("yyyy")
+        return formatter.string(from: date)
     }
 
     private func weekdayHeader(_ viewModel: CalendarHomeViewModel) -> some View {
