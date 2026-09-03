@@ -20,8 +20,8 @@ struct CalendarHomeView: View {
     /// <0 = previous month (from the left), 0 = jump-to-today (no direction).
     @State private var monthNavigationDirection = 0
 
-    private let baseCellHeight: CGFloat = 68
-    private let barLaneHeight: CGFloat = 17
+    private let baseCellHeight: CGFloat = 80
+    private let barLaneHeight: CGFloat = 19
 
     var body: some View {
         NavigationStack {
@@ -181,13 +181,14 @@ struct CalendarHomeView: View {
         stride(from: 0, to: days.count, by: 7).map { Array(days[$0..<min($0 + 7, days.count)]) }
     }
 
-    /// One grid row: date cells in a plain HStack, with multi-day schedule
-    /// bars drawn as an absolutely-positioned overlay on top (see
-    /// MultiDayBarView / CalendarHomeViewModel.MultiDayBar) — a LazyVGrid
-    /// can't make a single item span multiple columns, so this row needs
-    /// its own GeometryReader to compute each bar's pixel offset/width.
+    /// One grid row: date cells in a plain HStack, with every schedule
+    /// drawn as an absolutely-positioned category-colored bar overlay on
+    /// top (see ScheduleBarView / CalendarHomeViewModel.ScheduleBar) — a
+    /// LazyVGrid can't make a single item span multiple columns, so this
+    /// row needs its own GeometryReader to compute each bar's pixel
+    /// offset/width.
     private func weekRow(_ viewModel: CalendarHomeViewModel, week: [MonthGridDay]) -> some View {
-        let bars = viewModel.multiDayBars(forWeekStarting: week[0].date)
+        let bars = viewModel.scheduleBars(forWeekStarting: week[0].date)
         let laneCount = bars.map(\.lane).max().map { $0 + 1 } ?? 0
         let barsHeight = CGFloat(laneCount) * barLaneHeight
         let rowHeight = baseCellHeight + barsHeight
@@ -228,15 +229,18 @@ struct CalendarHomeView: View {
                 .frame(height: geo.size.height)
 
                 ForEach(bars) { bar in
-                    MultiDayBarView(
+                    ScheduleBarView(
                         title: bar.occurrence.schedule.title,
                         color: bar.occurrence.schedule.category?.color ?? PlantingColor.primaryBlue,
-                        onTap: { editingSchedule = bar.occurrence.schedule }
+                        sourceDate: bar.occurrence.date,
+                        scheduleID: bar.occurrence.schedule.id,
+                        onTap: { editingSchedule = bar.occurrence.schedule },
+                        onCopy: { payload in viewModel.copyItem(payload) }
                     )
-                    .frame(width: columnWidth * CGFloat(bar.columnSpan) - 3, height: 15)
+                    .frame(width: columnWidth * CGFloat(bar.columnSpan) - 3, height: 17)
                     .offset(
                         x: columnWidth * CGFloat(bar.startColumn) + 2,
-                        y: 21 + CGFloat(bar.lane) * barLaneHeight
+                        y: 24 + CGFloat(bar.lane) * barLaneHeight
                     )
                 }
             }

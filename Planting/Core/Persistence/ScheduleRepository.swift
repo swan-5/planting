@@ -120,6 +120,7 @@ final class SwiftDataScheduleRepository: ScheduleRepository {
             endTime: source.endTime,
             allDay: source.allDay,
             category: source.category,
+            location: source.location,
             memo: source.memo,
             recurrenceRule: .none
         )

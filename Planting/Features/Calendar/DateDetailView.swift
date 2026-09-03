@@ -111,6 +111,11 @@ struct DateDetailView: View {
                             .font(PlantingFont.caption)
                             .foregroundStyle(PlantingColor.secondaryText)
                     }
+                    if let location = occurrence.schedule.location, !location.isEmpty {
+                        Text(location)
+                            .font(PlantingFont.caption)
+                            .foregroundStyle(PlantingColor.secondaryText)
+                    }
                 }
                 Spacer(minLength: 0)
             }

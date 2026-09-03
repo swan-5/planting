@@ -16,6 +16,7 @@ struct ScheduleEditView: View {
     @State private var startTime: Date
     @State private var endTime: Date
     @State private var categoryID: UUID?
+    @State private var location: String
     @State private var memo: String
     @State private var rule: RecurrenceRule
     @State private var categories: [Category] = []
@@ -31,6 +32,7 @@ struct ScheduleEditView: View {
         _startTime = State(initialValue: existingSchedule?.startTime ?? initialDate)
         _endTime = State(initialValue: existingSchedule?.endTime ?? initialDate)
         _categoryID = State(initialValue: existingSchedule?.category?.id)
+        _location = State(initialValue: existingSchedule?.location ?? "")
         _memo = State(initialValue: existingSchedule?.memo ?? "")
         _rule = State(initialValue: existingSchedule?.recurrenceRule ?? .none)
     }
@@ -70,6 +72,11 @@ struct ScheduleEditView: View {
 
                 Section {
                     RecurrenceRuleEditor(rule: $rule)
+                }
+
+                Section {
+                    TextField("Location (optional)", text: $location)
+                        .font(PlantingFont.body())
                 }
 
                 Section {
@@ -120,6 +127,7 @@ struct ScheduleEditView: View {
         let repository = SwiftDataScheduleRepository(context: modelContext)
         let selectedCategory = categories.first { $0.id == categoryID }
         let trimmedMemo = memo.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedLocation = location.trimmingCharacters(in: .whitespacesAndNewlines)
 
         do {
             if let existingSchedule {
@@ -130,6 +138,7 @@ struct ScheduleEditView: View {
                 existingSchedule.startTime = allDay ? nil : startTime
                 existingSchedule.endTime = allDay ? nil : endTime
                 existingSchedule.category = selectedCategory
+                existingSchedule.location = trimmedLocation.isEmpty ? nil : trimmedLocation
                 existingSchedule.memo = trimmedMemo.isEmpty ? nil : trimmedMemo
                 existingSchedule.recurrenceRule = rule
                 try repository.update(existingSchedule)
@@ -142,6 +151,7 @@ struct ScheduleEditView: View {
                     endTime: allDay ? nil : endTime,
                     allDay: allDay,
                     category: selectedCategory,
+                    location: trimmedLocation.isEmpty ? nil : trimmedLocation,
                     memo: trimmedMemo.isEmpty ? nil : trimmedMemo,
                     recurrenceRule: rule
                 )

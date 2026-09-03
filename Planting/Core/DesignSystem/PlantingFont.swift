@@ -28,7 +28,10 @@ enum PlantingFont {
 
     /// Calendar month header (PRODUCT_SPEC.md §6.2 — avoid oversized headings).
     static let monthTitle = sectionHeading(20)
-    static let dateNumber = emphasis(13)
-    static let itemLabel = body(12)
+    static let dateNumber = emphasis(14)
+    /// Small on purpose: a calendar column is only ~50pt wide, and at this
+    /// size a title still shows ~4 characters before truncating instead of
+    /// ~2-3 (confirmed too little on request).
+    static let itemLabel = body(10)
     static let caption = body(11)
 }

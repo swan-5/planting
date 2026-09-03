@@ -13,6 +13,7 @@ final class Schedule: Identifiable {
     var startTime: Date?
     var endTime: Date?
     var allDay: Bool
+    var location: String?
     var memo: String?
     var recurrenceRule: RecurrenceRule
     var createdAt: Date
@@ -29,6 +30,7 @@ final class Schedule: Identifiable {
         endTime: Date? = nil,
         allDay: Bool = false,
         category: Category? = nil,
+        location: String? = nil,
         memo: String? = nil,
         recurrenceRule: RecurrenceRule = .none,
         createdAt: Date = .now,
@@ -42,6 +44,7 @@ final class Schedule: Identifiable {
         self.endTime = endTime
         self.allDay = allDay
         self.category = category
+        self.location = location
         self.memo = memo
         self.recurrenceRule = recurrenceRule
         self.createdAt = createdAt

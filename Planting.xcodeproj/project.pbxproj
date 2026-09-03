@@ -30,7 +30,6 @@
 		61AAAAF636462B161B85CD07 /* PlantingWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1BA2DE82F374F972704DAD7D /* PlantingWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		627C233394FD202E1B1942EC /* PlantingFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225B6D069A1700DCF7A4387D /* PlantingFont.swift */; };
 		63DCE1583FAB27A9562E1D5E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */; };
-		6450B41562B46E81D2D7241A /* DateCellRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */; };
 		6924A616CD3716F55D387626 /* CategoryManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */; };
 		6AB9A0B774625D16C829C04B /* Category+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FCCD1235D1036A58340D4 /* Category+Color.swift */; };
 		6B3AA03016C3DE0966D388D8 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC743F2C8586CD5BF3503C9 /* Color+Hex.swift */; };
@@ -41,6 +40,7 @@
 		76ECA46120FD896CA0890530 /* CloverGrowthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */; };
 		77049FB2A8FBFF2C2548C2CC /* TodoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497F769C29A3BFF6B7AE335 /* TodoWidget.swift */; };
 		779058A9796903B6E4DD71C9 /* CategorySeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596851DF4DAED41BE484EF94 /* CategorySeeder.swift */; };
+		7EE31E65B6465FB5F00A363E /* ScheduleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A43E13230B656918C91322 /* ScheduleBarView.swift */; };
 		7F562A208791E285FC4FCBE7 /* BiometricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */; };
 		81E7B494169AE296FD22FED0 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
 		856D95F61B442D621E0879DD /* TodoOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */; };
@@ -75,7 +75,6 @@
 		CD56E1FDE248CC1716176022 /* CalendarHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */; };
 		CE67E4DB1D67270E22D3DC89 /* TodayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2835B50441E9EFC86DAFF8D /* TodayWidget.swift */; };
 		CF43BE8401C5FFEE90C2F3B7 /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390F809C0440AFCE9D80151 /* MemoRepository.swift */; };
-		D0C9C6E42E3215181A9706DE /* MultiDayBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */; };
 		D20831A775D606C6EAF8EC33 /* TodoVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */; };
 		D2F3EF79704BF99B71A1CAA3 /* CalendarMonthLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */; };
 		D411F05CA0250A5C2CE76390 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
@@ -148,18 +147,17 @@
 		596851DF4DAED41BE484EF94 /* CategorySeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySeeder.swift; sourceTree = "<group>"; };
 		5EE20EDC369E7718BA4A8289 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		6A21786DE4BFF3FA27C99B5B /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
-		754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCellRow.swift; sourceTree = "<group>"; };
 		7614556DE72EAC68BB919688 /* PlantingMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingMetrics.swift; sourceTree = "<group>"; };
 		7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
 		868E49980751D7DBE34EC5BD /* PlantingWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingWidgetsBundle.swift; sourceTree = "<group>"; };
 		88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeViewModel.swift; sourceTree = "<group>"; };
-		89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiDayBarView.swift; sourceTree = "<group>"; };
 		8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddSheet.swift; sourceTree = "<group>"; };
 		916E3F626EC288D39627EBFC /* MemoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeView.swift; sourceTree = "<group>"; };
 		936CE7F86FB8B6D78558C574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9A67382D82172DDABDAF6650 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHomeViewModel.swift; sourceTree = "<group>"; };
 		A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingApp.swift; sourceTree = "<group>"; };
+		A8A43E13230B656918C91322 /* ScheduleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleBarView.swift; sourceTree = "<group>"; };
 		A95C4D94C04E357A79501704 /* TodoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditView.swift; sourceTree = "<group>"; };
 		AF95CF52DC7815BBCB464FEF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AFC9A568195DA5956A98F020 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
@@ -361,11 +359,10 @@
 				A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */,
 				3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */,
 				580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */,
-				754419A261FF6AD4AE5BF3A9 /* DateCellRow.swift */,
 				BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */,
 				EB0064883BB62E41F37E91E5 /* DateDetailView.swift */,
 				4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */,
-				89442C1D4C3D1250135298A3 /* MultiDayBarView.swift */,
+				A8A43E13230B656918C91322 /* ScheduleBarView.swift */,
 				3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */,
 			);
 			path = Calendar;
@@ -467,6 +464,12 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					6164D18116137917247D1B91 = {
+						ProvisioningStyle = Automatic;
+					};
+					63773DF236E14C253C32ED63 = {
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 54984903B1301F48EE1D81FA /* Build configuration list for PBXProject "Planting" */;
@@ -563,7 +566,6 @@
 				76ECA46120FD896CA0890530 /* CloverGrowthView.swift in Sources */,
 				270E833E7010F848EBAEC615 /* Color+Hex.swift in Sources */,
 				4C2D4E720624248C089C8043 /* DailyCompletionSummary.swift in Sources */,
-				6450B41562B46E81D2D7241A /* DateCellRow.swift in Sources */,
 				AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */,
 				A4B52BE6281127AAB3F86477 /* DateDetailView.swift in Sources */,
 				8907AB5848DFAC6B5F1E6311 /* FortuneOfTheDay.swift in Sources */,
@@ -572,7 +574,6 @@
 				2B12265E8E76E62BC39E3162 /* MemoHomeView.swift in Sources */,
 				5BAE5F40144F30676D10AC1C /* MemoHomeViewModel.swift in Sources */,
 				88AFA0806292240812A090E9 /* MemoRepository.swift in Sources */,
-				D0C9C6E42E3215181A9706DE /* MultiDayBarView.swift in Sources */,
 				99A70A4A59B3EB6E7540BE42 /* PersistenceController.swift in Sources */,
 				46FF5E19DD94B1AFD018B5FF /* PlantingApp.swift in Sources */,
 				AA1D928C646F573904BA1E86 /* PlantingColor.swift in Sources */,
@@ -584,6 +585,7 @@
 				E63E4E836AA254EB866EC61F /* RecurrenceRuleEditor.swift in Sources */,
 				E958671D7516829CEA68D1E8 /* RootTabView.swift in Sources */,
 				E8BA455E98FB14E98D2DD874 /* Schedule.swift in Sources */,
+				7EE31E65B6465FB5F00A363E /* ScheduleBarView.swift in Sources */,
 				4CBD7353C55DBA12470028E8 /* ScheduleEditView.swift in Sources */,
 				D411F05CA0250A5C2CE76390 /* ScheduleRepository.swift in Sources */,
 				99E1A288B7C5270B6ED9BF5C /* SettingsView.swift in Sources */,
@@ -662,6 +664,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -745,6 +748,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

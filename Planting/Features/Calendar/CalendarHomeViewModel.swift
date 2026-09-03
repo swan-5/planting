@@ -4,14 +4,15 @@ import Observation
 @Observable
 final class CalendarHomeViewModel {
     struct CellContent {
-        var schedules: [ScheduleOccurrence] = []
         var todos: [TodoItem] = []
     }
 
-    /// One multi-day schedule's bar segment within a single week (grid row).
-    /// A schedule spanning more than one week gets one bar per week row it
-    /// crosses, each clamped to that week's 7 columns.
-    struct MultiDayBar: Identifiable {
+    /// One schedule's bar segment within a single week (grid row) — every
+    /// schedule renders as a category-colored background bar now (not just
+    /// multi-day ones, on request), so a single-day schedule is just a bar
+    /// with columnSpan 1. A schedule spanning more than one week gets one
+    /// bar per week row it crosses, each clamped to that week's 7 columns.
+    struct ScheduleBar: Identifiable {
         let occurrence: ScheduleOccurrence
         let weekStart: Date
         let startColumn: Int
@@ -29,7 +30,7 @@ final class CalendarHomeViewModel {
 
     private(set) var visibleMonth: Date
     private(set) var cellContents: [Date: CellContent] = [:]
-    private(set) var multiDayBars: [MultiDayBar] = []
+    private(set) var scheduleBars: [ScheduleBar] = []
     /// In-memory only (not persisted) — resets on relaunch, which is fine
     /// for a short-lived copy/paste clipboard.
     private(set) var copiedPayload: CalendarDragPayload?
@@ -71,9 +72,9 @@ final class CalendarHomeViewModel {
         cellContents[calendar.startOfDay(for: date)] ?? CellContent()
     }
 
-    func multiDayBars(forWeekStarting date: Date) -> [MultiDayBar] {
+    func scheduleBars(forWeekStarting date: Date) -> [ScheduleBar] {
         let weekStart = calendar.startOfDay(for: date)
-        return multiDayBars.filter { calendar.isDate($0.weekStart, inSameDayAs: weekStart) }
+        return scheduleBars.filter { calendar.isDate($0.weekStart, inSameDayAs: weekStart) }
     }
 
     /// Calendar weeks (grid rows) overlapping the visible month that have
@@ -120,11 +121,6 @@ final class CalendarHomeViewModel {
             var contents: [Date: CellContent] = [:]
             for day in gridDays {
                 let dayStart = calendar.startOfDay(for: day.date)
-                // Multi-day schedules render as spanning bars (see below),
-                // not repeated inline rows, so only single-day ones land here.
-                let daySchedules = scheduleOccurrences.filter {
-                    !$0.isMultiDay && calendar.isDate($0.date, inSameDayAs: dayStart)
-                }
                 let dayTodos = todoItems
                     .filter { TodoVisibility.isVisible(todo: $0.todo, occurrence: $0.occurrence, on: dayStart, calendar: calendar) }
                     .sorted {
@@ -132,14 +128,14 @@ final class CalendarHomeViewModel {
                             ? $0.occurrence.order < $1.occurrence.order
                             : $0.todo.createdAt < $1.todo.createdAt
                     }
-                contents[dayStart] = CellContent(schedules: daySchedules, todos: dayTodos)
+                contents[dayStart] = CellContent(todos: dayTodos)
             }
             cellContents = contents
 
             let weeks = stride(from: 0, to: gridDays.count, by: 7)
                 .map { Array(gridDays[$0..<min($0 + 7, gridDays.count)]) }
-            multiDayBars = Self.packMultiDayBars(
-                occurrences: scheduleOccurrences.filter(\.isMultiDay),
+            scheduleBars = Self.packScheduleBars(
+                occurrences: scheduleOccurrences,
                 weeks: weeks,
                 calendar: calendar
             )
@@ -148,15 +144,16 @@ final class CalendarHomeViewModel {
         }
     }
 
-    /// Greedy interval-lane packing, one pass per week: each multi-day
-    /// occurrence is clamped to that week's 7 columns and assigned the
-    /// lowest lane whose last-used column doesn't overlap it.
-    private static func packMultiDayBars(
+    /// Greedy interval-lane packing, one pass per week: every schedule
+    /// occurrence (single-day included) is clamped to that week's 7
+    /// columns and assigned the lowest lane whose last-used column doesn't
+    /// overlap it.
+    private static func packScheduleBars(
         occurrences: [ScheduleOccurrence],
         weeks: [[MonthGridDay]],
         calendar: Calendar
-    ) -> [MultiDayBar] {
-        var bars: [MultiDayBar] = []
+    ) -> [ScheduleBar] {
+        var bars: [ScheduleBar] = []
 
         for week in weeks {
             let weekDays = week.map { calendar.startOfDay(for: $0.date) }
@@ -184,7 +181,7 @@ final class CalendarHomeViewModel {
                     laneEndColumn[lane] = endColumn
                 }
 
-                bars.append(MultiDayBar(
+                bars.append(ScheduleBar(
                     occurrence: occurrence,
                     weekStart: weekFirst,
                     startColumn: startColumn,

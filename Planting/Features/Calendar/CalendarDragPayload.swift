@@ -21,14 +21,3 @@ struct CalendarDragPayload: Codable, Transferable, Equatable {
         CodableRepresentation(contentType: .data)
     }
 }
-
-extension DateCellRow {
-    func dragPayload(sourceDate: Date) -> CalendarDragPayload {
-        switch self {
-        case .schedule(let occurrence):
-            return CalendarDragPayload(kind: .schedule, id: occurrence.schedule.id, sourceDate: sourceDate)
-        case .todo(let item):
-            return CalendarDragPayload(kind: .todoOccurrence, id: item.occurrence.id, sourceDate: sourceDate)
-        }
-    }
-}
