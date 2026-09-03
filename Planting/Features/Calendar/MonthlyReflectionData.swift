@@ -19,12 +19,6 @@ struct MonthlyReflectionData {
         var name: String { category?.name ?? "Uncategorized" }
     }
 
-    struct DaySummary {
-        let date: Date
-        let completed: Int
-        let total: Int
-    }
-
     let monthDate: Date
     let totalTodos: Int
     let completedTodos: Int
@@ -34,7 +28,6 @@ struct MonthlyReflectionData {
     let totalWeeksInMonth: Int
     let bestWeek: WeekSummary?
     let categoryBreakdown: [CategorySummary]
-    let bestDay: DaySummary?
     let incompleteTodos: [TodoItem]
 
     var completionRate: Double {
@@ -62,7 +55,7 @@ enum MonthlyReflectionCalculator {
             return MonthlyReflectionData(
                 monthDate: monthDate, totalTodos: 0, completedTodos: 0, scheduleCount: 0,
                 memoCount: 0, fullyCompletedWeeks: 0, totalWeeksInMonth: 0, bestWeek: nil,
-                categoryBreakdown: [], bestDay: nil, incompleteTodos: []
+                categoryBreakdown: [], incompleteTodos: []
             )
         }
         let monthRange = calendar.startOfDay(for: monthStart)...calendar.startOfDay(for: monthEnd)
@@ -130,23 +123,6 @@ enum MonthlyReflectionCalculator {
             .map { MonthlyReflectionData.CategorySummary(category: $0.category, count: $0.count) }
             .sorted { $0.count > $1.count }
 
-        var bestDay: MonthlyReflectionData.DaySummary?
-        for day in monthDaysOnly {
-            let items = todosVisible(on: day.date)
-            guard !items.isEmpty else { continue }
-            let completed = items.filter(\.occurrence.completed).count
-            let total = items.count
-            let candidateRate = Double(completed) / Double(total)
-            if let current = bestDay {
-                let currentRate = Double(current.completed) / Double(current.total)
-                if candidateRate > currentRate || (candidateRate == currentRate && total > current.total) {
-                    bestDay = MonthlyReflectionData.DaySummary(date: day.date, completed: completed, total: total)
-                }
-            } else {
-                bestDay = MonthlyReflectionData.DaySummary(date: day.date, completed: completed, total: total)
-            }
-        }
-
         let incompleteTodos = monthTodoItems.filter { item in
             guard !item.occurrence.completed else { return false }
             let dueDate = item.todo.dueDate ?? item.occurrence.occurrenceDate
@@ -164,7 +140,6 @@ enum MonthlyReflectionCalculator {
             totalWeeksInMonth: weeks.count,
             bestWeek: bestWeek,
             categoryBreakdown: categoryBreakdown,
-            bestDay: bestDay,
             incompleteTodos: incompleteTodos
         )
     }

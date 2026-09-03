@@ -13,7 +13,6 @@ struct MonthlyReflectionView: View {
 
     @State private var viewModel: MonthlyReflectionViewModel?
     @State private var saveTask: Task<Void, Never>?
-    @State private var detailDate: Date?
     @State private var editingTodo: Todo?
 
     private var monthName: String {
@@ -33,10 +32,6 @@ struct MonthlyReflectionView: View {
                     if !data.categoryBreakdown.isEmpty {
                         Divider().overlay(PlantingColor.divider)
                         categorySection(data)
-                    }
-                    if let bestDay = data.bestDay {
-                        Divider().overlay(PlantingColor.divider)
-                        bestDaySection(bestDay)
                     }
                     if !data.incompleteTodos.isEmpty {
                         Divider().overlay(PlantingColor.divider)
@@ -63,9 +58,9 @@ struct MonthlyReflectionView: View {
             vm.load()
             viewModel = vm
         }
-        .onDisappear { viewModel?.saveReflection() }
-        .navigationDestination(item: $detailDate) { date in
-            DateDetailView(date: date)
+        .onDisappear {
+            viewModel?.saveReflection()
+            viewModel?.saveQuestions()
         }
         .sheet(item: $editingTodo, onDismiss: { viewModel?.load() }) { todo in
             TodoEditView(existingTodo: todo)
@@ -145,24 +140,6 @@ struct MonthlyReflectionView: View {
         }
     }
 
-    // MARK: Best day
-
-    private func bestDaySection(_ bestDay: MonthlyReflectionData.DaySummary) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            sectionHeader("Best Day")
-            Text(dayString(bestDay.date))
-                .font(PlantingFont.body())
-                .foregroundStyle(PlantingColor.primaryText)
-            Text("\(bestDay.completed) / \(bestDay.total) completed")
-                .font(PlantingFont.caption)
-                .foregroundStyle(PlantingColor.secondaryText)
-            Button("View Day") { detailDate = bestDay.date }
-                .font(PlantingFont.emphasis(13))
-                .foregroundStyle(PlantingColor.primaryBlue)
-                .padding(.top, 2)
-        }
-    }
-
     // MARK: Incomplete todos
 
     private func incompleteSection(_ data: MonthlyReflectionData) -> some View {
@@ -196,21 +173,30 @@ struct MonthlyReflectionView: View {
             sectionHeader("Reflection")
 
             reflectionQuestion(
-                "What went well this month?",
+                question: Binding(
+                    get: { viewModel.wentWellQuestion },
+                    set: { viewModel.wentWellQuestion = $0; scheduleSave(viewModel) }
+                ),
                 text: Binding(
                     get: { viewModel.wentWell },
                     set: { viewModel.wentWell = $0; scheduleSave(viewModel) }
                 )
             )
             reflectionQuestion(
-                "What could have been better?",
+                question: Binding(
+                    get: { viewModel.couldImproveQuestion },
+                    set: { viewModel.couldImproveQuestion = $0; scheduleSave(viewModel) }
+                ),
                 text: Binding(
                     get: { viewModel.couldImprove },
                     set: { viewModel.couldImprove = $0; scheduleSave(viewModel) }
                 )
             )
             reflectionQuestion(
-                "What do I want to focus on next month?",
+                question: Binding(
+                    get: { viewModel.nextMonthFocusQuestion },
+                    set: { viewModel.nextMonthFocusQuestion = $0; scheduleSave(viewModel) }
+                ),
                 text: Binding(
                     get: { viewModel.nextMonthFocus },
                     set: { viewModel.nextMonthFocus = $0; scheduleSave(viewModel) }
@@ -219,9 +205,11 @@ struct MonthlyReflectionView: View {
         }
     }
 
-    private func reflectionQuestion(_ question: String, text: Binding<String>) -> some View {
+    /// The question label is a plain TextField (rather than static Text) so
+    /// it's editable in place — defaults to the built-in prompt, on request.
+    private func reflectionQuestion(question: Binding<String>, text: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(question)
+            TextField("Question", text: question, axis: .vertical)
                 .font(PlantingFont.emphasis(14))
                 .foregroundStyle(PlantingColor.primaryText)
             TextEditor(text: text)
@@ -240,6 +228,7 @@ struct MonthlyReflectionView: View {
             try? await Task.sleep(nanoseconds: 600_000_000)
             guard !Task.isCancelled else { return }
             viewModel.saveReflection()
+            viewModel.saveQuestions()
         }
     }
 
@@ -255,11 +244,5 @@ struct MonthlyReflectionView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d"
         return "\(formatter.string(from: week.startDate)) – \(formatter.string(from: week.endDate))"
-    }
-
-    private func dayString(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM d"
-        return formatter.string(from: date)
     }
 }
