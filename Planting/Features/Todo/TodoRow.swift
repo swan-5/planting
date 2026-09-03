@@ -12,7 +12,7 @@ struct TodoRow: View {
         HStack(alignment: .top, spacing: PlantingSpacing.sm) {
             Button(action: onToggle) {
                 Image(systemName: item.occurrence.completed ? "checkmark.square" : "square")
-                    .foregroundStyle(item.occurrence.completed ? PlantingColor.primaryBlue : PlantingColor.secondaryText)
+                    .foregroundStyle(item.todo.category?.color ?? PlantingColor.secondaryText)
             }
             .buttonStyle(.plain)
 

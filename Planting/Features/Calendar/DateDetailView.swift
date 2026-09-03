@@ -4,8 +4,16 @@ import SwiftData
 /// S02 (PRODUCT_SPEC.md §7). Full schedule/todo detail for one date, reached
 /// by tapping a date cell or its "+N" overflow indicator.
 struct DateDetailView: View {
+    private enum QuickAddKind {
+        case schedule, todo
+    }
+
     @Environment(\.modelContext) private var modelContext
-    let date: Date
+    @State private var date: Date
+
+    init(date: Date) {
+        _date = State(initialValue: date)
+    }
 
     @State private var schedules: [ScheduleOccurrence] = []
     @State private var todos: [TodoItem] = []
@@ -13,38 +21,55 @@ struct DateDetailView: View {
     @State private var editingTodo: Todo?
     @State private var isPresentingNewSchedule = false
     @State private var isPresentingNewTodo = false
+    @State private var isPresentingQuickAddDialog = false
+    @State private var pendingQuickAddKind: QuickAddKind?
 
     private var completion: DailyCompletionSummary {
         DailyCompletionSummary(completed: todos.filter(\.occurrence.completed).count, total: todos.count)
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: PlantingSpacing.md) {
-                header
+        GeometryReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    VStack(alignment: .leading, spacing: PlantingSpacing.md) {
+                        header
 
-                if !schedules.isEmpty {
-                    sectionHeader("Schedule")
-                    ForEach(schedules) { occurrence in
-                        scheduleRow(occurrence)
+                        if !schedules.isEmpty {
+                            sectionHeader("Schedule")
+                            ForEach(schedules) { occurrence in
+                                scheduleRow(occurrence)
+                            }
+                        }
+
+                        if !todos.isEmpty {
+                            sectionHeader("TO DO")
+                            ForEach(todos) { item in
+                                todoRow(item)
+                            }
+                        }
+
+                        if schedules.isEmpty && todos.isEmpty {
+                            Text("Nothing scheduled")
+                                .font(PlantingFont.body())
+                                .foregroundStyle(PlantingColor.secondaryText)
+                                .padding(.top, PlantingSpacing.sm)
+                        }
                     }
-                }
+                    .padding(PlantingSpacing.lg)
 
-                if !todos.isEmpty {
-                    sectionHeader("TO DO")
-                    ForEach(todos) { item in
-                        todoRow(item)
-                    }
+                    // Tapping anywhere below the actual content opens the
+                    // same quick-add choice — kept as its own blank region
+                    // (rather than layered under the content above) so the
+                    // popover it anchors to never lands over the header or
+                    // rows.
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture { isPresentingQuickAddDialog = true }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-
-                if schedules.isEmpty && todos.isEmpty {
-                    Text("Nothing scheduled")
-                        .font(PlantingFont.body())
-                        .foregroundStyle(PlantingColor.secondaryText)
-                        .padding(.top, PlantingSpacing.sm)
-                }
+                .frame(maxWidth: .infinity, minHeight: proxy.size.height, alignment: .topLeading)
             }
-            .padding(PlantingSpacing.lg)
         }
         .background(PlantingColor.background)
         .navigationBarTitleDisplayMode(.inline)
@@ -59,6 +84,19 @@ struct DateDetailView: View {
             }
         }
         .task { load() }
+        .sheet(
+            isPresented: $isPresentingQuickAddDialog,
+            onDismiss: {
+                switch pendingQuickAddKind {
+                case .schedule: isPresentingNewSchedule = true
+                case .todo: isPresentingNewTodo = true
+                case nil: break
+                }
+                pendingQuickAddKind = nil
+            }
+        ) {
+            quickAddPicker
+        }
         .sheet(isPresented: $isPresentingNewSchedule, onDismiss: load) {
             ScheduleEditView(initialDate: date)
         }
@@ -73,16 +111,68 @@ struct DateDetailView: View {
         }
     }
 
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(Self.headerFormatter.string(from: date))
-                .font(PlantingFont.sectionHeading(18))
-                .foregroundStyle(PlantingColor.primaryText)
-            if completion.total > 0 {
-                Text("\(completion.completed) / \(completion.total) completed")
-                    .font(PlantingFont.caption)
-                    .foregroundStyle(PlantingColor.secondaryText)
+    private var quickAddPicker: some View {
+        VStack(spacing: 0) {
+            quickAddRow(icon: "calendar", title: "Add Schedule") {
+                pendingQuickAddKind = .schedule
+                isPresentingQuickAddDialog = false
             }
+            Divider().overlay(PlantingColor.divider)
+            quickAddRow(icon: "checkmark.square", title: "Add Todo") {
+                pendingQuickAddKind = .todo
+                isPresentingQuickAddDialog = false
+            }
+        }
+        .padding(.vertical, PlantingSpacing.sm)
+        .presentationDetents([.height(140)])
+        .presentationCornerRadius(PlantingRadius.sheet)
+        .presentationDragIndicator(.visible)
+    }
+
+    private func quickAddRow(icon: String, title: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: PlantingSpacing.md) {
+                Image(systemName: icon)
+                    .foregroundStyle(PlantingColor.primaryBlue)
+                    .frame(width: 24)
+                Text(title)
+                    .font(PlantingFont.body())
+                    .foregroundStyle(PlantingColor.primaryText)
+                Spacer(minLength: 0)
+            }
+            .padding(.horizontal, PlantingSpacing.lg)
+            .padding(.vertical, PlantingSpacing.md)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var header: some View {
+        HStack(alignment: .top, spacing: PlantingSpacing.sm) {
+            Button { changeDay(by: -1) } label: {
+                Image(systemName: "chevron.left")
+            }
+            .foregroundStyle(PlantingColor.primaryText)
+            .padding(.top, 2)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(Self.headerFormatter.string(from: date))
+                    .font(PlantingFont.sectionHeading(18))
+                    .foregroundStyle(PlantingColor.primaryText)
+                if completion.total > 0 {
+                    Text("\(completion.completed) / \(completion.total) completed")
+                        .font(PlantingFont.caption)
+                        .foregroundStyle(PlantingColor.secondaryText)
+                }
+            }
+
+            Spacer(minLength: 0)
+
+            Button { changeDay(by: 1) } label: {
+                Image(systemName: "chevron.right")
+            }
+            .foregroundStyle(PlantingColor.primaryText)
+            .padding(.top, 2)
         }
     }
 
@@ -129,7 +219,7 @@ struct DateDetailView: View {
                 toggle(item)
             } label: {
                 Image(systemName: item.occurrence.completed ? "checkmark.square" : "square")
-                    .foregroundStyle(item.occurrence.completed ? PlantingColor.primaryBlue : PlantingColor.secondaryText)
+                    .foregroundStyle(item.todo.category?.color ?? PlantingColor.secondaryText)
             }
             .buttonStyle(.plain)
 
@@ -141,6 +231,12 @@ struct DateDetailView: View {
         }
         .contentShape(Rectangle())
         .onTapGesture { editingTodo = item.todo }
+    }
+
+    private func changeDay(by delta: Int) {
+        guard let newDate = MonthGridBuilder.calendar.date(byAdding: .day, value: delta, to: date) else { return }
+        date = newDate
+        load()
     }
 
     private func load() {

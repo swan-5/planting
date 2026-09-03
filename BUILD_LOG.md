@@ -1,6 +1,6 @@
 # Planting — Feature Specification & Build Log
 
-_As of 2026-09-03 · 4 commits · 51 Swift files · SwiftUI + SwiftData, iOS 17+_
+_As of 2026-09-03 · 9 commits · 57 Swift files · SwiftUI + SwiftData, iOS 17+_
 
 What actually shipped against `PRODUCT_SPEC.md`, plus everything added or changed live during
 development that the spec doesn't cover — kept as one running record instead of scattered
@@ -103,6 +103,45 @@ completion background removal — run against explicit non-negotiables in
    is ~50pt wide regardless, so keeping ~4 characters visible costs more than it gains in font
    size.
 
+10. **Monthly Reflection.** A new screen reached by tapping the month name in the calendar
+    header (`September ⌄`): auto-aggregated stats recomputed fresh every time it opens
+    (completion rate, best week, category breakdown, incomplete todos) plus a hand-written
+    3-question reflection that's the only part actually persisted (`MonthlyReflection`, one row
+    per year+month). The three questions are themselves editable in place — defaulting to the
+    built-in wording but rewritable to fit how the user actually wants to reflect — and shared
+    app-wide via `UserDefaults` rather than per month. A "Best Day" section shipped and was then
+    removed on request, along with its now-unused aggregation logic.
+
+11. **Todo search.** Plain substring match on title, added to Todo Home's existing filter/sort
+    controls.
+
+12. **Clover mascot, settled.** The daily-fortune caption moved from a permanent line under the
+    clover to a tap-to-reveal popover on the clover itself; the clover was recentered in the
+    blank space below the grid; the empty (pre-growth) state is now a plain circle labeled
+    "오늘의 운세" instead of blank, so there's always something to tap.
+
+13. **Calendar header, reshuffled.** The `‹ September ⌄ ›` layout (item 10 above introduced the
+    tappable month name) put month-navigation chevrons on either side of that button; moved back
+    to sit next to "Today" on the right, matching the header's original layout, with the month
+    name standing alone on the left. A year label was added above the month name, and the
+    ≥4-completed-weeks clover badge that used to sit next to it was dropped (the clover under
+    the grid already shows this).
+
+14. **Category-colored checkboxes.** Todo checkboxes (Todo Home, Date Detail, and the calendar's
+    date-cell rows) now render in the todo's category color instead of a fixed blue/gray, so a
+    day's todos read at a glance the same way schedule bars already do. The Category picker in
+    the Schedule/Todo edit forms was rebuilt as a custom `CategoryPickerRow` for the same
+    reason — a stock SwiftUI `Picker` always renders its selected value in the system accent
+    color with no way to recolor it, so the picker itself couldn't show the category color it
+    was about to set.
+
+15. **Date Detail: day navigation and tap-to-add.** `‹ ›` chevrons beside the date title step
+    one day at a time without leaving the screen. Tapping any blank space below the schedule/todo
+    list opens the same "Add Schedule / Add Todo" choice as the toolbar's "+" — built as a small
+    bottom sheet (matching `QuickAddSheet`'s style) rather than `confirmationDialog`, since
+    iOS 26's redesigned action-sheet presentation anchors as a floating card near the tap point
+    and would otherwise land on top of the header or list it was just triggered from.
+
 ---
 
 ## 4. Known limitations
@@ -113,7 +152,14 @@ completion background removal — run against explicit non-negotiables in
   container needs a paid Apple Developer account — this environment only has ad hoc local
   signing.
 - **Personal-device installs only.** Automatic code signing is wired up for a free Apple ID;
-  TestFlight and the App Store both need the paid Developer Program.
+  TestFlight and the App Store both need the paid Developer Program — not yet enrolled. App
+  Store submission prep has started ahead of that: the 1024×1024 app icon is confirmed
+  compliant, a privacy policy page is live at `swan-5.github.io/planting/privacy.html` (via
+  GitHub Pages, `docs/`), and a first draft of the store listing copy (name, subtitle,
+  description, keywords) exists outside this repo. `project.yml` now pins `DEVELOPMENT_TEAM`
+  explicitly — it had been set by hand in Xcode's Signing & Capabilities editor, which
+  `xcodegen generate` silently discards on every regeneration since that setting never lived in
+  `project.yml` to begin with.
 - **Widgets can miss upcoming repeating todos.** They read the shared store but never
   materialize new occurrences themselves, so the app has to open at least once first.
 - **Pretendard doesn't reach the widgets.** A widget extension is a separate bundle; it falls
@@ -134,4 +180,4 @@ completion background removal — run against explicit non-negotiables in
 
 ---
 
-_github.com/swan-5/planting · HEAD b526953 · 2026-09-03_
+_github.com/swan-5/planting · HEAD f41da4e · 2026-09-03_

@@ -110,7 +110,7 @@ struct DateCellView: View {
             } label: {
                 Image(systemName: item.occurrence.completed ? "checkmark.square" : "square")
                     .font(.system(size: 8))
-                    .foregroundStyle(item.occurrence.completed ? PlantingColor.primaryBlue : PlantingColor.secondaryText)
+                    .foregroundStyle(item.todo.category?.color ?? PlantingColor.secondaryText)
             }
             .buttonStyle(.plain)
             Text(item.todo.title)

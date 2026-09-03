@@ -49,12 +49,7 @@ struct ScheduleEditView: View {
                 }
 
                 Section {
-                    Picker("Category", selection: $categoryID) {
-                        Text("None").tag(UUID?.none)
-                        ForEach(categories) { category in
-                            Text(category.name).tag(Optional(category.id))
-                        }
-                    }
+                    CategoryPickerRow(categories: categories, categoryID: $categoryID)
                 }
 
                 Section {
