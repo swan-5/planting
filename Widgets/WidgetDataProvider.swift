@@ -15,7 +15,8 @@ enum WidgetDataProvider {
         let scheduleRepository = SwiftDataScheduleRepository(context: context, calendar: calendar)
         let schedules = (try? scheduleRepository.occurrences(in: today...today)) ?? []
 
-        let todos = (try? context.fetch(FetchDescriptor<Todo>())) ?? []
+        let uid = PersistenceController.currentUserID
+        let todos = (try? context.fetch(FetchDescriptor<Todo>(predicate: #Predicate { $0.ownerID == uid }))) ?? []
         var todoItems: [TodoItem] = []
         for todo in todos {
             for occurrence in todo.occurrences {
@@ -54,7 +55,8 @@ enum WidgetDataProvider {
         let context = ModelContext(PersistenceController.sharedContainer)
         let scheduleRepository = SwiftDataScheduleRepository(context: context, calendar: calendar)
         let scheduleOccurrences = (try? scheduleRepository.occurrences(in: range)) ?? []
-        let todos = (try? context.fetch(FetchDescriptor<Todo>())) ?? []
+        let uid = PersistenceController.currentUserID
+        let todos = (try? context.fetch(FetchDescriptor<Todo>(predicate: #Predicate { $0.ownerID == uid }))) ?? []
 
         var summaries: [Date: DaySummary] = [:]
         for day in days {

@@ -12,6 +12,9 @@ final class Todo: Identifiable {
     var dueDate: Date?
     var memo: String?
     var recurrenceRule: RecurrenceRule
+    /// Firebase Auth uid of the owning account (added on request, for
+    /// multi-user sync). Empty string until scoped by a repository write.
+    var ownerID: String = ""
     var createdAt: Date
     var updatedAt: Date
 
@@ -28,6 +31,7 @@ final class Todo: Identifiable {
         category: Category? = nil,
         memo: String? = nil,
         recurrenceRule: RecurrenceRule = .none,
+        ownerID: String = "",
         createdAt: Date = .now,
         updatedAt: Date = .now
     ) {
@@ -38,6 +42,7 @@ final class Todo: Identifiable {
         self.category = category
         self.memo = memo
         self.recurrenceRule = recurrenceRule
+        self.ownerID = ownerID
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

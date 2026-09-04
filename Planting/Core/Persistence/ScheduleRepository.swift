@@ -41,10 +41,15 @@ final class SwiftDataScheduleRepository: ScheduleRepository {
     }
 
     func fetchAll() throws -> [Schedule] {
-        try context.fetch(FetchDescriptor<Schedule>(sortBy: [SortDescriptor(\.startDate)]))
+        let uid = PersistenceController.currentUserID
+        return try context.fetch(FetchDescriptor<Schedule>(
+            predicate: #Predicate { $0.ownerID == uid },
+            sortBy: [SortDescriptor(\.startDate)]
+        ))
     }
 
     func create(_ schedule: Schedule) throws {
+        schedule.ownerID = PersistenceController.currentUserID
         context.insert(schedule)
         try context.save()
     }
@@ -100,7 +105,8 @@ final class SwiftDataScheduleRepository: ScheduleRepository {
     }
 
     func moveSchedule(id: UUID, sourceDate: Date, to newDate: Date) throws {
-        let descriptor = FetchDescriptor<Schedule>(predicate: #Predicate { $0.id == id })
+        let uid = PersistenceController.currentUserID
+        let descriptor = FetchDescriptor<Schedule>(predicate: #Predicate { $0.id == id && $0.ownerID == uid })
         guard let schedule = try context.fetch(descriptor).first else { return }
 
         let deltaDays = calendar.dateComponents(

@@ -14,8 +14,9 @@ final class SwiftDataMonthlyReflectionRepository: MonthlyReflectionRepository {
     }
 
     func fetch(year: Int, month: Int) throws -> MonthlyReflection? {
+        let uid = PersistenceController.currentUserID
         let descriptor = FetchDescriptor<MonthlyReflection>(
-            predicate: #Predicate { $0.year == year && $0.month == month }
+            predicate: #Predicate { $0.year == year && $0.month == month && $0.ownerID == uid }
         )
         return try context.fetch(descriptor).first
     }
@@ -32,7 +33,8 @@ final class SwiftDataMonthlyReflectionRepository: MonthlyReflectionRepository {
                 month: month,
                 wentWell: wentWell,
                 couldImprove: couldImprove,
-                nextMonthFocus: nextMonthFocus
+                nextMonthFocus: nextMonthFocus,
+                ownerID: PersistenceController.currentUserID
             )
             context.insert(reflection)
         }

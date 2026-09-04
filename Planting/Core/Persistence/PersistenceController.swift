@@ -33,4 +33,13 @@ enum PersistenceController {
             fatalError("Failed to create ModelContainer: \(error)")
         }
     }()
+
+    /// The signed-in Firebase uid, read from the shared App Group's
+    /// UserDefaults suite — deliberately Foundation-only (no FirebaseAuth
+    /// import) so both the app's repositories and the PlantingWidgets
+    /// extension (which cannot hold a live auth session of its own) can use
+    /// the same accessor. AppSession is the only writer of this key.
+    static var currentUserID: String {
+        UserDefaults(suiteName: appGroupIdentifier)?.string(forKey: "currentUserID") ?? ""
+    }
 }

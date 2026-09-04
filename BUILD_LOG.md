@@ -1,6 +1,6 @@
 # Planting — Feature Specification & Build Log
 
-_As of 2026-09-04 · 10 commits · 57 Swift files · SwiftUI + SwiftData, iOS 17+_
+_As of 2026-09-04 · 11 commits · 64 Swift files · SwiftUI + SwiftData, iOS 17+_
 
 What actually shipped against `PRODUCT_SPEC.md`, plus everything added or changed live during
 development that the spec doesn't cover — kept as one running record instead of scattered
@@ -161,13 +161,54 @@ completion background removal — run against explicit non-negotiables in
 
 ---
 
-## 4. Known limitations
+## 4. Accounts & sync (in progress — M1–M2 of 4 shipped)
 
-- **No accounts or login.** Raised, scoped to three options (app lock / Sign in with Apple /
-  email+password), then put on hold pending a decision on what it's actually for.
-- **No cross-device sync.** SwiftData's CloudKit integration would cover this, but a real
-  container needs a paid Apple Developer account — this environment only has ad hoc local
-  signing.
+Requested to enable cross-device sync and, eventually, a friends feature — both need real user
+identity, which the app never had. Built as four milestones since each layer depends on the
+previous one being solid: M1 auth, M2 per-user data scoping (both below), then M3 Firestore sync
+and M4 friends (not yet built — see "No cross-device sync" below).
+
+A hard constraint shaped several decisions here: `PlantingWidgets` recompiles
+`Core/Persistence`/`Core/Models`/etc. directly as source files rather than linking a shared
+framework (see `project.yml`), so any file in those directories that imports Firebase would drag
+Firebase into the widget build too. New Firebase-importing code lives in `Core/Session/` and
+`Features/Auth/` instead — directories the widget's `sources:` list never touches.
+
+**M1 — phone login.** Firebase Auth + Firestore added via SPM, linked to the `Planting` target
+only. `Features/Auth/` (`PhoneLoginView`, `VerificationCodeView`, `AuthViewModel`) handles the
+number-then-code flow; `AppSession` is a single `@Observable` wrapping `Auth.auth()` directly
+rather than a separate SwiftData `User` model, since Firebase Auth already persists uid/phone
+number on its own — a local mirror would just be a second source of truth for the same fields.
+`RootContainerView` gates between `AuthGateView` and the existing `RootTabView`, which is
+untouched and still exactly 3 tabs.
+
+No paid Apple Developer account yet means no APNs-based silent verification, so this falls back
+to Firebase's reCAPTCHA flow — which turned out to need three more things before it worked at
+all: a real `UIApplicationDelegate` (`AppDelegate.swift` + `@UIApplicationDelegateAdaptor`, since
+a pure SwiftUI-lifecycle app has no delegate for Firebase's swizzling to attach to and otherwise
+throws `ERROR_NOTIFICATION_NOT_FORWARDED`), a Firebase-specific "encoded app ID" URL scheme in
+Info.plist (`app-1-<sender-id>-ios-<app-id-suffix>` from `GOOGLE_APP_ID` — not the bundle ID, a
+tempting first guess), and, for the Simulator specifically — which can never receive a real APNs
+push, full stop — Firebase's own `isAppVerificationDisabledForTesting` flag, gated to `DEBUG`
+builds only. Separately, Firebase's per-project SMS region policy defaults to blocking regions
+until explicitly allowed, which isn't an app-code fix at all — it's a console setting.
+
+**M2 — per-user data scoping.** `ownerID: String` added to `Category`, `Schedule`, `Todo`,
+`Memo`, `MonthlyReflection` (not `TodoOccurrence` — scoped transitively through its parent
+`Todo`). `Category` also gained `updatedAt`, missing until now, needed for M3's conflict
+resolution. Every repository's `fetchAll`/`create`/single-item-by-id method now reads a new
+`PersistenceController.currentUserID` — deliberately a plain `UserDefaults` read with zero
+Firebase import, so both the app's repositories and the widget (which can't hold a live auth
+session of its own) share one accessor. `AppSession` is the only writer of that cached value.
+`CategorySeeder` now reseeds default categories on every fresh sign-in rather than once at
+launch, so a second account on the same device still gets starter categories.
+
+---
+
+## 5. Known limitations
+
+- **No cross-device sync yet.** Accounts exist (§4) but nothing syncs between devices yet — M3
+  (Firestore, last-write-wins via each model's `updatedAt`) is the next milestone.
 - **Personal-device installs only.** Automatic code signing is wired up for a free Apple ID;
   TestFlight and the App Store both need the paid Developer Program — not yet enrolled. App
   Store submission prep has started ahead of that: the 1024×1024 app icon is confirmed
@@ -184,7 +225,7 @@ completion background removal — run against explicit non-negotiables in
 
 ---
 
-## 5. Architecture & stack
+## 6. Architecture & stack
 
 | | |
 |---|---|
@@ -194,7 +235,9 @@ completion background removal — run against explicit non-negotiables in
 | **Recurrence** | Hand-rolled engine, an RFC5545 subset — no third-party RRule dependency |
 | **Security** | `LocalAuthentication` for per-memo lock |
 | **Widgets** | `WidgetKit`, three widget kinds, timeline refresh every 30–60 min |
+| **Accounts** | Firebase Auth (phone number), SPM, `Planting` target only |
+| **Sync (planned)** | Cloud Firestore, last-write-wins via `updatedAt` (M3, not yet built) |
 
 ---
 
-_github.com/swan-5/planting · HEAD 68a854a · 2026-09-04_
+_github.com/swan-5/planting · HEAD b62478b · 2026-09-04_

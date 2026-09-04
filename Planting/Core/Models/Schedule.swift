@@ -20,6 +20,9 @@ final class Schedule: Identifiable {
     /// on request, for a per-occurrence "delete this one only"). Empty for
     /// non-repeating schedules.
     var excludedDates: [Date] = []
+    /// Firebase Auth uid of the owning account (added on request, for
+    /// multi-user sync). Empty string until scoped by a repository write.
+    var ownerID: String = ""
     var createdAt: Date
     var updatedAt: Date
 
@@ -38,6 +41,7 @@ final class Schedule: Identifiable {
         memo: String? = nil,
         recurrenceRule: RecurrenceRule = .none,
         excludedDates: [Date] = [],
+        ownerID: String = "",
         createdAt: Date = .now,
         updatedAt: Date = .now
     ) {
@@ -53,6 +57,7 @@ final class Schedule: Identifiable {
         self.memo = memo
         self.recurrenceRule = recurrenceRule
         self.excludedDates = excludedDates
+        self.ownerID = ownerID
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

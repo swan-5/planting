@@ -11,6 +11,11 @@ settings:
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: 6ST84DG9D8
 
+packages:
+  FirebaseSDK:
+    url: https://github.com/firebase/firebase-ios-sdk
+    from: 11.0.0
+
 targets:
   Planting:
     type: application
@@ -29,6 +34,16 @@ targets:
           - Pretendard-Medium.otf
           - Pretendard-SemiBold.otf
         CFBundleDisplayName: Planting
+        # Lets Firebase Phone Auth's reCAPTCHA-verification web flow hand
+        # control back to the app (used until a paid Developer account adds
+        # APNs-based silent verification instead). Not the bundle ID — this
+        # is Firebase's own "encoded app ID" scheme, reverse-derived from
+        # GoogleService-Info.plist's GOOGLE_APP_ID
+        # (1:720707709518:ios:3163d4fdc0a862d23ef11f here); confirmed via
+        # the exact scheme FirebaseAuth's runtime error asked for.
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - app-1-720707709518-ios-3163d4fdc0a862d23ef11f
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         NSFaceIDUsageDescription: Planting uses Face ID to unlock locked memos.
@@ -46,6 +61,10 @@ targets:
     dependencies:
       - target: PlantingWidgets
         embed: true
+      - package: FirebaseSDK
+        product: FirebaseAuth
+      - package: FirebaseSDK
+        product: FirebaseFirestore
 
   PlantingWidgets:
     type: app-extension

@@ -13,6 +13,10 @@ final class MonthlyReflection: Identifiable {
     var wentWell: String
     var couldImprove: String
     var nextMonthFocus: String
+    /// Firebase Auth uid of the owning account (added on request, for
+    /// multi-user sync). Empty string until scoped by a repository write.
+    /// Part of the natural (ownerID, year, month) uniqueness key.
+    var ownerID: String = ""
     var createdAt: Date
     var updatedAt: Date
 
@@ -23,6 +27,7 @@ final class MonthlyReflection: Identifiable {
         wentWell: String = "",
         couldImprove: String = "",
         nextMonthFocus: String = "",
+        ownerID: String = "",
         createdAt: Date = .now,
         updatedAt: Date = .now
     ) {
@@ -32,6 +37,7 @@ final class MonthlyReflection: Identifiable {
         self.wentWell = wentWell
         self.couldImprove = couldImprove
         self.nextMonthFocus = nextMonthFocus
+        self.ownerID = ownerID
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

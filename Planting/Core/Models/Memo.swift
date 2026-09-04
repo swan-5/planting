@@ -9,6 +9,9 @@ final class Memo: Identifiable {
     var content: String
     var date: Date
     var locked: Bool
+    /// Firebase Auth uid of the owning account (added on request, for
+    /// multi-user sync). Empty string until scoped by a repository write.
+    var ownerID: String = ""
     var createdAt: Date
     var updatedAt: Date
 
@@ -18,6 +21,7 @@ final class Memo: Identifiable {
         content: String,
         date: Date,
         locked: Bool = false,
+        ownerID: String = "",
         createdAt: Date = .now,
         updatedAt: Date = .now
     ) {
@@ -26,6 +30,7 @@ final class Memo: Identifiable {
         self.content = content
         self.date = date
         self.locked = locked
+        self.ownerID = ownerID
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

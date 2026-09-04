@@ -19,20 +19,26 @@ final class SwiftDataMemoRepository: MemoRepository {
     }
 
     func fetchAll() throws -> [Memo] {
-        try context.fetch(FetchDescriptor<Memo>(sortBy: [SortDescriptor(\.date, order: .reverse)]))
+        let uid = PersistenceController.currentUserID
+        return try context.fetch(FetchDescriptor<Memo>(
+            predicate: #Predicate { $0.ownerID == uid },
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
+        ))
     }
 
     func memos(on date: Date) throws -> [Memo] {
         let day = calendar.startOfDay(for: date)
         guard let nextDay = calendar.date(byAdding: .day, value: 1, to: day) else { return [] }
+        let uid = PersistenceController.currentUserID
         let descriptor = FetchDescriptor<Memo>(
-            predicate: #Predicate { $0.date >= day && $0.date < nextDay },
+            predicate: #Predicate { $0.date >= day && $0.date < nextDay && $0.ownerID == uid },
             sortBy: [SortDescriptor(\.createdAt)]
         )
         return try context.fetch(descriptor)
     }
 
     func create(_ memo: Memo) throws {
+        memo.ownerID = PersistenceController.currentUserID
         context.insert(memo)
         try context.save()
     }

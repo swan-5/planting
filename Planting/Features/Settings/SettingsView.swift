@@ -7,6 +7,23 @@ struct SettingsView: View {
     var body: some View {
         List {
             Section {
+                if let phoneNumber = AppSession.shared.phoneNumber {
+                    HStack {
+                        Text("Phone")
+                            .font(PlantingFont.body())
+                        Spacer()
+                        Text(phoneNumber)
+                            .font(PlantingFont.body())
+                            .foregroundStyle(PlantingColor.secondaryText)
+                    }
+                }
+                Button("Sign Out", role: .destructive) {
+                    try? AppSession.shared.signOut()
+                }
+                .font(PlantingFont.body())
+            }
+
+            Section {
                 NavigationLink("Category") {
                     CategoryManagementView()
                 }

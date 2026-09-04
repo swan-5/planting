@@ -46,10 +46,15 @@ final class SwiftDataTodoRepository: TodoRepository {
     }
 
     func fetchAllTodos() throws -> [Todo] {
-        try context.fetch(FetchDescriptor<Todo>(sortBy: [SortDescriptor(\.createdAt)]))
+        let uid = PersistenceController.currentUserID
+        return try context.fetch(FetchDescriptor<Todo>(
+            predicate: #Predicate { $0.ownerID == uid },
+            sortBy: [SortDescriptor(\.createdAt)]
+        ))
     }
 
     func create(_ todo: Todo) throws {
+        todo.ownerID = PersistenceController.currentUserID
         context.insert(todo)
         if todo.recurrenceRule.frequency == .none {
             let occurrence = TodoOccurrence(todo: todo, occurrenceDate: calendar.startOfDay(for: todo.startDate))
@@ -115,7 +120,8 @@ final class SwiftDataTodoRepository: TodoRepository {
     }
 
     func moveOccurrence(id: UUID, sourceDate: Date, to newDate: Date) throws {
-        let descriptor = FetchDescriptor<TodoOccurrence>(predicate: #Predicate { $0.id == id })
+        let uid = PersistenceController.currentUserID
+        let descriptor = FetchDescriptor<TodoOccurrence>(predicate: #Predicate { $0.id == id && $0.todo?.ownerID == uid })
         guard let occurrence = try context.fetch(descriptor).first, let todo = occurrence.todo else { return }
 
         let day = calendar.startOfDay(for: newDate)
@@ -139,7 +145,8 @@ final class SwiftDataTodoRepository: TodoRepository {
     }
 
     func duplicateOccurrence(id: UUID, to newDate: Date) throws {
-        let descriptor = FetchDescriptor<TodoOccurrence>(predicate: #Predicate { $0.id == id })
+        let uid = PersistenceController.currentUserID
+        let descriptor = FetchDescriptor<TodoOccurrence>(predicate: #Predicate { $0.id == id && $0.todo?.ownerID == uid })
         guard let occurrence = try context.fetch(descriptor).first, let sourceTodo = occurrence.todo else { return }
 
         let day = calendar.startOfDay(for: newDate)
@@ -165,7 +172,8 @@ final class SwiftDataTodoRepository: TodoRepository {
     }
 
     func setOrder(occurrenceID: UUID, order: Int) throws {
-        let descriptor = FetchDescriptor<TodoOccurrence>(predicate: #Predicate { $0.id == occurrenceID })
+        let uid = PersistenceController.currentUserID
+        let descriptor = FetchDescriptor<TodoOccurrence>(predicate: #Predicate { $0.id == occurrenceID && $0.todo?.ownerID == uid })
         guard let occurrence = try context.fetch(descriptor).first else { return }
         occurrence.order = order
         try context.save()

@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06DB5181F9DA7DF40C326C4C /* PhoneLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74987BF9A73DF0B88D282B30 /* PhoneLoginView.swift */; };
 		08A616857E3A5B9EEF96624C /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110C8968A7C69A54A9769851 /* MemoEditView.swift */; };
 		0AD0182F2A2D69BB9B89ED4C /* DailyCompletionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */; };
 		11B9E035EA2F95C9B608F11F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEE5FA8B5EA076F5CD133C81 /* Pretendard-Thin.otf */; };
+		18499F38F0274413B4318186 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D948041D23B8772E145C2212 /* AuthViewModel.swift */; };
 		191755C610CB9A63E700B7BB /* CalendarHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78111F61EFDB04BF880DD8 /* CalendarHomeView.swift */; };
 		2415C200C1C901A7D3B7318B /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE20EDC369E7718BA4A8289 /* Todo.swift */; };
 		270E833E7010F848EBAEC615 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC743F2C8586CD5BF3503C9 /* Color+Hex.swift */; };
 		2B12265E8E76E62BC39E3162 /* MemoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E3F626EC288D39627EBFC /* MemoHomeView.swift */; };
 		2E4D865805A8B5C1B84C83B9 /* MonthlyReflectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF81E9846A3039009BBDE22 /* MonthlyReflectionData.swift */; };
 		2E8FBBCE4CB1E45060B47CF0 /* CategoryEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF2BA5F9ACB9FA0CBC0049 /* CategoryEditSheet.swift */; };
+		356AB2C57F51C7F358751659 /* VerificationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BF325A12E6DA2E046C42A /* VerificationCodeView.swift */; };
 		35B7681115D98920FE3AE000 /* TodoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED6DB7BA390A316E060BE9 /* TodoRow.swift */; };
 		368AC0D2603FB8693826E9A9 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 063527F85AF06697CDB75713 /* Pretendard-Medium.otf */; };
 		43EE0E2D22AB1697D0BF6C61 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE20EDC369E7718BA4A8289 /* Todo.swift */; };
@@ -26,10 +29,12 @@
 		523D3896AE17847ED423D73A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F1B22374250AF2E9D222441D /* README.md */; };
 		55BFCA03B1194C0CEE07ACDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D102CDE569CA536AADA33A44 /* Assets.xcassets */; };
 		5BAE5F40144F30676D10AC1C /* MemoHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B40B219E9D96D02E3CF96A /* MemoHomeViewModel.swift */; };
+		5ECFDD35FE4E6BCF0DF1AECB /* RootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E834683667B932A8AD6E60 /* RootContainerView.swift */; };
 		5FB72740B0172AC2E767DB9E /* TodoOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */; };
 		6150392449F10603B6E17703 /* MonthlyReflectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C9A1E30764B0748995518 /* MonthlyReflectionRepository.swift */; };
 		619E2876B52EC4DF84504588 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0624A4FDCBA48AD084776FA /* PersistenceController.swift */; };
 		61AAAAF636462B161B85CD07 /* PlantingWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1BA2DE82F374F972704DAD7D /* PlantingWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		622589381B1473FA1DB7493C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 259854758FB7F0CFD85F8BB8 /* GoogleService-Info.plist */; };
 		627C233394FD202E1B1942EC /* PlantingFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225B6D069A1700DCF7A4387D /* PlantingFont.swift */; };
 		63DCE1583FAB27A9562E1D5E /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */; };
 		64CE18DDFEEEB4CF38CC59F7 /* MonthlyReflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB65B7B5DE5F75500DCBFCA /* MonthlyReflection.swift */; };
@@ -41,12 +46,14 @@
 		7403290F1ACBD8963F73230B /* RecurrenceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */; };
 		746210E63421E7C2305B6342 /* CategoryPickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97E96A1CA92B83542847B74 /* CategoryPickerRow.swift */; };
 		75B1F8610A242F21E48F0FD8 /* Category+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FCCD1235D1036A58340D4 /* Category+Color.swift */; };
+		763296F44BA9A555DF05381C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F5C4A3C241B33425003405 /* AppDelegate.swift */; };
 		76ECA46120FD896CA0890530 /* CloverGrowthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */; };
 		77049FB2A8FBFF2C2548C2CC /* TodoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497F769C29A3BFF6B7AE335 /* TodoWidget.swift */; };
 		779058A9796903B6E4DD71C9 /* CategorySeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596851DF4DAED41BE484EF94 /* CategorySeeder.swift */; };
 		7EE31E65B6465FB5F00A363E /* ScheduleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A43E13230B656918C91322 /* ScheduleBarView.swift */; };
 		7F562A208791E285FC4FCBE7 /* BiometricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */; };
 		81E7B494169AE296FD22FED0 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
+		83A4C40B989D20A1B1785579 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9948C603CECEBB6A65F87BE1 /* AppSession.swift */; };
 		856D95F61B442D621E0879DD /* TodoOccurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */; };
 		866FE409393F982F3510B430 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */; };
 		86EC899DAE07A5C838345370 /* TodoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95C4D94C04E357A79501704 /* TodoEditView.swift */; };
@@ -69,6 +76,7 @@
 		AA1D928C646F573904BA1E86 /* PlantingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */; };
 		AA5D78FF218B3085AF54249D /* WidgetDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57266913BCC6DCDC3BB2E043 /* WidgetDataProvider.swift */; };
 		AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */; };
+		ABD2BCBCD02B75FEA7B4CB56 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2394361C16C50DD5153CFE54 /* FirebaseFirestore */; };
 		AE454D1C6D8E79A86FB3E31E /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */; };
 		B0C726EC02FCB82C18D2B948 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 12E06AAF1CBDA2B1C4A9F826 /* Pretendard-ExtraLight.otf */; };
 		B4C728A22D14B26AE819AB9B /* PlantingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */; };
@@ -88,12 +96,14 @@
 		DCACEAA36E3E2E83A9305CD6 /* TodoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022911A9727F3D514D4236A8 /* TodoHomeView.swift */; };
 		E1E71510E586B960D3B46379 /* MonthlyReflectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF89D37A68363F8A200DB843 /* MonthlyReflectionViewModel.swift */; };
 		E1E9E63CA7219EB785B25176 /* TodoVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB72CDDD8EB91AD9107CD9 /* TodoVisibility.swift */; };
+		E2DB6D7FE7B83E6CD792E3CE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = FE8E9FDD3888BD5B9B523FA9 /* FirebaseAuth */; };
 		E46A13863ABDDF3AAB214143 /* TodoHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDB5052D1C15D09C941EE0 /* TodoHomeViewModel.swift */; };
 		E63E4E836AA254EB866EC61F /* RecurrenceRuleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88EBB6B4D38F30EBC790106 /* RecurrenceRuleEditor.swift */; };
 		E8BA455E98FB14E98D2DD874 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA0312B115546A892B418F /* Schedule.swift */; };
 		E958671D7516829CEA68D1E8 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DAAFEC7ACCF33E1DE9B03 /* RootTabView.swift */; };
 		EB24E9DA6733A3315F49644B /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC9A568195DA5956A98F020 /* CategoryRepository.swift */; };
 		F3C6CCE881804C17F390DCBB /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA0312B115546A892B418F /* Schedule.swift */; };
+		F84D67F203CF6CF9727DFEF6 /* AuthGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B180C837A9BFE76F98C38B12 /* AuthGateView.swift */; };
 		F9F4B12E0A7623D3F0B61759 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F824E418FD1C0F82539D5F86 /* Pretendard-Black.otf */; };
 		FC7BF2BFA28CAC5F3B9376E2 /* CalendarMonthLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */; };
 		FD6EFD74AFCFD23CF57562B7 /* MonthlyReflection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB65B7B5DE5F75500DCBFCA /* MonthlyReflection.swift */; };
@@ -141,6 +151,7 @@
 		1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		1F855A1AF2E4A38C0DC454BE /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 		225B6D069A1700DCF7A4387D /* PlantingFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingFont.swift; sourceTree = "<group>"; };
+		259854758FB7F0CFD85F8BB8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29DDB5052D1C15D09C941EE0 /* TodoHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHomeViewModel.swift; sourceTree = "<group>"; };
 		34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRepository.swift; sourceTree = "<group>"; };
@@ -150,6 +161,8 @@
 		3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
 		3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthLayout.swift; sourceTree = "<group>"; };
 		4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneOfTheDay.swift; sourceTree = "<group>"; };
+		52E834683667B932A8AD6E60 /* RootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; };
+		54F5C4A3C241B33425003405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57266913BCC6DCDC3BB2E043 /* WidgetDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataProvider.swift; sourceTree = "<group>"; };
 		57ED6DB7BA390A316E060BE9 /* TodoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRow.swift; sourceTree = "<group>"; };
 		580CD68387A3BCC61E2ADA66 /* CloverGrowthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloverGrowthView.swift; sourceTree = "<group>"; };
@@ -157,6 +170,7 @@
 		596851DF4DAED41BE484EF94 /* CategorySeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySeeder.swift; sourceTree = "<group>"; };
 		5EE20EDC369E7718BA4A8289 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		6A21786DE4BFF3FA27C99B5B /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
+		74987BF9A73DF0B88D282B30 /* PhoneLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLoginView.swift; sourceTree = "<group>"; };
 		7614556DE72EAC68BB919688 /* PlantingMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingMetrics.swift; sourceTree = "<group>"; };
 		778E085D969FD3169E1873AA /* MonthlyReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReflectionView.swift; sourceTree = "<group>"; };
 		7F7C0B993AB2057E240A5926 /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
@@ -165,6 +179,7 @@
 		8B42208A9694CEC3C88512BF /* QuickAddSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAddSheet.swift; sourceTree = "<group>"; };
 		916E3F626EC288D39627EBFC /* MemoHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoHomeView.swift; sourceTree = "<group>"; };
 		936CE7F86FB8B6D78558C574 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9948C603CECEBB6A65F87BE1 /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
 		9A67382D82172DDABDAF6650 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		A6E1B341B1A705DF8E62DAD2 /* CalendarHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHomeViewModel.swift; sourceTree = "<group>"; };
 		A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantingApp.swift; sourceTree = "<group>"; };
@@ -173,6 +188,7 @@
 		AAF81E9846A3039009BBDE22 /* MonthlyReflectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReflectionData.swift; sourceTree = "<group>"; };
 		AF95CF52DC7815BBCB464FEF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AFC9A568195DA5956A98F020 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		B180C837A9BFE76F98C38B12 /* AuthGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthGateView.swift; sourceTree = "<group>"; };
 		B473AC4D6613756EBF7AD556 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		B66FCCD1235D1036A58340D4 /* Category+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Color.swift"; sourceTree = "<group>"; };
 		B7CEB8F00CA08AD05A0CC2D8 /* Planting.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Planting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +206,7 @@
 		D0624A4FDCBA48AD084776FA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceEngine.swift; sourceTree = "<group>"; };
 		D102CDE569CA536AADA33A44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D948041D23B8772E145C2212 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DEE5FA8B5EA076F5CD133C81 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		E1FA277A9DFD31AEBC831293 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		E2835B50441E9EFC86DAFF8D /* TodayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWidget.swift; sourceTree = "<group>"; };
@@ -199,8 +216,21 @@
 		F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCompletionSummary.swift; sourceTree = "<group>"; };
 		F497F769C29A3BFF6B7AE335 /* TodoWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoWidget.swift; sourceTree = "<group>"; };
 		F824E418FD1C0F82539D5F86 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		F88BF325A12E6DA2E046C42A /* VerificationCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeView.swift; sourceTree = "<group>"; };
 		FA22735F2D6EB7DCBC06551F /* PlantingWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlantingWidgets.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7627761D55E7CB77ACC9A6C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2DB6D7FE7B83E6CD792E3CE /* FirebaseAuth in Frameworks */,
+				ABD2BCBCD02B75FEA7B4CB56 /* FirebaseFirestore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		218588CC843712143E2C9424 /* Memo */ = {
@@ -279,6 +309,17 @@
 			path = Todo;
 			sourceTree = "<group>";
 		};
+		4DF1EE1F44DDBC30D4D5B46E /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B180C837A9BFE76F98C38B12 /* AuthGateView.swift */,
+				D948041D23B8772E145C2212 /* AuthViewModel.swift */,
+				74987BF9A73DF0B88D282B30 /* PhoneLoginView.swift */,
+				F88BF325A12E6DA2E046C42A /* VerificationCodeView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		4F23501E66432A83FE435320 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +356,7 @@
 		6E87EC952B2624EECA1F3C2C /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				4DF1EE1F44DDBC30D4D5B46E /* Auth */,
 				A554E1C60BA0BC9D15663CFC /* Calendar */,
 				C27BA2613D23E4D0E8ADB015 /* Category */,
 				218588CC843712143E2C9424 /* Memo */,
@@ -332,6 +374,7 @@
 				4758279D73233EFBE53B9800 /* Models */,
 				8E76C6236EF1B44FBB1F7DA2 /* Persistence */,
 				51A417B8BFC95DCEEC5F03B1 /* Recurrence */,
+				D0676BB298D499FF70374A48 /* Session */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -354,6 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				D102CDE569CA536AADA33A44 /* Assets.xcassets */,
+				259854758FB7F0CFD85F8BB8 /* GoogleService-Info.plist */,
 				3365A7F2A50C0BABD579199B /* Fonts */,
 			);
 			path = Resources;
@@ -415,12 +459,22 @@
 			path = QuickAdd;
 			sourceTree = "<group>";
 		};
+		D0676BB298D499FF70374A48 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				9948C603CECEBB6A65F87BE1 /* AppSession.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
 		D383DD69F68A7E6D5EFCB9C9 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				54F5C4A3C241B33425003405 /* AppDelegate.swift */,
 				936CE7F86FB8B6D78558C574 /* Info.plist */,
 				583AF1E1E9264495B8596A12 /* Planting.entitlements */,
 				A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */,
+				52E834683667B932A8AD6E60 /* RootContainerView.swift */,
 				027DAAFEC7ACCF33E1DE9B03 /* RootTabView.swift */,
 			);
 			path = App;
@@ -461,6 +515,7 @@
 			buildPhases = (
 				F55C786F05D6EF25EE57A82E /* Sources */,
 				8E5EC79F6B0BCC4FD8685ACE /* Resources */,
+				7627761D55E7CB77ACC9A6C7 /* Frameworks */,
 				B575601F42D89DC4D21A5C45 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -470,6 +525,8 @@
 			);
 			name = Planting;
 			packageProductDependencies = (
+				FE8E9FDD3888BD5B9B523FA9 /* FirebaseAuth */,
+				2394361C16C50DD5153CFE54 /* FirebaseFirestore */,
 			);
 			productName = Planting;
 			productReference = B7CEB8F00CA08AD05A0CC2D8 /* Planting.app */;
@@ -503,6 +560,9 @@
 			);
 			mainGroup = F216791AD38F29A557E67EE7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BB777E44C2CBDDE6B5F6ECD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 30F69412D30490AF8267C5BC /* Products */;
 			projectDirPath = "";
@@ -520,6 +580,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55BFCA03B1194C0CEE07ACDD /* Assets.xcassets in Resources */,
+				622589381B1473FA1DB7493C /* GoogleService-Info.plist in Resources */,
 				F9F4B12E0A7623D3F0B61759 /* Pretendard-Black.otf in Resources */,
 				A36EFB347AEB904597EF3D96 /* Pretendard-Bold.otf in Resources */,
 				9D5D336C1E548229BB26A607 /* Pretendard-ExtraBold.otf in Resources */,
@@ -575,6 +636,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				763296F44BA9A555DF05381C /* AppDelegate.swift in Sources */,
+				83A4C40B989D20A1B1785579 /* AppSession.swift in Sources */,
+				F84D67F203CF6CF9727DFEF6 /* AuthGateView.swift in Sources */,
+				18499F38F0274413B4318186 /* AuthViewModel.swift in Sources */,
 				7F562A208791E285FC4FCBE7 /* BiometricAuthenticator.swift in Sources */,
 				D79368DC745CA98DBBF6163A /* CalendarDragPayload.swift in Sources */,
 				191755C610CB9A63E700B7BB /* CalendarHomeView.swift in Sources */,
@@ -605,6 +670,7 @@
 				93FE81E28BDCACD0184BB73E /* MonthlyReflectionView.swift in Sources */,
 				E1E71510E586B960D3B46379 /* MonthlyReflectionViewModel.swift in Sources */,
 				99A70A4A59B3EB6E7540BE42 /* PersistenceController.swift in Sources */,
+				06DB5181F9DA7DF40C326C4C /* PhoneLoginView.swift in Sources */,
 				46FF5E19DD94B1AFD018B5FF /* PlantingApp.swift in Sources */,
 				AA1D928C646F573904BA1E86 /* PlantingColor.swift in Sources */,
 				627C233394FD202E1B1942EC /* PlantingFont.swift in Sources */,
@@ -613,6 +679,7 @@
 				7403290F1ACBD8963F73230B /* RecurrenceEngine.swift in Sources */,
 				63DCE1583FAB27A9562E1D5E /* RecurrenceRule.swift in Sources */,
 				E63E4E836AA254EB866EC61F /* RecurrenceRuleEditor.swift in Sources */,
+				5ECFDD35FE4E6BCF0DF1AECB /* RootContainerView.swift in Sources */,
 				E958671D7516829CEA68D1E8 /* RootTabView.swift in Sources */,
 				E8BA455E98FB14E98D2DD874 /* Schedule.swift in Sources */,
 				7EE31E65B6465FB5F00A363E /* ScheduleBarView.swift in Sources */,
@@ -627,6 +694,7 @@
 				4F8AB5514AB57AD6FBC69AAE /* TodoRepository.swift in Sources */,
 				35B7681115D98920FE3AE000 /* TodoRow.swift in Sources */,
 				D20831A775D606C6EAF8EC33 /* TodoVisibility.swift in Sources */,
+				356AB2C57F51C7F358751659 /* VerificationCodeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +943,30 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BB777E44C2CBDDE6B5F6ECD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2394361C16C50DD5153CFE54 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB777E44C2CBDDE6B5F6ECD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		FE8E9FDD3888BD5B9B523FA9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB777E44C2CBDDE6B5F6ECD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E9142D9E53A989FF7B0A4145 /* Project object */;
 }

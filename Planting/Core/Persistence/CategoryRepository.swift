@@ -19,13 +19,17 @@ final class SwiftDataCategoryRepository: CategoryRepository {
     }
 
     func fetchAll() throws -> [Category] {
-        try context.fetch(FetchDescriptor<Category>(sortBy: [SortDescriptor(\.order)]))
+        let uid = PersistenceController.currentUserID
+        return try context.fetch(FetchDescriptor<Category>(
+            predicate: #Predicate { $0.ownerID == uid },
+            sortBy: [SortDescriptor(\.order)]
+        ))
     }
 
     @discardableResult
     func create(name: String, colorHex: String) throws -> Category {
         let nextOrder = (try fetchAll().map(\.order).max() ?? -1) + 1
-        let category = Category(name: name, colorHex: colorHex, order: nextOrder)
+        let category = Category(name: name, colorHex: colorHex, order: nextOrder, ownerID: PersistenceController.currentUserID)
         context.insert(category)
         try context.save()
         return category
@@ -33,17 +37,20 @@ final class SwiftDataCategoryRepository: CategoryRepository {
 
     func rename(_ category: Category, to name: String) throws {
         category.name = name
+        category.updatedAt = .now
         try context.save()
     }
 
     func updateColor(_ category: Category, colorHex: String) throws {
         category.colorHex = colorHex
+        category.updatedAt = .now
         try context.save()
     }
 
     func reorder(_ categories: [Category]) throws {
         for (index, category) in categories.enumerated() {
             category.order = index
+            category.updatedAt = .now
         }
         try context.save()
     }
