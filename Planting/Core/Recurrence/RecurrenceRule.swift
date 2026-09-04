@@ -16,6 +16,15 @@ enum RecurrenceEnd: Codable, Equatable {
     case afterCount(Int)
 }
 
+/// Which occurrences a delete on a repeating Schedule/Todo should affect —
+/// not in the spec, added on request (matches the "This Event / Future
+/// Events / All Events" pattern from Apple's own Calendar app).
+enum RecurrenceDeleteScope {
+    case onlyThisOccurrence
+    case thisAndFuture
+    case entireSeries
+}
+
 /// Recurrence configuration shared by Schedule and Todo (PRODUCT_SPEC.md §11, §14, §23).
 ///
 /// `frequency` mainly drives which fields the create/edit UI shows; the actual

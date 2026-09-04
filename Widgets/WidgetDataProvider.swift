@@ -19,7 +19,7 @@ enum WidgetDataProvider {
         var todoItems: [TodoItem] = []
         for todo in todos {
             for occurrence in todo.occurrences {
-                if TodoVisibility.isVisible(todo: todo, occurrence: occurrence, on: today, calendar: calendar) {
+                if !occurrence.isSkipped && TodoVisibility.isVisible(todo: todo, occurrence: occurrence, on: today, calendar: calendar) {
                     todoItems.append(TodoItem(todo: todo, occurrence: occurrence))
                 }
             }
@@ -72,7 +72,7 @@ enum WidgetDataProvider {
 
             for todo in todos {
                 for occurrence in todo.occurrences {
-                    if TodoVisibility.isVisible(todo: todo, occurrence: occurrence, on: dayStart, calendar: calendar) {
+                    if !occurrence.isSkipped && TodoVisibility.isVisible(todo: todo, occurrence: occurrence, on: dayStart, calendar: calendar) {
                         summary.todoTotal += 1
                         if occurrence.completed { summary.todoCompleted += 1 }
                     }

@@ -17,8 +17,8 @@ struct DateDetailView: View {
 
     @State private var schedules: [ScheduleOccurrence] = []
     @State private var todos: [TodoItem] = []
-    @State private var editingSchedule: Schedule?
-    @State private var editingTodo: Todo?
+    @State private var editingSchedule: ScheduleOccurrence?
+    @State private var editingTodo: TodoItem?
     @State private var isPresentingNewSchedule = false
     @State private var isPresentingNewTodo = false
     @State private var isPresentingQuickAddDialog = false
@@ -103,11 +103,11 @@ struct DateDetailView: View {
         .sheet(isPresented: $isPresentingNewTodo, onDismiss: load) {
             TodoEditView(initialDate: date)
         }
-        .sheet(item: $editingSchedule, onDismiss: load) { schedule in
-            ScheduleEditView(existingSchedule: schedule)
+        .sheet(item: $editingSchedule, onDismiss: load) { occurrence in
+            ScheduleEditView(existingSchedule: occurrence.schedule, occurrenceDate: occurrence.date)
         }
-        .sheet(item: $editingTodo, onDismiss: load) { todo in
-            TodoEditView(existingTodo: todo)
+        .sheet(item: $editingTodo, onDismiss: load) { item in
+            TodoEditView(existingTodo: item.todo, existingOccurrence: item.occurrence)
         }
     }
 
@@ -185,7 +185,7 @@ struct DateDetailView: View {
 
     private func scheduleRow(_ occurrence: ScheduleOccurrence) -> some View {
         Button {
-            editingSchedule = occurrence.schedule
+            editingSchedule = occurrence
         } label: {
             HStack(alignment: .top, spacing: PlantingSpacing.sm) {
                 Circle()
@@ -230,7 +230,7 @@ struct DateDetailView: View {
             Spacer(minLength: 0)
         }
         .contentShape(Rectangle())
-        .onTapGesture { editingTodo = item.todo }
+        .onTapGesture { editingTodo = item }
     }
 
     private func changeDay(by delta: Int) {

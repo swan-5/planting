@@ -16,6 +16,10 @@ final class Schedule: Identifiable {
     var location: String?
     var memo: String?
     var recurrenceRule: RecurrenceRule
+    /// Individual dates skipped out of an otherwise-repeating series (added
+    /// on request, for a per-occurrence "delete this one only"). Empty for
+    /// non-repeating schedules.
+    var excludedDates: [Date] = []
     var createdAt: Date
     var updatedAt: Date
 
@@ -33,6 +37,7 @@ final class Schedule: Identifiable {
         location: String? = nil,
         memo: String? = nil,
         recurrenceRule: RecurrenceRule = .none,
+        excludedDates: [Date] = [],
         createdAt: Date = .now,
         updatedAt: Date = .now
     ) {
@@ -47,6 +52,7 @@ final class Schedule: Identifiable {
         self.location = location
         self.memo = memo
         self.recurrenceRule = recurrenceRule
+        self.excludedDates = excludedDates
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }

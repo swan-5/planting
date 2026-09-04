@@ -13,7 +13,7 @@ struct MonthlyReflectionView: View {
 
     @State private var viewModel: MonthlyReflectionViewModel?
     @State private var saveTask: Task<Void, Never>?
-    @State private var editingTodo: Todo?
+    @State private var editingTodo: TodoItem?
 
     private var monthName: String {
         let formatter = DateFormatter()
@@ -62,8 +62,8 @@ struct MonthlyReflectionView: View {
             viewModel?.saveReflection()
             viewModel?.saveQuestions()
         }
-        .sheet(item: $editingTodo, onDismiss: { viewModel?.load() }) { todo in
-            TodoEditView(existingTodo: todo)
+        .sheet(item: $editingTodo, onDismiss: { viewModel?.load() }) { item in
+            TodoEditView(existingTodo: item.todo, existingOccurrence: item.occurrence)
         }
     }
 
@@ -148,7 +148,7 @@ struct MonthlyReflectionView: View {
             VStack(alignment: .leading, spacing: 8) {
                 ForEach(data.incompleteTodos) { item in
                     Button {
-                        editingTodo = item.todo
+                        editingTodo = item
                     } label: {
                         HStack(spacing: 6) {
                             Image(systemName: "square")

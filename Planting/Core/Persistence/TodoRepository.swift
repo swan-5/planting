@@ -12,6 +12,10 @@ protocol TodoRepository {
     func create(_ todo: Todo) throws
     func update(_ todo: Todo) throws
     func delete(_ todo: Todo) throws
+    /// Deletes according to `scope` — the whole series, this date onward, or
+    /// just this one occurrence (see RecurrenceDeleteScope). A no-op scope
+    /// distinction for a non-repeating todo: all three behave the same.
+    func deleteOccurrence(_ item: TodoItem, scope: RecurrenceDeleteScope) throws
     func setCompleted(_ occurrence: TodoOccurrence, completed: Bool, at date: Date) throws
     /// Materializes any missing TodoOccurrence rows for repeating todos whose
     /// recurrence produces a date inside `range`, then returns every
@@ -65,6 +69,27 @@ final class SwiftDataTodoRepository: TodoRepository {
         try context.save()
     }
 
+    func deleteOccurrence(_ item: TodoItem, scope: RecurrenceDeleteScope) throws {
+        switch scope {
+        case .entireSeries:
+            try delete(item.todo)
+        case .onlyThisOccurrence:
+            item.occurrence.isSkipped = true
+            try context.save()
+        case .thisAndFuture:
+            let todo = item.todo
+            let day = calendar.startOfDay(for: item.occurrence.occurrenceDate)
+            for occurrence in todo.occurrences where calendar.startOfDay(for: occurrence.occurrenceDate) >= day {
+                context.delete(occurrence)
+            }
+            todo.occurrences.removeAll { calendar.startOfDay(for: $0.occurrenceDate) >= day }
+            let dayBefore = calendar.date(byAdding: .day, value: -1, to: day) ?? day
+            todo.recurrenceRule.end = .onDate(dayBefore)
+            todo.updatedAt = .now
+            try context.save()
+        }
+    }
+
     func setCompleted(_ occurrence: TodoOccurrence, completed: Bool, at date: Date = .now) throws {
         occurrence.completed = completed
         occurrence.completedAt = completed ? date : nil
@@ -75,7 +100,7 @@ final class SwiftDataTodoRepository: TodoRepository {
         try materializeRecurringOccurrences(in: range)
         return try fetchAllTodos().flatMap { todo in
             todo.occurrences
-                .filter { TodoVisibility.window(for: todo, occurrence: $0, calendar: calendar).overlaps(range) }
+                .filter { !$0.isSkipped && TodoVisibility.window(for: todo, occurrence: $0, calendar: calendar).overlaps(range) }
                 .map { TodoItem(todo: todo, occurrence: $0) }
         }
     }

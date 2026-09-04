@@ -14,7 +14,7 @@ struct CalendarHomeView: View {
     @State private var isPresentingCreate = false
     @State private var pendingCreateKind: QuickAddKind?
     @State private var detailDate: Date?
-    @State private var editingSchedule: Schedule?
+    @State private var editingSchedule: ScheduleOccurrence?
     /// The month tapped via the header's "‹ September ⌄ ›" control — not
     /// necessarily `viewModel.visibleMonth` by the time the pushed screen
     /// reads it if the user then also flips months, so this is captured
@@ -38,6 +38,7 @@ struct CalendarHomeView: View {
                         .id(viewModel.visibleMonth)
                         .transition(monthTransition)
                         .clipped()
+                        .gesture(monthSwipeGesture(viewModel))
 
                     // Centered in whatever blank space is left below the
                     // grid (down to the tab bar), not pinned to the grid's
@@ -109,8 +110,8 @@ struct CalendarHomeView: View {
             .navigationDestination(item: $reflectionMonth) { month in
                 MonthlyReflectionView(month: month)
             }
-            .sheet(item: $editingSchedule, onDismiss: { viewModel?.loadMonthData() }) { schedule in
-                ScheduleEditView(existingSchedule: schedule)
+            .sheet(item: $editingSchedule, onDismiss: { viewModel?.loadMonthData() }) { occurrence in
+                ScheduleEditView(existingSchedule: occurrence.schedule, occurrenceDate: occurrence.date)
             }
         }
     }
@@ -135,6 +136,24 @@ struct CalendarHomeView: View {
     private func goToToday(_ viewModel: CalendarHomeViewModel) {
         monthNavigationDirection = 0
         withAnimation(.easeInOut(duration: 0.28)) { viewModel.goToToday() }
+    }
+
+    /// Swipe left/right on the grid to change months (not in the spec,
+    /// added on request). `minimumDistance` is kept fairly large so a quick
+    /// horizontal flick doesn't fight the long-press-then-drag gesture
+    /// `.draggable` already uses for rescheduling a todo/schedule.
+    private func monthSwipeGesture(_ viewModel: CalendarHomeViewModel) -> some Gesture {
+        DragGesture(minimumDistance: 24)
+            .onEnded { value in
+                let horizontal = value.translation.width
+                let vertical = value.translation.height
+                guard abs(horizontal) > abs(vertical), abs(horizontal) > 60 else { return }
+                if horizontal < 0 {
+                    goToNextMonth(viewModel)
+                } else {
+                    goToPreviousMonth(viewModel)
+                }
+            }
     }
 
     /// "‹ September ⌄ ›" (not in the spec, added on request): the chevrons
@@ -278,7 +297,7 @@ struct CalendarHomeView: View {
                         color: bar.occurrence.schedule.category?.color ?? PlantingColor.primaryBlue,
                         sourceDate: bar.occurrence.date,
                         scheduleID: bar.occurrence.schedule.id,
-                        onTap: { editingSchedule = bar.occurrence.schedule },
+                        onTap: { editingSchedule = bar.occurrence },
                         onCopy: { payload in viewModel.copyItem(payload) }
                     )
                     .frame(width: columnWidth * CGFloat(bar.columnSpan) - 3, height: 17)

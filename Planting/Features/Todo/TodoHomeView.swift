@@ -6,7 +6,7 @@ struct TodoHomeView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel: TodoHomeViewModel?
     @State private var isPresentingNewTodo = false
-    @State private var editingTodo: Todo?
+    @State private var editingTodo: TodoItem?
 
     var body: some View {
         NavigationStack {
@@ -30,7 +30,7 @@ struct TodoHomeView: View {
                                     item: item,
                                     dDayLabel: viewModel.dDayLabel(for: item),
                                     onToggle: { viewModel.toggleCompletion(item) },
-                                    onTap: { editingTodo = item.todo }
+                                    onTap: { editingTodo = item }
                                 )
                             }
                         }
@@ -73,8 +73,8 @@ struct TodoHomeView: View {
             .sheet(isPresented: $isPresentingNewTodo, onDismiss: { viewModel?.load() }) {
                 TodoEditView()
             }
-            .sheet(item: $editingTodo, onDismiss: { viewModel?.load() }) { todo in
-                TodoEditView(existingTodo: todo)
+            .sheet(item: $editingTodo, onDismiss: { viewModel?.load() }) { item in
+                TodoEditView(existingTodo: item.todo, existingOccurrence: item.occurrence)
             }
         }
     }

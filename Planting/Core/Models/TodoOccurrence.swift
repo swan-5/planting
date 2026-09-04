@@ -16,6 +16,11 @@ final class TodoOccurrence: Identifiable {
     /// sorts first; ties break by the parent Todo's createdAt, so untouched
     /// items keep their original creation order.
     var order: Int = 0
+    /// "Delete this occurrence only" for a repeating todo (added on
+    /// request). The row is kept rather than removed so lazy materialization
+    /// (see TodoRepository) never recreates it for this date; every read
+    /// path filters it out.
+    var isSkipped: Bool = false
 
     var todo: Todo?
 
@@ -25,7 +30,8 @@ final class TodoOccurrence: Identifiable {
         occurrenceDate: Date,
         completed: Bool = false,
         completedAt: Date? = nil,
-        order: Int = 0
+        order: Int = 0,
+        isSkipped: Bool = false
     ) {
         self.id = id
         self.todo = todo
@@ -33,5 +39,6 @@ final class TodoOccurrence: Identifiable {
         self.completed = completed
         self.completedAt = completedAt
         self.order = order
+        self.isSkipped = isSkipped
     }
 }

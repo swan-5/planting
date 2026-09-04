@@ -9,6 +9,11 @@ struct TodoEditView: View {
     @Environment(\.dismiss) private var dismiss
 
     private let existingTodo: Todo?
+    /// The specific occurrence this edit was opened from — needed for
+    /// delete scope (see RecurrenceDeleteScope). Every call site that edits
+    /// an existing todo has a TodoItem on hand and passes it; nil only when
+    /// creating a new todo.
+    private let existingOccurrence: TodoOccurrence?
 
     @State private var title: String
     @State private var startDate: Date
@@ -19,8 +24,9 @@ struct TodoEditView: View {
     @State private var categories: [Category] = []
     @State private var showingDeleteConfirmation = false
 
-    init(existingTodo: Todo? = nil, initialDate: Date = .now) {
+    init(existingTodo: Todo? = nil, existingOccurrence: TodoOccurrence? = nil, initialDate: Date = .now) {
         self.existingTodo = existingTodo
+        self.existingOccurrence = existingOccurrence
         _title = State(initialValue: existingTodo?.title ?? "")
         _startDate = State(initialValue: existingTodo?.startDate ?? initialDate)
         _dueDate = State(initialValue: existingTodo?.dueDate ?? initialDate)
@@ -83,7 +89,21 @@ struct TodoEditView: View {
                 isPresented: $showingDeleteConfirmation,
                 titleVisibility: .visible
             ) {
-                Button("Delete", role: .destructive, action: deleteTodo)
+                if existingTodo?.recurrenceRule.frequency != .none, existingOccurrence != nil {
+                    Button("Delete This Todo Only", role: .destructive) {
+                        deleteTodo(scope: .onlyThisOccurrence)
+                    }
+                    Button("Delete This and Future Todos", role: .destructive) {
+                        deleteTodo(scope: .thisAndFuture)
+                    }
+                    Button("Delete All Todos", role: .destructive) {
+                        deleteTodo(scope: .entireSeries)
+                    }
+                } else {
+                    Button("Delete", role: .destructive) {
+                        deleteTodo(scope: .entireSeries)
+                    }
+                }
                 Button("Cancel", role: .cancel) {}
             }
         }
@@ -128,10 +148,15 @@ struct TodoEditView: View {
         }
     }
 
-    private func deleteTodo() {
+    private func deleteTodo(scope: RecurrenceDeleteScope) {
         guard let existingTodo else { return }
         do {
-            try SwiftDataTodoRepository(context: modelContext).delete(existingTodo)
+            let repository = SwiftDataTodoRepository(context: modelContext)
+            if let existingOccurrence {
+                try repository.deleteOccurrence(TodoItem(todo: existingTodo, occurrence: existingOccurrence), scope: scope)
+            } else {
+                try repository.delete(existingTodo)
+            }
             dismiss()
         } catch {
             print("Failed to delete todo: \(error)")

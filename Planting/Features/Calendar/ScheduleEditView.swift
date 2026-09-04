@@ -7,6 +7,11 @@ struct ScheduleEditView: View {
     @Environment(\.dismiss) private var dismiss
 
     private let existingSchedule: Schedule?
+    /// The specific occurrence date this edit was opened from — used only
+    /// to compute delete scope (see RecurrenceDeleteScope); falls back to
+    /// the series' own startDate if a caller doesn't have a more specific
+    /// occurrence date on hand.
+    private let occurrenceDate: Date
 
     @State private var title: String
     @State private var startDate: Date
@@ -22,8 +27,9 @@ struct ScheduleEditView: View {
     @State private var categories: [Category] = []
     @State private var showingDeleteConfirmation = false
 
-    init(existingSchedule: Schedule? = nil, initialDate: Date = .now) {
+    init(existingSchedule: Schedule? = nil, occurrenceDate: Date? = nil, initialDate: Date = .now) {
         self.existingSchedule = existingSchedule
+        self.occurrenceDate = occurrenceDate ?? existingSchedule?.startDate ?? initialDate
         _title = State(initialValue: existingSchedule?.title ?? "")
         _startDate = State(initialValue: existingSchedule?.startDate ?? initialDate)
         _hasEndDate = State(initialValue: existingSchedule?.endDate != nil)
@@ -104,7 +110,21 @@ struct ScheduleEditView: View {
                 isPresented: $showingDeleteConfirmation,
                 titleVisibility: .visible
             ) {
-                Button("Delete", role: .destructive, action: deleteSchedule)
+                if existingSchedule?.recurrenceRule.frequency != .none {
+                    Button("Delete This Event Only", role: .destructive) {
+                        deleteSchedule(scope: .onlyThisOccurrence)
+                    }
+                    Button("Delete This and Future Events", role: .destructive) {
+                        deleteSchedule(scope: .thisAndFuture)
+                    }
+                    Button("Delete All Events", role: .destructive) {
+                        deleteSchedule(scope: .entireSeries)
+                    }
+                } else {
+                    Button("Delete", role: .destructive) {
+                        deleteSchedule(scope: .entireSeries)
+                    }
+                }
                 Button("Cancel", role: .cancel) {}
             }
         }
@@ -158,10 +178,14 @@ struct ScheduleEditView: View {
         }
     }
 
-    private func deleteSchedule() {
+    private func deleteSchedule(scope: RecurrenceDeleteScope) {
         guard let existingSchedule else { return }
         do {
-            try SwiftDataScheduleRepository(context: modelContext).delete(existingSchedule)
+            try SwiftDataScheduleRepository(context: modelContext).deleteOccurrence(
+                existingSchedule,
+                on: occurrenceDate,
+                scope: scope
+            )
             dismiss()
         } catch {
             print("Failed to delete schedule: \(error)")

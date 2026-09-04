@@ -18,6 +18,10 @@ protocol ScheduleRepository {
     func create(_ schedule: Schedule) throws
     func update(_ schedule: Schedule) throws
     func delete(_ schedule: Schedule) throws
+    /// Deletes according to `scope` — the whole series, this date onward, or
+    /// just this one occurrence (see RecurrenceDeleteScope). A no-op scope
+    /// distinction for a non-repeating schedule: all three behave the same.
+    func deleteOccurrence(_ schedule: Schedule, on date: Date, scope: RecurrenceDeleteScope) throws
     func occurrences(in range: ClosedRange<Date>) throws -> [ScheduleOccurrence]
     /// Drag-to-reschedule. Repeating schedules have no per-occurrence
     /// override model yet (see Schedule.swift), so moving one occurrence
@@ -55,6 +59,20 @@ final class SwiftDataScheduleRepository: ScheduleRepository {
         try context.save()
     }
 
+    func deleteOccurrence(_ schedule: Schedule, on date: Date, scope: RecurrenceDeleteScope) throws {
+        switch scope {
+        case .entireSeries:
+            try delete(schedule)
+        case .onlyThisOccurrence:
+            schedule.excludedDates.append(calendar.startOfDay(for: date))
+            try update(schedule)
+        case .thisAndFuture:
+            let dayBefore = calendar.date(byAdding: .day, value: -1, to: calendar.startOfDay(for: date)) ?? date
+            schedule.recurrenceRule.end = .onDate(dayBefore)
+            try update(schedule)
+        }
+    }
+
     func occurrences(in range: ClosedRange<Date>) throws -> [ScheduleOccurrence] {
         try fetchAll().flatMap { schedule -> [ScheduleOccurrence] in
             let start = calendar.startOfDay(for: schedule.startDate)
@@ -65,6 +83,7 @@ final class SwiftDataScheduleRepository: ScheduleRepository {
             // Widen the query so an occurrence that *started* before `range`
             // but still spans into it (a multi-day event) isn't missed.
             let widenedStart = calendar.date(byAdding: .day, value: -spanDays, to: range.lowerBound) ?? range.lowerBound
+            let excludedDays = Set(schedule.excludedDates.map { calendar.startOfDay(for: $0) })
 
             return RecurrenceEngine.occurrences(
                 of: schedule.recurrenceRule,
@@ -72,6 +91,7 @@ final class SwiftDataScheduleRepository: ScheduleRepository {
                 in: widenedStart...range.upperBound,
                 calendar: calendar
             ).compactMap { occurrenceStart -> ScheduleOccurrence? in
+                guard !excludedDays.contains(occurrenceStart) else { return nil }
                 let occurrenceEnd = calendar.date(byAdding: .day, value: spanDays, to: occurrenceStart) ?? occurrenceStart
                 guard occurrenceEnd >= range.lowerBound, occurrenceStart <= range.upperBound else { return nil }
                 return ScheduleOccurrence(schedule: schedule, date: occurrenceStart, endDate: occurrenceEnd)

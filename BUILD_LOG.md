@@ -1,6 +1,6 @@
 # Planting — Feature Specification & Build Log
 
-_As of 2026-09-03 · 9 commits · 57 Swift files · SwiftUI + SwiftData, iOS 17+_
+_As of 2026-09-04 · 10 commits · 57 Swift files · SwiftUI + SwiftData, iOS 17+_
 
 What actually shipped against `PRODUCT_SPEC.md`, plus everything added or changed live during
 development that the spec doesn't cover — kept as one running record instead of scattered
@@ -142,6 +142,23 @@ completion background removal — run against explicit non-negotiables in
     iOS 26's redesigned action-sheet presentation anchors as a floating card near the tap point
     and would otherwise land on top of the header or list it was just triggered from.
 
+16. **Recurrence-aware delete.** Deleting a repeating Schedule or Todo now asks which occurrences
+    to affect — "This Event/Todo Only", "This and Future", or "All" — matching Apple Calendar's
+    own pattern. Schedule occurrences are virtual (expanded on demand, never persisted per-date),
+    so "only this one" is a new `excludedDates: [Date]` list `RecurrenceEngine` filters out, and
+    "this and future" just truncates `recurrenceRule.end` to the day before. Todo occurrences
+    *are* persisted rows (`TodoOccurrence`), so "only this one" instead flips a new `isSkipped`
+    flag rather than deleting the row outright — deleting it would only have had lazy
+    materialization silently recreate it the next time that date range was queried — and "this
+    and future" deletes every occurrence row from that date on top of the same `end` truncation.
+    Every read path (Todo Home, Date Detail, Monthly Reflection, both widgets) now filters
+    `isSkipped` rows out.
+
+17. **Swipe to change months.** A left/right drag on the calendar grid now moves to the
+    next/previous month, alongside the existing header chevrons — kept to a fairly large
+    `minimumDistance` so a quick horizontal flick doesn't fight the long-press-then-drag gesture
+    `.draggable` already uses for rescheduling a todo/schedule onto another date.
+
 ---
 
 ## 4. Known limitations
@@ -180,4 +197,4 @@ completion background removal — run against explicit non-negotiables in
 
 ---
 
-_github.com/swan-5/planting · HEAD f41da4e · 2026-09-03_
+_github.com/swan-5/planting · HEAD 68a854a · 2026-09-04_
