@@ -1,6 +1,6 @@
 # Planting — Feature Specification & Build Log
 
-_As of 2026-09-04 · 12 commits · 68 Swift files · SwiftUI + SwiftData, iOS 17+_
+_As of 2026-09-04 · 13 commits · 70 Swift files · SwiftUI + SwiftData, iOS 17+_
 
 What actually shipped against `PRODUCT_SPEC.md`, plus everything added or changed live during
 development that the spec doesn't cover — kept as one running record instead of scattered
@@ -173,6 +173,17 @@ completion background removal — run against explicit non-negotiables in
     formula, so a year outside that range shows only the fixed 8 until someone adds that year's
     actual published dates to the table.
 
+20. **Tap the Calendar tab to jump to today; dropped the header's "Today" button.** A new
+    `CalendarNavigationTrigger` (`@Observable`, injected via `.environment` from `RootTabView`)
+    lets re-tapping the already-selected Calendar tab call the same `goToToday()` the old button
+    used — detected with a custom `Binding` on the tab selection, since SwiftUI's `TabView` still
+    invokes that binding's setter on a re-tap even though the value doesn't change.
+
+21. **In-app feature guide.** A new "기능 소개" screen off Settings (`FeatureGuideView`) — a plain
+    icon + one-line-Korean-description list covering everything added along the way (drag/copy,
+    recurrence delete scope, monthly reflection, clover growth, fortune, birthday, holidays,
+    widgets), for a new user to skim in one place rather than discover piecemeal.
+
 ---
 
 ## 4. Accounts & sync (in progress — M1–M2 of 4 shipped)
@@ -257,4 +268,4 @@ launch, so a second account on the same device still gets starter categories.
 
 ---
 
-_github.com/swan-5/planting · HEAD ef702ff · 2026-09-04_
+_github.com/swan-5/planting · HEAD 148eb7e · 2026-09-04_

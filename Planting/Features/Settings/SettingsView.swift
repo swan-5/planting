@@ -9,8 +9,8 @@ struct SettingsView: View {
 
     var body: some View {
         List {
-            Section {
-                if let phoneNumber = AppSession.shared.phoneNumber {
+            if let phoneNumber = AppSession.shared.phoneNumber {
+                Section {
                     HStack {
                         Text("Phone")
                             .font(PlantingFont.body())
@@ -20,10 +20,6 @@ struct SettingsView: View {
                             .foregroundStyle(PlantingColor.secondaryText)
                     }
                 }
-                Button("Sign Out", role: .destructive) {
-                    try? AppSession.shared.signOut()
-                }
-                .font(PlantingFont.body())
             }
 
             Section {
@@ -39,6 +35,13 @@ struct SettingsView: View {
             }
 
             Section {
+                NavigationLink("기능 소개") {
+                    FeatureGuideView()
+                }
+                .font(PlantingFont.body())
+            }
+
+            Section {
                 HStack {
                     Text("Version")
                         .font(PlantingFont.body())
@@ -47,6 +50,13 @@ struct SettingsView: View {
                         .font(PlantingFont.body())
                         .foregroundStyle(PlantingColor.secondaryText)
                 }
+            }
+
+            Section {
+                Button("Sign Out", role: .destructive) {
+                    try? AppSession.shared.signOut()
+                }
+                .font(PlantingFont.body())
             }
         }
         .listStyle(.plain)

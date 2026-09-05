@@ -15,8 +15,10 @@
 		18499F38F0274413B4318186 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D948041D23B8772E145C2212 /* AuthViewModel.swift */; };
 		191755C610CB9A63E700B7BB /* CalendarHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E78111F61EFDB04BF880DD8 /* CalendarHomeView.swift */; };
 		2415C200C1C901A7D3B7318B /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE20EDC369E7718BA4A8289 /* Todo.swift */; };
+		26E97C6E57D05BFE29F1F8BD /* FeatureGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735A823F525360F1E379400 /* FeatureGuideView.swift */; };
 		270E833E7010F848EBAEC615 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC743F2C8586CD5BF3503C9 /* Color+Hex.swift */; };
 		2B12265E8E76E62BC39E3162 /* MemoHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E3F626EC288D39627EBFC /* MemoHomeView.swift */; };
+		2CAFFB3E785380CEA68F6465 /* CalendarNavigationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6154A97DE20DFCBC1FE1993F /* CalendarNavigationTrigger.swift */; };
 		2E4D865805A8B5C1B84C83B9 /* MonthlyReflectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF81E9846A3039009BBDE22 /* MonthlyReflectionData.swift */; };
 		2E8FBBCE4CB1E45060B47CF0 /* CategoryEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAF2BA5F9ACB9FA0CBC0049 /* CategoryEditSheet.swift */; };
 		356AB2C57F51C7F358751659 /* VerificationCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88BF325A12E6DA2E046C42A /* VerificationCodeView.swift */; };
@@ -176,6 +178,7 @@
 		583AF1E1E9264495B8596A12 /* Planting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planting.entitlements; sourceTree = "<group>"; };
 		596851DF4DAED41BE484EF94 /* CategorySeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySeeder.swift; sourceTree = "<group>"; };
 		5EE20EDC369E7718BA4A8289 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		6154A97DE20DFCBC1FE1993F /* CalendarNavigationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNavigationTrigger.swift; sourceTree = "<group>"; };
 		6A21786DE4BFF3FA27C99B5B /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		72665B0585B9081CA2EEF8E6 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		74987BF9A73DF0B88D282B30 /* PhoneLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLoginView.swift; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 		C33AD271C3838E3921BF3CA3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		C3DFA3E5E167677D31D022B1 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricAuthenticator.swift; sourceTree = "<group>"; };
+		C735A823F525360F1E379400 /* FeatureGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureGuideView.swift; sourceTree = "<group>"; };
 		CF89D37A68363F8A200DB843 /* MonthlyReflectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReflectionViewModel.swift; sourceTree = "<group>"; };
 		D0624A4FDCBA48AD084776FA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D0DD017728DE9E561305A4E5 /* RecurrenceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceEngine.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 		9EE7AE64E0BB3754371B79BF /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				C735A823F525360F1E379400 /* FeatureGuideView.swift */,
 				AF95CF52DC7815BBCB464FEF /* SettingsView.swift */,
 			);
 			path = Settings;
@@ -493,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				54F5C4A3C241B33425003405 /* AppDelegate.swift */,
+				6154A97DE20DFCBC1FE1993F /* CalendarNavigationTrigger.swift */,
 				936CE7F86FB8B6D78558C574 /* Info.plist */,
 				583AF1E1E9264495B8596A12 /* Planting.entitlements */,
 				A87AFFB69516918AC1FF6BF9 /* PlantingApp.swift */,
@@ -670,6 +676,7 @@
 				191755C610CB9A63E700B7BB /* CalendarHomeView.swift in Sources */,
 				CD56E1FDE248CC1716176022 /* CalendarHomeViewModel.swift in Sources */,
 				FC7BF2BFA28CAC5F3B9376E2 /* CalendarMonthLayout.swift in Sources */,
+				2CAFFB3E785380CEA68F6465 /* CalendarNavigationTrigger.swift in Sources */,
 				75B1F8610A242F21E48F0FD8 /* Category+Color.swift in Sources */,
 				8FB59EA7C5220B1A4A77B97D /* Category.swift in Sources */,
 				2E8FBBCE4CB1E45060B47CF0 /* CategoryEditSheet.swift in Sources */,
@@ -683,6 +690,7 @@
 				4C2D4E720624248C089C8043 /* DailyCompletionSummary.swift in Sources */,
 				AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */,
 				A4B52BE6281127AAB3F86477 /* DateDetailView.swift in Sources */,
+				26E97C6E57D05BFE29F1F8BD /* FeatureGuideView.swift in Sources */,
 				8907AB5848DFAC6B5F1E6311 /* FortuneOfTheDay.swift in Sources */,
 				FB7C197092A5F654117E880B /* KoreanHolidays.swift in Sources */,
 				866FE409393F982F3510B430 /* Memo.swift in Sources */,

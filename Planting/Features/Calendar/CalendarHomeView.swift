@@ -9,6 +9,7 @@ struct CalendarHomeView: View {
     }
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(CalendarNavigationTrigger.self) private var navigationTrigger
     @State private var viewModel: CalendarHomeViewModel?
     @State private var isPresentingQuickAdd = false
     @State private var isPresentingCreate = false
@@ -54,6 +55,9 @@ struct CalendarHomeView: View {
             }
             .background(PlantingColor.background)
             .onAppear { viewModel?.loadMonthData() }
+            .onChange(of: navigationTrigger.goToTodayCount) {
+                if let viewModel { goToToday(viewModel) }
+            }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -187,18 +191,12 @@ struct CalendarHomeView: View {
 
             Spacer()
 
-            HStack(spacing: PlantingSpacing.md) {
-                Button("Today") { goToToday(viewModel) }
-                    .font(PlantingFont.body(13))
-                    .foregroundStyle(PlantingColor.secondaryText)
-
-                HStack(spacing: 6) {
-                    Button { goToPreviousMonth(viewModel) } label: {
-                        Image(systemName: "chevron.left")
-                    }
-                    Button { goToNextMonth(viewModel) } label: {
-                        Image(systemName: "chevron.right")
-                    }
+            HStack(spacing: 6) {
+                Button { goToPreviousMonth(viewModel) } label: {
+                    Image(systemName: "chevron.left")
+                }
+                Button { goToNextMonth(viewModel) } label: {
+                    Image(systemName: "chevron.right")
                 }
             }
         }
@@ -319,5 +317,6 @@ struct CalendarHomeView: View {
 
 #Preview {
     CalendarHomeView()
+        .environment(CalendarNavigationTrigger())
         .modelContainer(PersistenceController.sharedContainer)
 }
