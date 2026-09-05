@@ -23,6 +23,11 @@ struct DateCellView: View {
     let isToday: Bool
     let content: CalendarHomeViewModel.CellContent
     let hasClipboard: Bool
+    /// Not in the spec — added on request. `isBirthday` repeats every year
+    /// off the account's own UserProfile.birthday (month+day only);
+    /// `holidayName` is nil whenever the Settings toggle is off.
+    let isBirthday: Bool
+    let holidayName: String?
     /// Blank space reserved below the date number so this cell's own rows
     /// don't sit under the schedule bars drawn as an overlay above the
     /// whole week row (see CalendarHomeView.weekRow).
@@ -45,9 +50,22 @@ struct DateCellView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 1) {
-            Text(dayNumber)
-                .font(isToday ? PlantingFont.emphasis(14) : PlantingFont.dateNumber)
-                .foregroundStyle(numberColor)
+            HStack(spacing: 2) {
+                Text(dayNumber)
+                    .font(isToday ? PlantingFont.emphasis(14) : PlantingFont.dateNumber)
+                    .foregroundStyle(numberColor)
+                if isBirthday {
+                    Text("🎂")
+                        .font(.system(size: 10))
+                }
+            }
+
+            if let holidayName {
+                Text(holidayName)
+                    .font(PlantingFont.itemLabel)
+                    .foregroundStyle(Color.red)
+                    .lineLimit(1)
+            }
 
             if topInset > 0 {
                 Color.clear.frame(height: topInset)
@@ -121,6 +139,7 @@ struct DateCellView: View {
     }
 
     private var numberColor: Color {
+        if holidayName != nil { return .red }
         if isToday { return PlantingColor.primaryBlue }
         return day.isInCurrentMonth ? PlantingColor.primaryText : PlantingColor.secondaryText
     }

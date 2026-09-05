@@ -24,6 +24,8 @@ struct CalendarHomeView: View {
     /// "natural month slide"). >0 = next month (slides in from the right),
     /// <0 = previous month (from the left), 0 = jump-to-today (no direction).
     @State private var monthNavigationDirection = 0
+    /// Toggled from Settings (not in the spec — added on request).
+    @AppStorage("showHolidays") private var showHolidays = true
 
     private let baseCellHeight: CGFloat = 80
     private let barLaneHeight: CGFloat = 19
@@ -75,7 +77,8 @@ struct CalendarHomeView: View {
                 guard viewModel == nil else { return }
                 let vm = CalendarHomeViewModel(
                     scheduleRepository: SwiftDataScheduleRepository(context: modelContext),
-                    todoRepository: SwiftDataTodoRepository(context: modelContext)
+                    todoRepository: SwiftDataTodoRepository(context: modelContext),
+                    userProfileRepository: SwiftDataUserProfileRepository(context: modelContext)
                 )
                 vm.loadMonthData()
                 viewModel = vm
@@ -278,6 +281,8 @@ struct CalendarHomeView: View {
                             isToday: viewModel.isToday(day.date),
                             content: viewModel.content(for: day.date),
                             hasClipboard: viewModel.copiedPayload != nil,
+                            isBirthday: viewModel.isBirthday(day.date),
+                            holidayName: showHolidays ? KoreanHolidays.name(for: day.date) : nil,
                             topInset: topInset(forColumn: column),
                             onOpen: { detailDate = day.date },
                             onMove: { payload in viewModel.moveItem(payload, to: day.date) },

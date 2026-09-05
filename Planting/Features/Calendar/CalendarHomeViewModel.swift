@@ -27,10 +27,14 @@ final class CalendarHomeViewModel {
     private let calendar: Calendar
     private let scheduleRepository: ScheduleRepository
     private let todoRepository: TodoRepository
+    private let userProfileRepository: UserProfileRepository
 
     private(set) var visibleMonth: Date
     private(set) var cellContents: [Date: CellContent] = [:]
     private(set) var scheduleBars: [ScheduleBar] = []
+    /// Month + day only (year is irrelevant — it repeats annually). Loaded
+    /// once; doesn't change per month navigation.
+    private(set) var birthdayMonthDay: DateComponents?
     /// In-memory only (not persisted) — resets on relaunch, which is fine
     /// for a short-lived copy/paste clipboard.
     private(set) var copiedPayload: CalendarDragPayload?
@@ -38,14 +42,28 @@ final class CalendarHomeViewModel {
     init(
         scheduleRepository: ScheduleRepository,
         todoRepository: TodoRepository,
+        userProfileRepository: UserProfileRepository,
         referenceDate: Date = .now,
         calendar: Calendar = MonthGridBuilder.calendar
     ) {
         self.scheduleRepository = scheduleRepository
         self.todoRepository = todoRepository
+        self.userProfileRepository = userProfileRepository
         self.calendar = calendar
         self.visibleMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: referenceDate))
             ?? referenceDate
+        loadBirthday()
+    }
+
+    private func loadBirthday() {
+        guard let birthday = try? userProfileRepository.fetch()?.birthday else { return }
+        birthdayMonthDay = calendar.dateComponents([.month, .day], from: birthday)
+    }
+
+    func isBirthday(_ date: Date) -> Bool {
+        guard let birthdayMonthDay else { return false }
+        let comps = calendar.dateComponents([.month, .day], from: date)
+        return comps.month == birthdayMonthDay.month && comps.day == birthdayMonthDay.day
     }
 
     var days: [MonthGridDay] {

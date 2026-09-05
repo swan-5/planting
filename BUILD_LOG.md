@@ -1,6 +1,6 @@
 # Planting — Feature Specification & Build Log
 
-_As of 2026-09-04 · 11 commits · 64 Swift files · SwiftUI + SwiftData, iOS 17+_
+_As of 2026-09-04 · 12 commits · 68 Swift files · SwiftUI + SwiftData, iOS 17+_
 
 What actually shipped against `PRODUCT_SPEC.md`, plus everything added or changed live during
 development that the spec doesn't cover — kept as one running record instead of scattered
@@ -159,6 +159,20 @@ completion background removal — run against explicit non-negotiables in
     `minimumDistance` so a quick horizontal flick doesn't fight the long-press-then-drag gesture
     `.draggable` already uses for rescheduling a todo/schedule onto another date.
 
+18. **Birthday marker.** A new post-signup screen (`BirthdayEntryView`, skippable) asks once per
+    account for a birthday, stored on a new `UserProfile` row (`ownerID` + `birthday`, one per
+    account — its mere existence marks the prompt as already shown, whether or not a birthday was
+    actually entered). `CalendarHomeViewModel.isBirthday(_:)` compares month+day only, so it
+    reappears on the calendar every year regardless of which year is on screen.
+
+19. **Korean public holidays, togglable.** A new "Show Holidays" switch in Settings
+    (`@AppStorage("showHolidays")`, default on); when on, a holiday's date number and name render
+    in red. `KoreanHolidays` covers the 8 fixed-date holidays exactly (always correct) plus
+    Seollal/Chuseok/Buddha's Birthday and their substitute-holiday extensions as an explicit
+    year-by-year table for 2024–2026 only — those move with the lunar calendar and don't follow a
+    formula, so a year outside that range shows only the fixed 8 until someone adds that year's
+    actual published dates to the table.
+
 ---
 
 ## 4. Accounts & sync (in progress — M1–M2 of 4 shipped)
@@ -209,6 +223,9 @@ launch, so a second account on the same device still gets starter categories.
 
 - **No cross-device sync yet.** Accounts exist (§4) but nothing syncs between devices yet — M3
   (Firestore, last-write-wins via each model's `updatedAt`) is the next milestone.
+- **Holiday dates need yearly upkeep.** `KoreanHolidays`'s lunar-calendar entries (§3.19) only
+  cover 2024–2026 — extending past that means manually adding the next year's actual published
+  dates, not a formula.
 - **Personal-device installs only.** Automatic code signing is wired up for a free Apple ID;
   TestFlight and the App Store both need the paid Developer Program — not yet enrolled. App
   Store submission prep has started ahead of that: the 1024×1024 app icon is confirmed
@@ -240,4 +257,4 @@ launch, so a second account on the same device still gets starter categories.
 
 ---
 
-_github.com/swan-5/planting · HEAD b62478b · 2026-09-04_
+_github.com/swan-5/planting · HEAD ef702ff · 2026-09-04_

@@ -4,6 +4,9 @@ import SwiftUI
 /// info. Security toggles (§17.4 app-wide lock, etc.) are Future Features
 /// (PRODUCT_SPEC.md §26), not part of this pass.
 struct SettingsView: View {
+    /// Not in the spec — added on request, read by CalendarHomeView.
+    @AppStorage("showHolidays") private var showHolidays = true
+
     var body: some View {
         List {
             Section {
@@ -28,6 +31,11 @@ struct SettingsView: View {
                     CategoryManagementView()
                 }
                 .font(PlantingFont.body())
+            }
+
+            Section {
+                Toggle("Show Holidays", isOn: $showHolidays)
+                    .font(PlantingFont.body())
             }
 
             Section {
