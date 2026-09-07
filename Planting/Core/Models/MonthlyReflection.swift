@@ -10,6 +10,10 @@ final class MonthlyReflection: Identifiable {
     var id: UUID
     var year: Int
     var month: Int
+    /// Set at the start of the month (or whenever), shown above the
+    /// reflection questions when looking back — not in the spec, added on
+    /// request.
+    var goal: String
     var wentWell: String
     var couldImprove: String
     var nextMonthFocus: String
@@ -24,6 +28,7 @@ final class MonthlyReflection: Identifiable {
         id: UUID = UUID(),
         year: Int,
         month: Int,
+        goal: String = "",
         wentWell: String = "",
         couldImprove: String = "",
         nextMonthFocus: String = "",
@@ -34,6 +39,7 @@ final class MonthlyReflection: Identifiable {
         self.id = id
         self.year = year
         self.month = month
+        self.goal = goal
         self.wentWell = wentWell
         self.couldImprove = couldImprove
         self.nextMonthFocus = nextMonthFocus

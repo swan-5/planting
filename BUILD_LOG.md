@@ -1,6 +1,6 @@
 # Planting — Feature Specification & Build Log
 
-_As of 2026-09-07 · 14 commits · 70 Swift files · SwiftUI + SwiftData, iOS 17+_
+_As of 2026-09-07 · 15 commits · 70 Swift files · SwiftUI + SwiftData, iOS 17+_
 
 What actually shipped against `PRODUCT_SPEC.md`, plus everything added or changed live during
 development that the spec doesn't cover — kept as one running record instead of scattered
@@ -192,6 +192,19 @@ completion background removal — run against explicit non-negotiables in
     from the calendar's own date cells, reintroduced only inside the monthly summary rather than
     on every cell.
 
+23. **Reflection screen trimmed to Summary + Goal + Reflection; renamed to "Review".** Dropped
+    the Growth (fully-completed-weeks/best-week), By Category, and Still Growing (incomplete
+    todos) sections along with their now-unused fields on `MonthlyReflectionData` — the heatmap
+    (item 22) already covers what Growth was showing, just at daily rather than weekly
+    resolution, and grew from 14pt to 28pt squares now that it's the section's main visual rather
+    than a small addition. Added a new "`<Month>` Goal" section — a single free-text field,
+    persisted as `MonthlyReflection.goal` — sitting between Summary and Reflection, so whatever
+    goal was set earlier in the month is right there for context when writing the retrospective
+    at the end of it. The screen's title changed from "`<Month>` Reflection" to "`<Month>`
+    Review" to cover both the goal and the reflection now on it; the "Reflection" section header
+    for the three written questions stayed as-is, since that block specifically is still just the
+    reflection.
+
 ---
 
 ## 4. Accounts & sync (in progress — M1–M2 of 4 shipped)
@@ -276,4 +289,4 @@ launch, so a second account on the same device still gets starter categories.
 
 ---
 
-_github.com/swan-5/planting · HEAD f9b5fe1 · 2026-09-07_
+_github.com/swan-5/planting · HEAD d44e118 · 2026-09-07_

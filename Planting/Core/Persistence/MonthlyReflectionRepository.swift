@@ -3,7 +3,7 @@ import SwiftData
 
 protocol MonthlyReflectionRepository {
     func fetch(year: Int, month: Int) throws -> MonthlyReflection?
-    func save(year: Int, month: Int, wentWell: String, couldImprove: String, nextMonthFocus: String) throws
+    func save(year: Int, month: Int, goal: String, wentWell: String, couldImprove: String, nextMonthFocus: String) throws
 }
 
 final class SwiftDataMonthlyReflectionRepository: MonthlyReflectionRepository {
@@ -21,8 +21,9 @@ final class SwiftDataMonthlyReflectionRepository: MonthlyReflectionRepository {
         return try context.fetch(descriptor).first
     }
 
-    func save(year: Int, month: Int, wentWell: String, couldImprove: String, nextMonthFocus: String) throws {
+    func save(year: Int, month: Int, goal: String, wentWell: String, couldImprove: String, nextMonthFocus: String) throws {
         if let existing = try fetch(year: year, month: month) {
+            existing.goal = goal
             existing.wentWell = wentWell
             existing.couldImprove = couldImprove
             existing.nextMonthFocus = nextMonthFocus
@@ -31,6 +32,7 @@ final class SwiftDataMonthlyReflectionRepository: MonthlyReflectionRepository {
             let reflection = MonthlyReflection(
                 year: year,
                 month: month,
+                goal: goal,
                 wentWell: wentWell,
                 couldImprove: couldImprove,
                 nextMonthFocus: nextMonthFocus,

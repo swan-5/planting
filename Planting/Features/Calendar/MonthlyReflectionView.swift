@@ -13,7 +13,6 @@ struct MonthlyReflectionView: View {
 
     @State private var viewModel: MonthlyReflectionViewModel?
     @State private var saveTask: Task<Void, Never>?
-    @State private var editingTodo: TodoItem?
 
     private var monthName: String {
         let formatter = DateFormatter()
@@ -28,15 +27,7 @@ struct MonthlyReflectionView: View {
                 VStack(alignment: .leading, spacing: PlantingSpacing.xl) {
                     summarySection(data)
                     Divider().overlay(PlantingColor.divider)
-                    growthSection(data)
-                    if !data.categoryBreakdown.isEmpty {
-                        Divider().overlay(PlantingColor.divider)
-                        categorySection(data)
-                    }
-                    if !data.incompleteTodos.isEmpty {
-                        Divider().overlay(PlantingColor.divider)
-                        incompleteSection(data)
-                    }
+                    goalSection(viewModel)
                     Divider().overlay(PlantingColor.divider)
                     reflectionSection(viewModel)
                 }
@@ -44,7 +35,7 @@ struct MonthlyReflectionView: View {
             }
         }
         .background(PlantingColor.background)
-        .navigationTitle("\(monthName) Reflection")
+        .navigationTitle("\(monthName) Review")
         .navigationBarTitleDisplayMode(.inline)
         .task {
             guard viewModel == nil else { return }
@@ -61,9 +52,6 @@ struct MonthlyReflectionView: View {
         .onDisappear {
             viewModel?.saveReflection()
             viewModel?.saveQuestions()
-        }
-        .sheet(item: $editingTodo, onDismiss: { viewModel?.load() }) { item in
-            TodoEditView(existingTodo: item.todo, existingOccurrence: item.occurrence)
         }
     }
 
@@ -102,13 +90,13 @@ struct MonthlyReflectionView: View {
         let weeks = stride(from: 0, to: gridDays.count, by: 7)
             .map { Array(gridDays[$0..<min($0 + 7, gridDays.count)]) }
 
-        return VStack(alignment: .leading, spacing: 3) {
+        return VStack(alignment: .leading, spacing: 5) {
             ForEach(Array(weeks.enumerated()), id: \.offset) { _, week in
-                HStack(spacing: 3) {
+                HStack(spacing: 5) {
                     ForEach(week) { day in
-                        RoundedRectangle(cornerRadius: 2)
+                        RoundedRectangle(cornerRadius: 4)
                             .fill(heatmapColor(for: day, completionByDay: completionByDay))
-                            .frame(width: 14, height: 14)
+                            .frame(width: 28, height: 28)
                     }
                 }
             }
@@ -134,82 +122,26 @@ struct MonthlyReflectionView: View {
         }
     }
 
-    // MARK: Growth
+    // MARK: Monthly goal
 
-    private func growthSection(_ data: MonthlyReflectionData) -> some View {
+    /// Shown above the reflection questions, so the goal set at the start
+    /// of the month is right there for context when looking back at the
+    /// end of it — not in the spec, added on request.
+    private func goalSection(_ viewModel: MonthlyReflectionViewModel) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 4) {
-                sectionHeader("\(monthName) Growth")
-                Text("☘️").font(.system(size: 14))
-            }
-            Text("\(data.fullyCompletedWeeks) of \(data.totalWeeksInMonth) weeks completed")
-                .font(PlantingFont.body())
-                .foregroundStyle(PlantingColor.primaryText)
-
-            if let bestWeek = data.bestWeek {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Best Week")
-                        .font(PlantingFont.emphasis(13))
-                        .foregroundStyle(PlantingColor.secondaryText)
-                        .padding(.top, PlantingSpacing.xs)
-                    Text(weekRangeString(bestWeek))
-                        .font(PlantingFont.body())
-                        .foregroundStyle(PlantingColor.primaryText)
-                    Text("\(bestWeek.completed) / \(bestWeek.total) todos completed")
-                        .font(PlantingFont.caption)
-                        .foregroundStyle(PlantingColor.secondaryText)
-                }
-            }
-        }
-    }
-
-    // MARK: Category
-
-    private func categorySection(_ data: MonthlyReflectionData) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            sectionHeader("By Category")
-            VStack(alignment: .leading, spacing: 8) {
-                ForEach(data.categoryBreakdown) { summary in
-                    HStack(spacing: 6) {
-                        Circle()
-                            .fill(summary.category?.color ?? PlantingColor.secondaryText)
-                            .frame(width: 7, height: 7)
-                        Text(summary.name)
-                            .font(PlantingFont.body())
-                            .foregroundStyle(PlantingColor.primaryText)
-                        Spacer(minLength: 0)
-                        Text("\(summary.count)")
-                            .font(PlantingFont.emphasis(14))
-                            .foregroundStyle(PlantingColor.secondaryText)
-                    }
-                }
-            }
-        }
-    }
-
-    // MARK: Incomplete todos
-
-    private func incompleteSection(_ data: MonthlyReflectionData) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            sectionHeader("Still Growing")
-            VStack(alignment: .leading, spacing: 8) {
-                ForEach(data.incompleteTodos) { item in
-                    Button {
-                        editingTodo = item
-                    } label: {
-                        HStack(spacing: 6) {
-                            Image(systemName: "square")
-                                .foregroundStyle(PlantingColor.secondaryText)
-                            Text(item.todo.title)
-                                .font(PlantingFont.body())
-                                .foregroundStyle(PlantingColor.primaryText)
-                            Spacer(minLength: 0)
-                        }
-                        .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
+            sectionHeader("\(monthName) Goal")
+            TextEditor(
+                text: Binding(
+                    get: { viewModel.goal },
+                    set: { viewModel.goal = $0; scheduleSave(viewModel) }
+                )
+            )
+            .font(PlantingFont.body())
+            .scrollContentBackground(.hidden)
+            .frame(minHeight: 60)
+            .padding(8)
+            .background(PlantingColor.divider.opacity(0.3))
+            .clipShape(RoundedRectangle(cornerRadius: PlantingRadius.textField))
         }
     }
 
@@ -287,9 +219,4 @@ struct MonthlyReflectionView: View {
             .foregroundStyle(PlantingColor.primaryText)
     }
 
-    private func weekRangeString(_ week: MonthlyReflectionData.WeekSummary) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        return "\(formatter.string(from: week.startDate)) – \(formatter.string(from: week.endDate))"
-    }
 }

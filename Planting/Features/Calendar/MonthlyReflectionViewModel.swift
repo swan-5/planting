@@ -21,6 +21,7 @@ final class MonthlyReflectionViewModel {
     let monthDate: Date
     private(set) var data: MonthlyReflectionData?
 
+    var goal: String = ""
     var wentWell: String = ""
     var couldImprove: String = ""
     var nextMonthFocus: String = ""
@@ -68,6 +69,7 @@ final class MonthlyReflectionViewModel {
         let comps = calendar.dateComponents([.year, .month], from: monthDate)
         guard let year = comps.year, let month = comps.month else { return }
         if let existing = try? reflectionRepository.fetch(year: year, month: month) {
+            goal = existing.goal
             wentWell = existing.wentWell
             couldImprove = existing.couldImprove
             nextMonthFocus = existing.nextMonthFocus
@@ -88,6 +90,7 @@ final class MonthlyReflectionViewModel {
             try reflectionRepository.save(
                 year: year,
                 month: month,
+                goal: goal,
                 wentWell: wentWell,
                 couldImprove: couldImprove,
                 nextMonthFocus: nextMonthFocus
