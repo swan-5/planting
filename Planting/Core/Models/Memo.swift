@@ -15,12 +15,16 @@ final class Memo: Identifiable {
     var createdAt: Date
     var updatedAt: Date
 
+    /// Not in PRODUCT_SPEC.md — added on request, matching Schedule/Todo.
+    var category: Category?
+
     init(
         id: UUID = UUID(),
         title: String? = nil,
         content: String,
         date: Date,
         locked: Bool = false,
+        category: Category? = nil,
         ownerID: String = "",
         createdAt: Date = .now,
         updatedAt: Date = .now
@@ -30,6 +34,7 @@ final class Memo: Identifiable {
         self.content = content
         self.date = date
         self.locked = locked
+        self.category = category
         self.ownerID = ownerID
         self.createdAt = createdAt
         self.updatedAt = updatedAt

@@ -2,9 +2,9 @@ import Foundation
 import SwiftData
 
 protocol CategoryRepository {
-    func fetchAll() throws -> [Category]
+    func fetchAll(kind: CategoryKind) throws -> [Category]
     @discardableResult
-    func create(name: String, colorHex: String) throws -> Category
+    func create(name: String, colorHex: String, kind: CategoryKind) throws -> Category
     func rename(_ category: Category, to name: String) throws
     func updateColor(_ category: Category, colorHex: String) throws
     func reorder(_ categories: [Category]) throws
@@ -18,18 +18,19 @@ final class SwiftDataCategoryRepository: CategoryRepository {
         self.context = context
     }
 
-    func fetchAll() throws -> [Category] {
+    func fetchAll(kind: CategoryKind) throws -> [Category] {
         let uid = PersistenceController.currentUserID
+        let kindRaw = kind.rawValue
         return try context.fetch(FetchDescriptor<Category>(
-            predicate: #Predicate { $0.ownerID == uid },
+            predicate: #Predicate { $0.ownerID == uid && $0.kindRawValue == kindRaw },
             sortBy: [SortDescriptor(\.order)]
         ))
     }
 
     @discardableResult
-    func create(name: String, colorHex: String) throws -> Category {
-        let nextOrder = (try fetchAll().map(\.order).max() ?? -1) + 1
-        let category = Category(name: name, colorHex: colorHex, order: nextOrder, ownerID: PersistenceController.currentUserID)
+    func create(name: String, colorHex: String, kind: CategoryKind) throws -> Category {
+        let nextOrder = (try fetchAll(kind: kind).map(\.order).max() ?? -1) + 1
+        let category = Category(name: name, colorHex: colorHex, order: nextOrder, kind: kind, ownerID: PersistenceController.currentUserID)
         context.insert(category)
         try context.save()
         return category

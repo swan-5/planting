@@ -14,6 +14,8 @@ struct MemoEditView: View {
     @State private var content: String
     @State private var date: Date
     @State private var locked: Bool
+    @State private var categoryID: UUID?
+    @State private var categories: [Category] = []
     @State private var showingDeleteConfirmation = false
 
     init(existingMemo: Memo? = nil, initialDate: Date = .now) {
@@ -22,6 +24,7 @@ struct MemoEditView: View {
         _content = State(initialValue: existingMemo?.content ?? "")
         _date = State(initialValue: existingMemo?.date ?? initialDate)
         _locked = State(initialValue: existingMemo?.locked ?? false)
+        _categoryID = State(initialValue: existingMemo?.category?.id)
     }
 
     private var isEditing: Bool { existingMemo != nil }
@@ -35,6 +38,9 @@ struct MemoEditView: View {
                 }
                 Section {
                     TextField("Title (optional)", text: $title)
+                }
+                Section {
+                    CategoryPickerRow(categories: $categories, categoryID: $categoryID, kind: .memo)
                 }
                 Section {
                     TextField("Write something...", text: $content, axis: .vertical)
@@ -70,11 +76,21 @@ struct MemoEditView: View {
                 Button("Delete", role: .destructive, action: deleteMemo)
                 Button("Cancel", role: .cancel) {}
             }
+            .task { loadCategories() }
+        }
+    }
+
+    private func loadCategories() {
+        do {
+            categories = try SwiftDataCategoryRepository(context: modelContext).fetchAll(kind: .memo)
+        } catch {
+            print("Failed to load categories: \(error)")
         }
     }
 
     private func save() {
         let repository = SwiftDataMemoRepository(context: modelContext)
+        let selectedCategory = categories.first { $0.id == categoryID }
         let trimmedTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
 
         do {
@@ -83,13 +99,15 @@ struct MemoEditView: View {
                 existingMemo.content = trimmedContent
                 existingMemo.date = date
                 existingMemo.locked = locked
+                existingMemo.category = selectedCategory
                 try repository.update(existingMemo)
             } else {
                 let memo = Memo(
                     title: trimmedTitle.isEmpty ? nil : trimmedTitle,
                     content: trimmedContent,
                     date: date,
-                    locked: locked
+                    locked: locked,
+                    category: selectedCategory
                 )
                 try repository.create(memo)
             }

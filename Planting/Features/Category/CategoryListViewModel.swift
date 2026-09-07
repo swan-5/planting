@@ -13,7 +13,7 @@ final class CategoryListViewModel {
 
     func load() {
         do {
-            categories = try repository.fetchAll()
+            categories = try repository.fetchAll(kind: .event)
         } catch {
             print("Failed to load categories: \(error)")
         }
@@ -45,7 +45,7 @@ final class CategoryListViewModel {
                 try repository.rename(existing, to: name)
                 try repository.updateColor(existing, colorHex: colorHex)
             } else {
-                try repository.create(name: name, colorHex: colorHex)
+                try repository.create(name: name, colorHex: colorHex, kind: .event)
             }
             load()
         } catch {

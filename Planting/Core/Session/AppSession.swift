@@ -28,25 +28,30 @@ final class AppSession {
         phoneNumber = Auth.auth().currentUser?.phoneNumber
         authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             guard let self else { return }
-            let wasSignedIn = self.currentUserID != nil
             self.currentUserID = user?.uid
             self.phoneNumber = user?.phoneNumber
             self.sharedDefaults?.set(user?.uid, forKey: "currentUserID")
 
-            if !wasSignedIn, user != nil {
+            if user != nil {
+                // Fires on every signed-in launch, not just a fresh sign-in
+                // — both of these are cheap no-ops when there's nothing to
+                // do (seeding checks emptiness first; sync checks isActive).
                 self.seedDefaultsForNewSignIn()
+                Task { @MainActor in FirestoreSyncEngine.shared.startListening() }
+            } else {
+                Task { @MainActor in FirestoreSyncEngine.shared.stopListening() }
             }
         }
     }
 
     func signOut() throws {
+        Task { @MainActor in FirestoreSyncEngine.shared.stopListening() }
         try Auth.auth().signOut()
     }
 
-    /// Runs once per fresh sign-in (transitioning signed-out → signed-in).
-    /// Once M2 scopes `CategoryRepository.fetchAll()` by `ownerID`, this
-    /// naturally reseeds defaults for any user who has none yet, rather
-    /// than only ever running once globally on first app launch.
+    /// Seeds default categories for any signed-in user who has none yet —
+    /// idempotent, so calling it on every launch (not just a fresh sign-in)
+    /// is harmless.
     private func seedDefaultsForNewSignIn() {
         Task { @MainActor in
             let repository = SwiftDataCategoryRepository(context: PersistenceController.sharedContainer.mainContext)

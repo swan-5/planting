@@ -72,6 +72,12 @@ struct MemoHomeView: View {
                         .font(PlantingFont.body())
                         .foregroundStyle(PlantingColor.secondaryText)
                 } else {
+                    if let category = memo.category {
+                        Circle()
+                            .fill(category.color)
+                            .frame(width: 7, height: 7)
+                            .padding(.top, 5)
+                    }
                     VStack(alignment: .leading, spacing: 2) {
                         if let title = memo.title, !title.isEmpty {
                             Text(title)

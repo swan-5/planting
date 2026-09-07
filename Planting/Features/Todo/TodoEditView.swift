@@ -47,7 +47,7 @@ struct TodoEditView: View {
                 }
 
                 Section {
-                    CategoryPickerRow(categories: categories, categoryID: $categoryID)
+                    CategoryPickerRow(categories: $categories, categoryID: $categoryID)
                 }
 
                 Section {
@@ -111,7 +111,7 @@ struct TodoEditView: View {
 
     private func loadCategories() {
         do {
-            categories = try SwiftDataCategoryRepository(context: modelContext).fetchAll()
+            categories = try SwiftDataCategoryRepository(context: modelContext).fetchAll(kind: .event)
         } catch {
             print("Failed to load categories: \(error)")
         }

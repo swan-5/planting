@@ -12,10 +12,12 @@ enum CategorySeeder {
         ("Appointment", "D08C99"),
     ]
 
+    /// Only seeds `.event` (Schedule/Todo) categories — Memo categories
+    /// (added on request as a separate pool) start empty, with no defaults.
     static func seedIfNeeded(repository: CategoryRepository) throws {
-        guard try repository.fetchAll().isEmpty else { return }
+        guard try repository.fetchAll(kind: .event).isEmpty else { return }
         for entry in defaults {
-            try repository.create(name: entry.name, colorHex: entry.colorHex)
+            try repository.create(name: entry.name, colorHex: entry.colorHex, kind: .event)
         }
     }
 }

@@ -58,6 +58,12 @@ targets:
       properties:
         com.apple.security.application-groups:
           - group.com.planting.app
+        # Push Notifications (aps-environment) would let Firebase Phone Auth
+        # use real silent-push verification instead of the flaky reCAPTCHA
+        # fallback, but Personal Teams can't have it — re-add once the paid
+        # Apple Developer Program enrollment (paid, pending approval as of
+        # 2026-09-07) finishes processing and Xcode shows the real team
+        # instead of "Personal Team" in Settings > Accounts.
     dependencies:
       - target: PlantingWidgets
         embed: true
@@ -76,6 +82,7 @@ targets:
       - path: Planting/Core/Persistence
       - path: Planting/Core/Recurrence
       - path: Planting/Core/DesignSystem
+      - path: Planting/Core/Holidays
       - path: Planting/Features/Calendar/CalendarMonthLayout.swift
     info:
       path: Widgets/Info.plist

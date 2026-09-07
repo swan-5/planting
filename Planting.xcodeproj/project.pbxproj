@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00B9CF1EBDD6B82AC4C82575 /* KoreanHolidays.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35E4007AF38FAA5E7600041 /* KoreanHolidays.swift */; };
 		06DB5181F9DA7DF40C326C4C /* PhoneLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74987BF9A73DF0B88D282B30 /* PhoneLoginView.swift */; };
 		08A616857E3A5B9EEF96624C /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110C8968A7C69A54A9769851 /* MemoEditView.swift */; };
 		0AD0182F2A2D69BB9B89ED4C /* DailyCompletionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F200CA70CB3900591ADB67A4 /* DailyCompletionSummary.swift */; };
@@ -84,6 +85,7 @@
 		AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB6F687BDDAC80C7D38BCB3 /* DateCellView.swift */; };
 		ABD2BCBCD02B75FEA7B4CB56 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2394361C16C50DD5153CFE54 /* FirebaseFirestore */; };
 		AE454D1C6D8E79A86FB3E31E /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EEF55659C9933F5EB62C4E0 /* TodoRepository.swift */; };
+		AF557F73C0F7D14C471E03A7 /* FirestoreSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37292A3EFC5DF331333CD318 /* FirestoreSyncEngine.swift */; };
 		B0C726EC02FCB82C18D2B948 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 12E06AAF1CBDA2B1C4A9F826 /* Pretendard-ExtraLight.otf */; };
 		B4C728A22D14B26AE819AB9B /* PlantingColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC4FD5272EE9CE9E8DB5A /* PlantingColor.swift */; };
 		B6CFA9FFB88974DA83B5F851 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B473AC4D6613756EBF7AD556 /* Pretendard-SemiBold.otf */; };
@@ -165,6 +167,7 @@
 		34C0C06ECA846BF5DB5B9BD8 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRepository.swift; sourceTree = "<group>"; };
 		355C9A1E30764B0748995518 /* MonthlyReflectionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReflectionRepository.swift; sourceTree = "<group>"; };
+		37292A3EFC5DF331333CD318 /* FirestoreSyncEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreSyncEngine.swift; sourceTree = "<group>"; };
 		3AB65B7B5DE5F75500DCBFCA /* MonthlyReflection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReflection.swift; sourceTree = "<group>"; };
 		3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOccurrence.swift; sourceTree = "<group>"; };
 		3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
@@ -365,6 +368,14 @@
 			path = Recurrence;
 			sourceTree = "<group>";
 		};
+		5D19F30AEA2C17D6EFB730D8 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				37292A3EFC5DF331333CD318 /* FirestoreSyncEngine.swift */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
 		64E71449DA86183B6F78BE68 /* Planting */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +411,7 @@
 				8E76C6236EF1B44FBB1F7DA2 /* Persistence */,
 				51A417B8BFC95DCEEC5F03B1 /* Recurrence */,
 				D0676BB298D499FF70374A48 /* Session */,
+				5D19F30AEA2C17D6EFB730D8 /* Sync */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -637,6 +649,7 @@
 				6E60A3D3FFAD72E44DABCD93 /* CategorySeeder.swift in Sources */,
 				6B3AA03016C3DE0966D388D8 /* Color+Hex.swift in Sources */,
 				0AD0182F2A2D69BB9B89ED4C /* DailyCompletionSummary.swift in Sources */,
+				00B9CF1EBDD6B82AC4C82575 /* KoreanHolidays.swift in Sources */,
 				8A4D16FA1F9FFADE863A62A4 /* Memo.swift in Sources */,
 				CF43BE8401C5FFEE90C2F3B7 /* MemoRepository.swift in Sources */,
 				FD6EFD74AFCFD23CF57562B7 /* MonthlyReflection.swift in Sources */,
@@ -691,6 +704,7 @@
 				AB071056C5743B55D24F3F97 /* DateCellView.swift in Sources */,
 				A4B52BE6281127AAB3F86477 /* DateDetailView.swift in Sources */,
 				26E97C6E57D05BFE29F1F8BD /* FeatureGuideView.swift in Sources */,
+				AF557F73C0F7D14C471E03A7 /* FirestoreSyncEngine.swift in Sources */,
 				8907AB5848DFAC6B5F1E6311 /* FortuneOfTheDay.swift in Sources */,
 				FB7C197092A5F654117E880B /* KoreanHolidays.swift in Sources */,
 				866FE409393F982F3510B430 /* Memo.swift in Sources */,

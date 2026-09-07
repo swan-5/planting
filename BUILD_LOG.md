@@ -205,14 +205,27 @@ completion background removal — run against explicit non-negotiables in
     for the three written questions stayed as-is, since that block specifically is still just the
     reflection.
 
+24. **Memo categories split from Schedule/Todo categories.** `Category` gained a `kindRawValue`
+    (`.event`/`.memo`, raw-`String`-backed so `#Predicate` filtering stays a plain equality check)
+    and `Memo` gained its own `category: Category?`. `CategoryPickerRow` takes a `kind:` param
+    (defaults to `.event`) and can create a new category inline rather than only picking from an
+    existing list, so a memo's category pool no longer overlaps with schedules/todos'.
+
+25. **Calendar widget rebuilt as a mini replica of the real month view.** Replaced the earlier
+    dot-based day cells with per-day schedule-color bars, todo checkboxes, holiday names in red,
+    and the birthday emoji — `WidgetDataProvider.monthDetail(for:)` is the new data source. True
+    background transparency was attempted and reverted: iOS Home Screen widgets always composite
+    onto a system material regardless of what color the widget itself draws, unlike Lock
+    Screen/StandBy widgets — not something fixable from the widget's own code.
+
 ---
 
-## 4. Accounts & sync (in progress — M1–M2 of 4 shipped)
+## 4. Accounts & sync (in progress — M1–M3 of 4 built, M3 disabled pending a bug)
 
 Requested to enable cross-device sync and, eventually, a friends feature — both need real user
 identity, which the app never had. Built as four milestones since each layer depends on the
-previous one being solid: M1 auth, M2 per-user data scoping (both below), then M3 Firestore sync
-and M4 friends (not yet built — see "No cross-device sync" below).
+previous one being solid: M1 auth, M2 per-user data scoping, M3 Firestore sync (all below), M4
+friends not yet built.
 
 A hard constraint shaped several decisions here: `PlantingWidgets` recompiles
 `Core/Persistence`/`Core/Models`/etc. directly as source files rather than linking a shared
@@ -239,6 +252,11 @@ push, full stop — Firebase's own `isAppVerificationDisabledForTesting` flag, g
 builds only. Separately, Firebase's per-project SMS region policy defaults to blocking regions
 until explicitly allowed, which isn't an app-code fix at all — it's a console setting.
 
+Verified end-to-end on a real device in a Release build with a real (non-test) phone number: a
+brief invisible reCAPTCHA check, then a real SMS code, then sign-in — works without a paid
+Developer account/APNs at all. An earlier `ERROR_NOTIFICATION_NOT_FORWARDED` seen mid-development
+did not reproduce once the three fixes above were all in place.
+
 **M2 — per-user data scoping.** `ownerID: String` added to `Category`, `Schedule`, `Todo`,
 `Memo`, `MonthlyReflection` (not `TodoOccurrence` — scoped transitively through its parent
 `Todo`). `Category` also gained `updatedAt`, missing until now, needed for M3's conflict
@@ -249,12 +267,36 @@ session of its own) share one accessor. `AppSession` is the only writer of that 
 `CategorySeeder` now reseeds default categories on every fresh sign-in rather than once at
 launch, so a second account on the same device still gets starter categories.
 
----
+**M3 — Firestore sync (built, currently non-functional — see below).** New
+`Core/Sync/FirestoreSyncEngine.swift` mirrors all 5 models to `users/{uid}/{collection}/{docID}`.
+Push observes SwiftData's own `ModelContext.didSave` notification rather than having the
+repositories call out to Firestore directly — keeps every Firebase import out of
+`Core/Persistence`/`Core/Models`, which the widget also compiles. Pull is a `addSnapshotListener`
+per collection, last-write-wins via each model's `updatedAt`. `Todo` syncs only the parent
+document; per-occurrence state (`completed`/`isSkipped`/`order`) rides along as an embedded
+`occurrenceStates` map keyed by ISO date and gets overlaid onto locally-materialized occurrences
+on pull — the recurrence rule itself regenerates the same dates on any device, so there's no
+reason to sync `TodoOccurrence` rows.
 
-## 5. Known limitations
+Currently blocked: every write fails with Firestore's `Missing or insufficient permissions.`
+under the real per-uid security rule (`firestore.rules`, repo root), even though the ID token
+being sent is confirmed valid end-to-end — decoded its JWT claims directly and got the right
+`aud` (project), right `sub`/uid, not expired. Writes succeed instantly under a fully-open
+`allow read, write: if true` rule, and even the simplest possible non-trivial check
+(`request.auth != nil`, no uid comparison at all) still fails — so this isn't a rule-syntax bug.
+Ruled out: rules publish-propagation delay (waited 5+ minutes), stale/wrong project (uid and
+`projectID` printed and cross-checked against the console), device clock skew, Cloud Firestore's
+Identity Toolkit API being disabled, and SPM version skew between `FirebaseAuth`/`FirebaseFirestore`
+(both pinned from the same `firebase-ios-sdk` package, so this isn't even possible here). Root
+cause not yet found — would need Firebase's own server-side request logs to go further, which
+aren't available from this environment. `firestore.rules` in the console is left on the correct,
+locked-down per-uid rule (write access safely denied to everyone, including legitimate users)
+rather than the permissive one — sync silently does nothing rather than exposing data.
 
-- **No cross-device sync yet.** Accounts exist (§4) but nothing syncs between devices yet — M3
-  (Firestore, last-write-wins via each model's `updatedAt`) is the next milestone.
+- **No cross-device sync yet.** M3 (§4) is built but every Firestore write is denied by an
+  unresolved permissions issue — the security rule itself is confirmed correct and the ID token
+  confirmed valid, so the actual cause is still open. Safe as-is (rule denies everyone, no data
+  exposure), just non-functional.
 - **Holiday dates need yearly upkeep.** `KoreanHolidays`'s lunar-calendar entries (§3.19) only
   cover 2024–2026 — extending past that means manually adding the next year's actual published
   dates, not a formula.
@@ -285,7 +327,7 @@ launch, so a second account on the same device still gets starter categories.
 | **Security** | `LocalAuthentication` for per-memo lock |
 | **Widgets** | `WidgetKit`, three widget kinds, timeline refresh every 30–60 min |
 | **Accounts** | Firebase Auth (phone number), SPM, `Planting` target only |
-| **Sync (planned)** | Cloud Firestore, last-write-wins via `updatedAt` (M3, not yet built) |
+| **Sync** | Cloud Firestore, last-write-wins via `updatedAt` — built, currently non-functional (§4) |
 
 ---
 
