@@ -13,7 +13,7 @@ final class MonthlyReflection: Identifiable {
     /// Set at the start of the month (or whenever), shown above the
     /// reflection questions when looking back — not in the spec, added on
     /// request.
-    var goal: String
+    var goal: String = ""
     var wentWell: String
     var couldImprove: String
     var nextMonthFocus: String
