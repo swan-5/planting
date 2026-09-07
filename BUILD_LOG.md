@@ -1,6 +1,6 @@
 # Planting — Feature Specification & Build Log
 
-_As of 2026-09-04 · 13 commits · 70 Swift files · SwiftUI + SwiftData, iOS 17+_
+_As of 2026-09-07 · 14 commits · 70 Swift files · SwiftUI + SwiftData, iOS 17+_
 
 What actually shipped against `PRODUCT_SPEC.md`, plus everything added or changed live during
 development that the spec doesn't cover — kept as one running record instead of scattered
@@ -184,6 +184,14 @@ completion background removal — run against explicit non-negotiables in
     recurrence delete scope, monthly reflection, clover growth, fortune, birthday, holidays,
     widgets), for a new user to skim in one place rather than discover piecemeal.
 
+22. **GitHub-style heatmap in Monthly Reflection.** The Summary section now shows a small
+    contribution-graph grid, one square per day in the month, shaded by that day's todo
+    completion *rate* rather than a raw count (`MonthlyReflectionData.DayCompletion`, four
+    intensity levels of `PlantingColor.primaryBlue`) — a raw-count scale wouldn't read well given
+    how few todos a typical day here has. This is the same GitHub-contribution idea §1 removed
+    from the calendar's own date cells, reintroduced only inside the monthly summary rather than
+    on every cell.
+
 ---
 
 ## 4. Accounts & sync (in progress — M1–M2 of 4 shipped)
@@ -268,4 +276,4 @@ launch, so a second account on the same device still gets starter categories.
 
 ---
 
-_github.com/swan-5/planting · HEAD 148eb7e · 2026-09-04_
+_github.com/swan-5/planting · HEAD f9b5fe1 · 2026-09-07_

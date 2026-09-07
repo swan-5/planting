@@ -19,6 +19,15 @@ struct MonthlyReflectionData {
         var name: String { category?.name ?? "Uncategorized" }
     }
 
+    /// One entry per in-month day — the raw material for the GitHub-style
+    /// heatmap in the Summary section (not in the spec, added on request).
+    struct DayCompletion: Identifiable {
+        let date: Date
+        let completed: Int
+        let total: Int
+        var id: Date { date }
+    }
+
     let monthDate: Date
     let totalTodos: Int
     let completedTodos: Int
@@ -29,6 +38,7 @@ struct MonthlyReflectionData {
     let bestWeek: WeekSummary?
     let categoryBreakdown: [CategorySummary]
     let incompleteTodos: [TodoItem]
+    let dailyCompletion: [DayCompletion]
 
     var completionRate: Double {
         totalTodos == 0 ? 0 : Double(completedTodos) / Double(totalTodos)
@@ -55,7 +65,7 @@ enum MonthlyReflectionCalculator {
             return MonthlyReflectionData(
                 monthDate: monthDate, totalTodos: 0, completedTodos: 0, scheduleCount: 0,
                 memoCount: 0, fullyCompletedWeeks: 0, totalWeeksInMonth: 0, bestWeek: nil,
-                categoryBreakdown: [], incompleteTodos: []
+                categoryBreakdown: [], incompleteTodos: [], dailyCompletion: []
             )
         }
         let monthRange = calendar.startOfDay(for: monthStart)...calendar.startOfDay(for: monthEnd)
@@ -123,6 +133,15 @@ enum MonthlyReflectionCalculator {
             .map { MonthlyReflectionData.CategorySummary(category: $0.category, count: $0.count) }
             .sorted { $0.count > $1.count }
 
+        let dailyCompletion = monthDaysOnly.map { day -> MonthlyReflectionData.DayCompletion in
+            let items = todosVisible(on: day.date)
+            return MonthlyReflectionData.DayCompletion(
+                date: calendar.startOfDay(for: day.date),
+                completed: items.filter(\.occurrence.completed).count,
+                total: items.count
+            )
+        }
+
         let incompleteTodos = monthTodoItems.filter { item in
             guard !item.occurrence.completed else { return false }
             let dueDate = item.todo.dueDate ?? item.occurrence.occurrenceDate
@@ -140,7 +159,8 @@ enum MonthlyReflectionCalculator {
             totalWeeksInMonth: weeks.count,
             bestWeek: bestWeek,
             categoryBreakdown: categoryBreakdown,
-            incompleteTodos: incompleteTodos
+            incompleteTodos: incompleteTodos,
+            dailyCompletion: dailyCompletion
         )
     }
 }

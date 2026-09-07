@@ -84,6 +84,53 @@ struct MonthlyReflectionView: View {
             Text("\(data.memoCount) Memos")
                 .font(PlantingFont.body())
                 .foregroundStyle(PlantingColor.secondaryText)
+
+            heatmap(data)
+                .padding(.top, PlantingSpacing.sm)
+        }
+    }
+
+    /// GitHub-contribution-style grid, one square per day this month —
+    /// not in the spec, added on request. Shaded by that day's todo
+    /// completion rate rather than a raw count, since a typical day here
+    /// only has a handful of todos.
+    private func heatmap(_ data: MonthlyReflectionData) -> some View {
+        let gridDays = MonthGridBuilder.days(for: data.monthDate)
+        let completionByDay = Dictionary(
+            uniqueKeysWithValues: data.dailyCompletion.map { ($0.date, $0) }
+        )
+        let weeks = stride(from: 0, to: gridDays.count, by: 7)
+            .map { Array(gridDays[$0..<min($0 + 7, gridDays.count)]) }
+
+        return VStack(alignment: .leading, spacing: 3) {
+            ForEach(Array(weeks.enumerated()), id: \.offset) { _, week in
+                HStack(spacing: 3) {
+                    ForEach(week) { day in
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(heatmapColor(for: day, completionByDay: completionByDay))
+                            .frame(width: 14, height: 14)
+                    }
+                }
+            }
+        }
+    }
+
+    private func heatmapColor(
+        for day: MonthGridDay,
+        completionByDay: [Date: MonthlyReflectionData.DayCompletion]
+    ) -> Color {
+        guard day.isInCurrentMonth else { return .clear }
+        guard let entry = completionByDay[MonthGridBuilder.calendar.startOfDay(for: day.date)],
+              entry.total > 0
+        else {
+            return PlantingColor.divider.opacity(0.6)
+        }
+        let rate = Double(entry.completed) / Double(entry.total)
+        switch rate {
+        case 0: return PlantingColor.primaryBlue.opacity(0.15)
+        case ..<0.5: return PlantingColor.primaryBlue.opacity(0.4)
+        case ..<1.0: return PlantingColor.primaryBlue.opacity(0.7)
+        default: return PlantingColor.primaryBlue
         }
     }
 
