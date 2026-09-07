@@ -331,4 +331,4 @@ rather than the permissive one — sync silently does nothing rather than exposi
 
 ---
 
-_github.com/swan-5/planting · HEAD d44e118 · 2026-09-07_
+_github.com/swan-5/planting · HEAD 4c5bf79 · 2026-09-07_
