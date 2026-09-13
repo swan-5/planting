@@ -47,6 +47,13 @@ targets:
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         NSFaceIDUsageDescription: Planting uses Face ID to unlock locked memos.
+        # AppDelegate.swift already forwards remote notifications to
+        # Auth.auth().canHandleNotification manually — leaving Firebase's own
+        # automatic swizzling on at the same time made the two paths race,
+        # surfacing Firebase's internal "app delegate swizzling is disabled"
+        # warning as a user-facing sign-in error. Disabling swizzling here
+        # makes the manual path the only one, removing the race.
+        FirebaseAppDelegateProxyEnabled: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.planting.app
@@ -58,12 +65,11 @@ targets:
       properties:
         com.apple.security.application-groups:
           - group.com.planting.app
-        # Push Notifications (aps-environment) would let Firebase Phone Auth
-        # use real silent-push verification instead of the flaky reCAPTCHA
-        # fallback, but Personal Teams can't have it — re-add once the paid
-        # Apple Developer Program enrollment (paid, pending approval as of
-        # 2026-09-07) finishes processing and Xcode shows the real team
-        # instead of "Personal Team" in Settings > Accounts.
+        # Lets Firebase Phone Auth use real silent-push verification instead
+        # of the reCAPTCHA fallback — needs the paid Apple Developer Program
+        # (approved 2026-09-13; a Personal Team can't have this capability
+        # at all, which is why it wasn't here before).
+        aps-environment: development
     dependencies:
       - target: PlantingWidgets
         embed: true

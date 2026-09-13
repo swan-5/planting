@@ -29,6 +29,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Planting uses Face ID to unlock locked memos.</string>
 	<key>UIAppFonts</key>

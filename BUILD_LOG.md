@@ -257,6 +257,18 @@ brief invisible reCAPTCHA check, then a real SMS code, then sign-in — works wi
 Developer account/APNs at all. An earlier `ERROR_NOTIFICATION_NOT_FORWARDED` seen mid-development
 did not reproduce once the three fixes above were all in place.
 
+One more swizzling issue surfaced later: Firebase's automatic app-delegate swizzling and
+`AppDelegate.swift`'s manual forwarding (added above) were both active at once, and the two
+paths raced — intermittently surfacing Firebase's internal "app delegate swizzling is disabled"
+warning as a user-facing sign-in error instead of sending the code. Fixed by setting
+`FirebaseAppDelegateProxyEnabled: false` in Info.plist so the manual path is the only one.
+
+**Apple Developer Program approved 2026-09-13.** `aps-environment: development` added back to
+`Planting.entitlements` now that a Personal Team's hard restriction on Push Notifications no
+longer applies — confirmed by the same entitlement that previously failed the build now signing
+successfully. Real APNs-based silent verification (no reCAPTCHA at all) is the next thing to
+verify once a production APNs key is uploaded to the Firebase console.
+
 **M2 — per-user data scoping.** `ownerID: String` added to `Category`, `Schedule`, `Todo`,
 `Memo`, `MonthlyReflection` (not `TodoOccurrence` — scoped transitively through its parent
 `Todo`). `Category` also gained `updatedAt`, missing until now, needed for M3's conflict
@@ -300,15 +312,14 @@ rather than the permissive one — sync silently does nothing rather than exposi
 - **Holiday dates need yearly upkeep.** `KoreanHolidays`'s lunar-calendar entries (§3.19) only
   cover 2024–2026 — extending past that means manually adding the next year's actual published
   dates, not a formula.
-- **Personal-device installs only.** Automatic code signing is wired up for a free Apple ID;
-  TestFlight and the App Store both need the paid Developer Program — not yet enrolled. App
-  Store submission prep has started ahead of that: the 1024×1024 app icon is confirmed
-  compliant, a privacy policy page is live at `swan-5.github.io/planting/privacy.html` (via
-  GitHub Pages, `docs/`), and a first draft of the store listing copy (name, subtitle,
-  description, keywords) exists outside this repo. `project.yml` now pins `DEVELOPMENT_TEAM`
-  explicitly — it had been set by hand in Xcode's Signing & Capabilities editor, which
-  `xcodegen generate` silently discards on every regeneration since that setting never lived in
-  `project.yml` to begin with.
+- **App Store Connect registration not done yet.** The paid Apple Developer Program enrollment
+  was approved 2026-09-13, unblocking distribution signing and Push Notifications (§4) — App
+  Store Connect app registration, screenshots, and age rating are still outstanding. Already
+  ready ahead of that: the 1024×1024 app icon is confirmed compliant, a privacy policy page is
+  live at `swan-5.github.io/planting/privacy.html` (via GitHub Pages, `docs/`), and a first draft
+  of the store listing copy (name, subtitle, description, keywords) exists outside this repo.
+  `project.yml` pins `DEVELOPMENT_TEAM` explicitly so `xcodegen generate` doesn't silently
+  discard a team set by hand in Xcode's Signing & Capabilities editor.
 - **Widgets can miss upcoming repeating todos.** They read the shared store but never
   materialize new occurrences themselves, so the app has to open at least once first.
 - **Pretendard doesn't reach the widgets.** A widget extension is a separate bundle; it falls
