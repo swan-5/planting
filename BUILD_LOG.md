@@ -269,6 +269,22 @@ longer applies — confirmed by the same entitlement that previously failed the 
 successfully. Real APNs-based silent verification (no reCAPTCHA at all) is the next thing to
 verify once a production APNs key is uploaded to the Firebase console.
 
+That same entitlement immediately surfaced a launch crash that had been dormant this entire
+project: `AppDelegate.application(_:didRegisterForRemoteNotificationsWithDeviceToken:)` had
+always called `Auth.auth().setAPNSToken(deviceToken, type: .unknown)`, but this line had never
+actually run before — without the Push Notifications capability, `registerForRemoteNotifications()`
+always failed and only `didFailToRegisterForRemoteNotificationsWithError` fired. With the
+capability now present, the callback fires for real and crashed via an internal FirebaseAuth
+assertion on every launch, Simulator and physical device alike. Root cause: the Simulator hands
+back a token from `registerForRemoteNotifications()` despite never being able to receive a real
+push, and forwarding that fake token into FirebaseAuth is what actually crashed — not the
+`.unknown` type (tried explicit `.sandbox`/`.prod` first per build config; still crashed at the
+same call). Fixed by skipping the `setAPNSToken` call entirely under
+`#if !targetEnvironment(simulator)`, which also keeps the (now correct) `.sandbox`/`.prod` typing
+for real devices. **Build 1 (1.0 (1)), already uploaded to App Store Connect before this fix
+existed, crashed on launch on a real device and must not be submitted for review — build 2 is
+the first submittable one.**
+
 **M2 — per-user data scoping.** `ownerID: String` added to `Category`, `Schedule`, `Todo`,
 `Memo`, `MonthlyReflection` (not `TodoOccurrence` — scoped transitively through its parent
 `Todo`). `Category` also gained `updatedAt`, missing until now, needed for M3's conflict

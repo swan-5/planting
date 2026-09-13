@@ -20,7 +20,17 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        Auth.auth().setAPNSToken(deviceToken, type: .unknown)
+        // The Simulator can hand back a token from `registerForRemoteNotifications`
+        // without ever being able to receive a real push — forwarding that
+        // fake token into FirebaseAuth crashes via an internal assertion.
+        // Real devices don't have this problem, so this only skips a no-op.
+        #if !targetEnvironment(simulator)
+        #if DEBUG
+        Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
+        #else
+        Auth.auth().setAPNSToken(deviceToken, type: .prod)
+        #endif
+        #endif
     }
 
     func application(
