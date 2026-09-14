@@ -358,4 +358,18 @@ rather than the permissive one — sync silently does nothing rather than exposi
 
 ---
 
+**Swipe-to-delete for Todo/Schedule rows, 2026-09-14.** The recurring-aware delete
+`confirmationDialog` (This Only / This and Future / All, vs. a single "Delete" for a non-repeating
+item) already existed inside `TodoEditView`/`ScheduleEditView`'s edit sheets — the ask was to
+reach the same choice from a row swipe instead of having to open the edit sheet first.
+`TodoHomeView`'s rows sit inside a `List` already, so that one just got `.swipeActions`.
+`DateDetailView`'s schedule/todo rows are hand-built `VStack`s inside a `ScrollView` (needed for
+its "tap the blank space below to quick-add" gesture and header layout), where `.swipeActions`
+isn't available — added `Shared/SwipeToDeleteRow.swift`, a small drag-gesture-based swipe wrapper
+that reveals a trailing red delete button, for those two rows instead of restructuring the view
+around `List`. Both spots reuse the same recurring-vs-single `confirmationDialog` branching as the
+edit sheets.
+
+---
+
 _github.com/swan-5/planting · HEAD b15fb20 · 2026-09-13_

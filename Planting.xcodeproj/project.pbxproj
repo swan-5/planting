@@ -57,6 +57,7 @@
 		77049FB2A8FBFF2C2548C2CC /* TodoWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497F769C29A3BFF6B7AE335 /* TodoWidget.swift */; };
 		779058A9796903B6E4DD71C9 /* CategorySeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596851DF4DAED41BE484EF94 /* CategorySeeder.swift */; };
 		79092A041925A68906E929B3 /* UserProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA9F2D8E3E3B728BD9A78F /* UserProfileRepository.swift */; };
+		79442396E592A950A7A0C5A2 /* SwipeToDeleteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439F0D69C76CAAC76143CE4D /* SwipeToDeleteRow.swift */; };
 		7EE31E65B6465FB5F00A363E /* ScheduleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A43E13230B656918C91322 /* ScheduleBarView.swift */; };
 		7F562A208791E285FC4FCBE7 /* BiometricAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */; };
 		81E7B494169AE296FD22FED0 /* ScheduleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D17C4596D34FDAF070F643 /* ScheduleRepository.swift */; };
@@ -172,6 +173,7 @@
 		3DB9CB341C51EB05537C6CBA /* TodoOccurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOccurrence.swift; sourceTree = "<group>"; };
 		3FC5DF0D26B9B69491D9102D /* ScheduleEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEditView.swift; sourceTree = "<group>"; };
 		3FF9E3231A067574D8D13820 /* CalendarMonthLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthLayout.swift; sourceTree = "<group>"; };
+		439F0D69C76CAAC76143CE4D /* SwipeToDeleteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDeleteRow.swift; sourceTree = "<group>"; };
 		4996F05BAD30D28160899B42 /* FortuneOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneOfTheDay.swift; sourceTree = "<group>"; };
 		52E834683667B932A8AD6E60 /* RootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerView.swift; sourceTree = "<group>"; };
 		54F5C4A3C241B33425003405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				C5D219E9DB2A6AA483AD4BEC /* BiometricAuthenticator.swift */,
 				B97E96A1CA92B83542847B74 /* CategoryPickerRow.swift */,
 				B88EBB6B4D38F30EBC790106 /* RecurrenceRuleEditor.swift */,
+				439F0D69C76CAAC76143CE4D /* SwipeToDeleteRow.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				4CBD7353C55DBA12470028E8 /* ScheduleEditView.swift in Sources */,
 				D411F05CA0250A5C2CE76390 /* ScheduleRepository.swift in Sources */,
 				99E1A288B7C5270B6ED9BF5C /* SettingsView.swift in Sources */,
+				79442396E592A950A7A0C5A2 /* SwipeToDeleteRow.swift in Sources */,
 				2415C200C1C901A7D3B7318B /* Todo.swift in Sources */,
 				86EC899DAE07A5C838345370 /* TodoEditView.swift in Sources */,
 				DCACEAA36E3E2E83A9305CD6 /* TodoHomeView.swift in Sources */,
@@ -765,7 +769,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Planting/App/Planting.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = Planting/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -848,7 +852,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widgets/PlantingWidgets.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -926,7 +930,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Widgets/PlantingWidgets.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = Widgets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -948,7 +952,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Planting/App/Planting.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = Planting/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -23,6 +23,8 @@ struct DateDetailView: View {
     @State private var isPresentingNewTodo = false
     @State private var isPresentingQuickAddDialog = false
     @State private var pendingQuickAddKind: QuickAddKind?
+    @State private var schedulePendingDelete: ScheduleOccurrence?
+    @State private var todoPendingDelete: TodoItem?
 
     private var completion: DailyCompletionSummary {
         DailyCompletionSummary(completed: todos.filter(\.occurrence.completed).count, total: todos.count)
@@ -109,6 +111,56 @@ struct DateDetailView: View {
         .sheet(item: $editingTodo, onDismiss: load) { item in
             TodoEditView(existingTodo: item.todo, existingOccurrence: item.occurrence)
         }
+        .confirmationDialog(
+            "Delete this schedule?",
+            isPresented: Binding(
+                get: { schedulePendingDelete != nil },
+                set: { if !$0 { schedulePendingDelete = nil } }
+            ),
+            titleVisibility: .visible
+        ) {
+            if let occurrence = schedulePendingDelete, occurrence.schedule.recurrenceRule.frequency != .none {
+                Button("Delete This Event Only", role: .destructive) {
+                    deleteSchedule(occurrence, scope: .onlyThisOccurrence)
+                }
+                Button("Delete This and Future Events", role: .destructive) {
+                    deleteSchedule(occurrence, scope: .thisAndFuture)
+                }
+                Button("Delete All Events", role: .destructive) {
+                    deleteSchedule(occurrence, scope: .entireSeries)
+                }
+            } else if let occurrence = schedulePendingDelete {
+                Button("Delete Schedule", role: .destructive) {
+                    deleteSchedule(occurrence, scope: .entireSeries)
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        }
+        .confirmationDialog(
+            "Delete this todo?",
+            isPresented: Binding(
+                get: { todoPendingDelete != nil },
+                set: { if !$0 { todoPendingDelete = nil } }
+            ),
+            titleVisibility: .visible
+        ) {
+            if let item = todoPendingDelete, item.todo.recurrenceRule.frequency != .none {
+                Button("Delete This Todo Only", role: .destructive) {
+                    deleteTodo(item, scope: .onlyThisOccurrence)
+                }
+                Button("Delete This and Future Todos", role: .destructive) {
+                    deleteTodo(item, scope: .thisAndFuture)
+                }
+                Button("Delete All Todos", role: .destructive) {
+                    deleteTodo(item, scope: .entireSeries)
+                }
+            } else if let item = todoPendingDelete {
+                Button("Delete Todo", role: .destructive) {
+                    deleteTodo(item, scope: .entireSeries)
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        }
     }
 
     private var quickAddPicker: some View {
@@ -184,53 +236,57 @@ struct DateDetailView: View {
     }
 
     private func scheduleRow(_ occurrence: ScheduleOccurrence) -> some View {
-        Button {
-            editingSchedule = occurrence
-        } label: {
-            HStack(alignment: .top, spacing: PlantingSpacing.sm) {
-                Circle()
-                    .fill(occurrence.schedule.category?.color ?? PlantingColor.secondaryText)
-                    .frame(width: 7, height: 7)
-                    .padding(.top, 5)
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(occurrence.schedule.title)
-                        .font(PlantingFont.body())
-                        .foregroundStyle(PlantingColor.primaryText)
-                    if !occurrence.schedule.allDay, let time = occurrence.schedule.startTime {
-                        Text(Self.timeFormatter.string(from: time))
-                            .font(PlantingFont.caption)
-                            .foregroundStyle(PlantingColor.secondaryText)
+        SwipeToDeleteRow(onDelete: { schedulePendingDelete = occurrence }) {
+            Button {
+                editingSchedule = occurrence
+            } label: {
+                HStack(alignment: .top, spacing: PlantingSpacing.sm) {
+                    Circle()
+                        .fill(occurrence.schedule.category?.color ?? PlantingColor.secondaryText)
+                        .frame(width: 7, height: 7)
+                        .padding(.top, 5)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(occurrence.schedule.title)
+                            .font(PlantingFont.body())
+                            .foregroundStyle(PlantingColor.primaryText)
+                        if !occurrence.schedule.allDay, let time = occurrence.schedule.startTime {
+                            Text(Self.timeFormatter.string(from: time))
+                                .font(PlantingFont.caption)
+                                .foregroundStyle(PlantingColor.secondaryText)
+                        }
+                        if let location = occurrence.schedule.location, !location.isEmpty {
+                            Text(location)
+                                .font(PlantingFont.caption)
+                                .foregroundStyle(PlantingColor.secondaryText)
+                        }
                     }
-                    if let location = occurrence.schedule.location, !location.isEmpty {
-                        Text(location)
-                            .font(PlantingFont.caption)
-                            .foregroundStyle(PlantingColor.secondaryText)
-                    }
+                    Spacer(minLength: 0)
                 }
-                Spacer(minLength: 0)
             }
+            .buttonStyle(.plain)
         }
-        .buttonStyle(.plain)
     }
 
     private func todoRow(_ item: TodoItem) -> some View {
-        HStack(spacing: PlantingSpacing.sm) {
-            Button {
-                toggle(item)
-            } label: {
-                Image(systemName: item.occurrence.completed ? "checkmark.square" : "square")
-                    .foregroundStyle(item.todo.category?.color ?? PlantingColor.secondaryText)
+        SwipeToDeleteRow(onDelete: { todoPendingDelete = item }) {
+            HStack(spacing: PlantingSpacing.sm) {
+                Button {
+                    toggle(item)
+                } label: {
+                    Image(systemName: item.occurrence.completed ? "checkmark.square" : "square")
+                        .foregroundStyle(item.todo.category?.color ?? PlantingColor.secondaryText)
+                }
+                .buttonStyle(.plain)
+
+                Text(item.todo.title)
+                    .font(PlantingFont.body())
+                    .foregroundStyle(PlantingColor.primaryText)
+
+                Spacer(minLength: 0)
             }
-            .buttonStyle(.plain)
-
-            Text(item.todo.title)
-                .font(PlantingFont.body())
-                .foregroundStyle(PlantingColor.primaryText)
-
-            Spacer(minLength: 0)
+            .contentShape(Rectangle())
+            .onTapGesture { editingTodo = item }
         }
-        .contentShape(Rectangle())
-        .onTapGesture { editingTodo = item }
     }
 
     private func changeDay(by delta: Int) {
@@ -266,6 +322,28 @@ struct DateDetailView: View {
             load()
         } catch {
             print("Failed to toggle todo: \(error)")
+        }
+    }
+
+    private func deleteSchedule(_ occurrence: ScheduleOccurrence, scope: RecurrenceDeleteScope) {
+        do {
+            try SwiftDataScheduleRepository(context: modelContext).deleteOccurrence(
+                occurrence.schedule,
+                on: occurrence.date,
+                scope: scope
+            )
+            load()
+        } catch {
+            print("Failed to delete schedule: \(error)")
+        }
+    }
+
+    private func deleteTodo(_ item: TodoItem, scope: RecurrenceDeleteScope) {
+        do {
+            try SwiftDataTodoRepository(context: modelContext).deleteOccurrence(item, scope: scope)
+            load()
+        } catch {
+            print("Failed to delete todo: \(error)")
         }
     }
 

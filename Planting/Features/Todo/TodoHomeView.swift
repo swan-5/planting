@@ -7,6 +7,7 @@ struct TodoHomeView: View {
     @State private var viewModel: TodoHomeViewModel?
     @State private var isPresentingNewTodo = false
     @State private var editingTodo: TodoItem?
+    @State private var todoPendingDelete: TodoItem?
 
     var body: some View {
         NavigationStack {
@@ -32,6 +33,13 @@ struct TodoHomeView: View {
                                     onToggle: { viewModel.toggleCompletion(item) },
                                     onTap: { editingTodo = item }
                                 )
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        todoPendingDelete = item
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                             }
                         }
                         .listStyle(.plain)
@@ -76,6 +84,40 @@ struct TodoHomeView: View {
             .sheet(item: $editingTodo, onDismiss: { viewModel?.load() }) { item in
                 TodoEditView(existingTodo: item.todo, existingOccurrence: item.occurrence)
             }
+            .confirmationDialog(
+                "Delete this todo?",
+                isPresented: Binding(
+                    get: { todoPendingDelete != nil },
+                    set: { if !$0 { todoPendingDelete = nil } }
+                ),
+                titleVisibility: .visible
+            ) {
+                if let item = todoPendingDelete, item.todo.recurrenceRule.frequency != .none {
+                    Button("Delete This Todo Only", role: .destructive) {
+                        deleteTodo(item, scope: .onlyThisOccurrence)
+                    }
+                    Button("Delete This and Future Todos", role: .destructive) {
+                        deleteTodo(item, scope: .thisAndFuture)
+                    }
+                    Button("Delete All Todos", role: .destructive) {
+                        deleteTodo(item, scope: .entireSeries)
+                    }
+                } else if let item = todoPendingDelete {
+                    Button("Delete Todo", role: .destructive) {
+                        deleteTodo(item, scope: .entireSeries)
+                    }
+                }
+                Button("Cancel", role: .cancel) {}
+            }
+        }
+    }
+
+    private func deleteTodo(_ item: TodoItem, scope: RecurrenceDeleteScope) {
+        do {
+            try SwiftDataTodoRepository(context: modelContext).deleteOccurrence(item, scope: scope)
+            viewModel?.load()
+        } catch {
+            print("Failed to delete todo: \(error)")
         }
     }
 
