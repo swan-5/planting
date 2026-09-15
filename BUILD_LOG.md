@@ -328,16 +328,19 @@ rather than the permissive one — sync silently does nothing rather than exposi
 - **Holiday dates need yearly upkeep.** `KoreanHolidays`'s lunar-calendar entries (§3.19) only
   cover 2024–2026 — extending past that means manually adding the next year's actual published
   dates, not a formula.
-- **App Store submission in progress.** The paid Apple Developer Program enrollment was approved
-  2026-09-13, unblocking distribution signing and Push Notifications (§4). App Store Connect app
-  registration is done and build 2 (1.0 (2)) — the first submittable one, since build 1 shipped
-  before the APNs-token launch crash fix — is uploaded and processing as of 2026-09-15. Ready
-  ahead of that: the 1024×1024 app icon is confirmed compliant, a privacy policy page is live at
-  `swan-5.github.io/planting/privacy.html` (via GitHub Pages, `docs/`), and a first draft of the
-  store listing copy (name, subtitle, description, keywords) exists outside this repo. Still
-  outstanding: App Store screenshots and age rating. `project.yml` pins `DEVELOPMENT_TEAM`
-  explicitly so `xcodegen generate` doesn't silently discard a team set by hand in Xcode's
-  Signing & Capabilities editor.
+- **Submitted for App Store review, 2026-09-15.** The paid Apple Developer Program enrollment was
+  approved 2026-09-13, unblocking distribution signing and Push Notifications (§4). Build 2
+  (1.0 (2)) — the first submittable one, since build 1 shipped before the APNs-token launch crash
+  fix — is uploaded and the full listing is in: 1024×1024 app icon, privacy policy + a new support
+  page at `swan-5.github.io/planting/privacy.html` / `.../support.html` (via GitHub Pages, `docs/`,
+  both fixed 2026-09-15 to actually describe the phone-number Firebase Auth sign-in and profile
+  birthday, which an earlier draft wrongly claimed didn't exist), App Store screenshots (6.5"
+  display set, 1284×2778, shot on-device via `xcrun devicectl`, resized with `sips`), age rating,
+  and store listing copy. `project.yml` pins `DEVELOPMENT_TEAM` explicitly so `xcodegen generate`
+  doesn't silently discard a team set by hand in Xcode's Signing & Capabilities editor.
+  **Known gap, not yet fixed:** no in-app account deletion, which Apple Guideline 5.1.1(v)
+  requires for any app with account creation — this app has phone-number sign-in, so a rejection
+  or a demand to add it before the next review is likely.
 - **Widgets can miss upcoming repeating todos.** They read the shared store but never
   materialize new occurrences themselves, so the app has to open at least once first.
 - **Pretendard doesn't reach the widgets.** A widget extension is a separate bundle; it falls
