@@ -395,4 +395,17 @@ Two bugs found testing that on-device, both fixed same day:
 
 ---
 
+**D-day counter, 2026-09-15.** Not in PRODUCT_SPEC.md — added on request. A standalone `DDay`
+model (`title` + `targetDate`, same `ownerID`/`createdAt`/`updatedAt` shape as every other model)
+with its own `DDayRepository`/`SwiftDataDDayRepository`, registered in `PersistenceController`'s
+schema. Created from the Calendar tab's existing "+" `QuickAddSheet`, now a 4th row alongside
+Schedule/Todo/Memo. Displayed as up to 3 small "title D-n" chips (`DDayChipRow`) immediately to
+the left of the clover — nearest-to-today first, by `abs(daysFromToday)` so an imminent D- and a
+recently-passed D+ both surface before a distant one either direction — with a 4th "…" chip
+opening the full list (`DDayListView`, native `List` + `.swipeActions`) once there are more than
+3. `CloverGrowthView` lost its own `.frame(maxWidth: .infinity)` so the chip row and the clover
+center as one `HStack` unit instead of the clover re-centering itself independently.
+
+---
+
 _github.com/swan-5/planting · HEAD 003f337 · 2026-09-15_

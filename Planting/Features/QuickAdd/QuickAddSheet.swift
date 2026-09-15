@@ -6,6 +6,7 @@ struct QuickAddSheet: View {
     let onSelectSchedule: () -> Void
     let onSelectTodo: () -> Void
     let onSelectMemo: () -> Void
+    let onSelectDDay: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -14,9 +15,11 @@ struct QuickAddSheet: View {
             row(icon: "checkmark.square", title: "Todo", action: onSelectTodo)
             Divider().overlay(PlantingColor.divider)
             row(icon: "doc.text", title: "Memo", action: onSelectMemo)
+            Divider().overlay(PlantingColor.divider)
+            row(icon: "flag", title: "D-day", action: onSelectDDay)
         }
         .padding(.vertical, PlantingSpacing.sm)
-        .presentationDetents([.height(200)])
+        .presentationDetents([.height(260)])
         .presentationCornerRadius(PlantingRadius.sheet)
         .presentationDragIndicator(.visible)
     }

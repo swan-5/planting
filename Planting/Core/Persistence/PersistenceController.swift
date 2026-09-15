@@ -16,6 +16,7 @@ enum PersistenceController {
             Memo.self,
             MonthlyReflection.self,
             UserProfile.self,
+            DDay.self,
         ])
 
         let configuration: ModelConfiguration

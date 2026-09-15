@@ -65,6 +65,5 @@ struct CloverGrowthView: View {
                 .frame(maxWidth: 260)
                 .presentationCompactAdaptation(.popover)
         }
-        .frame(maxWidth: .infinity)
     }
 }

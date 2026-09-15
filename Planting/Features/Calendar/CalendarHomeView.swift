@@ -5,7 +5,7 @@ import SwiftData
 /// and completion-intensity backgrounds inside each date cell.
 struct CalendarHomeView: View {
     private enum QuickAddKind {
-        case schedule, todo, memo
+        case schedule, todo, memo, dday
     }
 
     @Environment(\.modelContext) private var modelContext
@@ -16,6 +16,9 @@ struct CalendarHomeView: View {
     @State private var pendingCreateKind: QuickAddKind?
     @State private var detailDate: Date?
     @State private var editingSchedule: ScheduleOccurrence?
+    @State private var dDays: [DDay] = []
+    @State private var editingDDay: DDay?
+    @State private var isPresentingDDayList = false
     /// The month tapped via the header's "‹ September ⌄ ›" control — not
     /// necessarily `viewModel.visibleMonth` by the time the pushed screen
     /// reads it if the user then also flips months, so this is captured
@@ -47,7 +50,15 @@ struct CalendarHomeView: View {
                     // grid (down to the tab bar), not pinned to the grid's
                     // bottom edge — on request.
                     Spacer(minLength: 0)
-                    CloverGrowthView(fullyCompletedWeeks: viewModel.fullyCompletedWeeksThisMonth)
+                    HStack(spacing: PlantingSpacing.sm) {
+                        DDayChipRow(
+                            dDays: dDays,
+                            onTapChip: { editingDDay = $0 },
+                            onTapMore: { isPresentingDDayList = true }
+                        )
+                        CloverGrowthView(fullyCompletedWeeks: viewModel.fullyCompletedWeeksThisMonth)
+                    }
+                    .frame(maxWidth: .infinity)
                     Spacer(minLength: 0)
                 } else {
                     Spacer(minLength: 0)
@@ -86,6 +97,7 @@ struct CalendarHomeView: View {
                 )
                 vm.loadMonthData()
                 viewModel = vm
+                loadDDays()
             }
             .sheet(
                 isPresented: $isPresentingQuickAdd,
@@ -94,7 +106,8 @@ struct CalendarHomeView: View {
                 QuickAddSheet(
                     onSelectSchedule: { pendingCreateKind = .schedule; isPresentingQuickAdd = false },
                     onSelectTodo: { pendingCreateKind = .todo; isPresentingQuickAdd = false },
-                    onSelectMemo: { pendingCreateKind = .memo; isPresentingQuickAdd = false }
+                    onSelectMemo: { pendingCreateKind = .memo; isPresentingQuickAdd = false },
+                    onSelectDDay: { pendingCreateKind = .dday; isPresentingQuickAdd = false }
                 )
             }
             .sheet(
@@ -102,12 +115,14 @@ struct CalendarHomeView: View {
                 onDismiss: {
                     pendingCreateKind = nil
                     viewModel?.loadMonthData()
+                    loadDDays()
                 }
             ) {
                 switch pendingCreateKind {
                 case .schedule: ScheduleEditView(initialDate: .now)
                 case .todo: TodoEditView(initialDate: .now)
                 case .memo: MemoEditView(initialDate: .now)
+                case .dday: DDayEditView(initialDate: .now)
                 case nil: EmptyView()
                 }
             }
@@ -120,6 +135,12 @@ struct CalendarHomeView: View {
             .sheet(item: $editingSchedule, onDismiss: { viewModel?.loadMonthData() }) { occurrence in
                 ScheduleEditView(existingSchedule: occurrence.schedule, occurrenceDate: occurrence.date)
             }
+            .sheet(item: $editingDDay, onDismiss: loadDDays) { dDay in
+                DDayEditView(existingDDay: dDay)
+            }
+            .sheet(isPresented: $isPresentingDDayList, onDismiss: loadDDays) {
+                DDayListView(onChanged: loadDDays)
+            }
         }
     }
 
@@ -128,6 +149,15 @@ struct CalendarHomeView: View {
             insertion: .move(edge: monthNavigationDirection < 0 ? .leading : .trailing),
             removal: .move(edge: monthNavigationDirection < 0 ? .trailing : .leading)
         )
+    }
+
+    private func loadDDays() {
+        do {
+            dDays = try SwiftDataDDayRepository(context: modelContext).fetchAll()
+                .sorted { abs($0.daysFromToday()) < abs($1.daysFromToday()) }
+        } catch {
+            print("Failed to load D-days: \(error)")
+        }
     }
 
     private func goToPreviousMonth(_ viewModel: CalendarHomeViewModel) {
