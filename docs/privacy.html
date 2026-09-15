@@ -38,16 +38,16 @@
   <p>Planting(이하 "앱")은 캘린더, 할 일(투두), 메모를 관리하는 개인용 생산성 앱입니다. 본 방침은 앱이 어떤 정보를 다루는지 설명합니다.</p>
 
   <h2>수집하는 정보</h2>
-  <p>앱은 별도의 서버로 데이터를 전송하거나 수집하지 않습니다. 사용자가 입력한 일정, 할 일, 메모, 카테고리 등 모든 데이터는 기기 내부(및 위젯이 함께 읽을 수 있도록 앱 자체의 로컬 저장 공간)에만 저장되며, 개발자를 포함한 외부 누구도 이 데이터에 접근할 수 없습니다.</p>
+  <p>사용자가 입력한 일정, 할 일, 메모, 카테고리 등 콘텐츠는 기본적으로 기기 내부(및 위젯이 함께 읽을 수 있도록 앱 자체의 로컬 저장 공간)에만 저장됩니다. 로그인 시 전화번호가 Firebase Authentication으로 전달되어 인증 목적으로만 사용되며, 앱은 그 결과로 발급된 계정 식별자(UID)만 보관합니다. 이 외에 별도의 분석·추적 목적으로 수집하는 정보는 없습니다.</p>
 
   <h2>계정 및 회원가입</h2>
-  <p>앱은 회원가입이나 로그인 절차가 없으며, 이름, 이메일, 전화번호 등 개인 식별 정보를 수집하지 않습니다.</p>
+  <p>앱은 전화번호 인증(SMS)으로 로그인하며, Firebase Authentication을 통해 처리됩니다. 로그인 시 전화번호가 인증 목적으로 Firebase(Google)에 전달되며, 앱은 발급된 계정 식별자(UID)만 사용자를 구분하는 용도로 보관합니다. 프로필에 입력한 생일은 캘린더에 매년 표시하는 용도로만 기기에 저장됩니다.</p>
 
   <h2>Face ID / Touch ID</h2>
   <p>메모 잠금 기능은 iOS의 Face ID, Touch ID 또는 기기 암호를 사용합니다. 이 인증은 기기 자체에서 처리되며, 앱이나 개발자에게 생체 정보가 전달되거나 저장되지 않습니다.</p>
 
   <h2>제3자 공유 및 광고</h2>
-  <p>앱은 분석 도구, 광고 SDK, 제3자 추적 기술을 사용하지 않으며, 어떠한 정보도 제3자와 공유하거나 판매하지 않습니다.</p>
+  <p>로그인 인증에 사용되는 Firebase(Google) 외에는 어떠한 분석 도구, 광고 SDK, 제3자 추적 기술도 사용하지 않으며, 어떠한 정보도 제3자와 공유하거나 판매하지 않습니다.</p>
 
   <h2>데이터 삭제</h2>
   <p>앱을 삭제하면 기기에 저장된 모든 데이터가 함께 삭제됩니다.</p>
@@ -69,16 +69,16 @@
   <p>Planting ("the app") is a personal productivity app for managing a calendar, to-dos, and notes. This policy explains what the app does with your information.</p>
 
   <h2>Information We Collect</h2>
-  <p>The app does not send or collect any data on a remote server. All data you enter — schedules, to-dos, memos, and categories — is stored only in local storage on your device (shared with the app's own widgets), and is never accessible to the developer or any third party.</p>
+  <p>The content you enter — schedules, to-dos, memos, and categories — is stored only in local storage on your device (shared with the app's own widgets). We don't collect any of it for analytics or tracking purposes.</p>
 
   <h2>Accounts</h2>
-  <p>The app has no sign-up or login flow and does not collect personally identifiable information such as your name, email, or phone number.</p>
+  <p>The app signs you in with phone number verification (SMS) through Firebase Authentication. Your phone number is sent to Firebase (Google) for that verification only; the app itself stores just the resulting account identifier (UID) to tell users apart. A birthday entered in your profile is stored on-device, used only to show it on your calendar each year.</p>
 
   <h2>Face ID / Touch ID</h2>
   <p>The memo lock feature uses iOS Face ID, Touch ID, or your device passcode. This authentication is handled entirely by the device; no biometric data is ever sent to or stored by the app or its developer.</p>
 
   <h2>Third Parties &amp; Advertising</h2>
-  <p>The app does not use analytics tools, advertising SDKs, or third-party trackers, and does not share or sell any information to third parties.</p>
+  <p>Other than Firebase (Google), used for sign-in, the app does not use analytics tools, advertising SDKs, or third-party trackers, and does not share or sell any information to third parties.</p>
 
   <h2>Data Deletion</h2>
   <p>Deleting the app removes all data stored on your device.</p>
