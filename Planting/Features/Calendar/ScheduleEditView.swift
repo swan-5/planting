@@ -110,7 +110,7 @@ struct ScheduleEditView: View {
                 isPresented: $showingDeleteConfirmation,
                 titleVisibility: .visible
             ) {
-                if existingSchedule?.recurrenceRule.frequency != .none {
+                if (existingSchedule?.recurrenceRule.frequency ?? .none) != .none {
                     Button("Delete This Event Only", role: .destructive) {
                         deleteSchedule(scope: .onlyThisOccurrence)
                     }

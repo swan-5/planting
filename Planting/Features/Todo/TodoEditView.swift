@@ -89,7 +89,7 @@ struct TodoEditView: View {
                 isPresented: $showingDeleteConfirmation,
                 titleVisibility: .visible
             ) {
-                if existingTodo?.recurrenceRule.frequency != .none, existingOccurrence != nil {
+                if (existingTodo?.recurrenceRule.frequency ?? .none) != .none, existingOccurrence != nil {
                     Button("Delete This Todo Only", role: .destructive) {
                         deleteTodo(scope: .onlyThisOccurrence)
                     }

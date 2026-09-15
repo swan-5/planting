@@ -370,6 +370,29 @@ that reveals a trailing red delete button, for those two rows instead of restruc
 around `List`. Both spots reuse the same recurring-vs-single `confirmationDialog` branching as the
 edit sheets.
 
+Two bugs found testing that on-device, both fixed same day:
+
+1. `SwipeToDeleteRow`'s first pass used a `ZStack` with the delete button given
+   `.frame(maxHeight: .infinity)` — with no bounded height proposal from its `VStack`/`ScrollView`
+   parent, that made the button's real layout frame balloon past the visible red rectangle,
+   showing it even before any swipe and overlapping the row's own tap target (a single tap could
+   fire both "open edit sheet" and "delete"). Fixed by switching to `.background(alignment:
+   .trailing) { ... }`, which sizes the button to content's own measured frame instead of an
+   independent (and here, ambiguous) layout pass, plus `.opacity`/`.allowsHitTesting` gated on
+   the swipe actually being open.
+2. `TodoEditView`/`ScheduleEditView`'s existing recurring-vs-single delete dialogs were showing
+   all three scope buttons for every item, repeating or not. Cause: `existingTodo?.recurrenceRule
+   .frequency != .none` — since the left side is `RecurrenceFrequency?` (from the `?.` chain
+   through `existingTodo: Todo?`), Swift resolves the bare `.none` on the right against the
+   *optional's own* `.none` case (i.e. "is nil") rather than `RecurrenceFrequency.none`, because a
+   direct `Optional.none` match wins over promoting `RecurrenceFrequency.none` into `.some(.none)`.
+   The condition was therefore just "is there an existing item" — true whenever the delete button
+   is even reachable. Fixed by unwrapping first: `(existingTodo?.recurrenceRule.frequency ?? .none)
+   != .none`, which forces the comparison onto a concrete non-optional `RecurrenceFrequency` where
+   `.none` is unambiguous. Confirmed no other `?.recurrenceRule.frequency` comparison in the
+   codebase has the same shape (the swipe code added above compares through non-optional
+   `item.todo`/`occurrence.schedule`, so it was never affected).
+
 ---
 
 _github.com/swan-5/planting · HEAD 8a103be · 2026-09-14_
