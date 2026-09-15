@@ -395,4 +395,4 @@ Two bugs found testing that on-device, both fixed same day:
 
 ---
 
-_github.com/swan-5/planting · HEAD 8a103be · 2026-09-14_
+_github.com/swan-5/planting · HEAD 003f337 · 2026-09-15_
